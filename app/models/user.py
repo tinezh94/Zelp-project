@@ -28,3 +28,7 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email
         }
+
+
+    businesses_owned = db.relationship('Business', back_populates='owner')
+    
