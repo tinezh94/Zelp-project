@@ -16,9 +16,10 @@ const CreateBusinessForm = () => {
 
     const categoriesArr = categories ? Object.values(categories) : null;
     // console.log('frontend array', categoriesArr)
+
     const [ name, setName ] = useState('');
     const [ description, setDescription ] = useState('');
-    const [ category, setCategory ] = useState('');
+    const [ category, setCategory ] = useState('default');
     const [ businessHours, setBusinessHours ] = useState('');
     const [ website, setWebsite ] = useState('');
     const [ priceRange, setPriceRange ] = useState(priceRangeArr[0]);
@@ -29,8 +30,6 @@ const CreateBusinessForm = () => {
     // useEffect(() => {
     //     const errors = [];
     // })
-
-    console.log(categoriesArr[0]?.category_name)
 
     useEffect(() => {
         dispatch(loadCategories());
@@ -103,12 +102,12 @@ const CreateBusinessForm = () => {
                 <label>Category</label>
                 <select
                     value={category}
-                    defaultValue={'default'}
+                    // defaultValue={'default'}
                     onChange={e => setCategory(e.target.value)}
                 >
-                    <option value={'default'} disabled>Please choose a category</option>
-                    {categoriesArr?.map(category => (
-                        <option value={category?.category_name} key={category.id}>{category?.category_name}</option>
+                    <option value={'default'} disabled hidden>Please choose a category</option>
+                    {categoriesArr?.map((category, idx) => (
+                        <option value={category.category_name} key={idx}>{category.category_name}</option>
                     ))}
                 </select>
                 <label>Website</label>
