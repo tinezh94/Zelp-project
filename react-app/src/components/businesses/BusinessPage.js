@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { loadBusinesses, loadOneBusiness } from '../../store/business';
+import BusinessReviews from '../reviews/BusinessReviews';
 import EditBusinessForm from './EditBusinessForm';
 
 const BusinessPage = () => {
@@ -10,13 +11,13 @@ const BusinessPage = () => {
 
     const businesses = useSelector(state => state?.businesses);
     const businessesArr = businesses ? Object.values(businesses) : null;
-    console.log('***', businessesArr)
+    // console.log('***', businessesArr)
     let business = businessesArr?.filter(business => {
         return business?.id === Number(businessId)
     });
 
     business = business[0];
-    console.log('---', business)
+    // console.log('---', business)
 
     useEffect(() => {
         dispatch(loadBusinesses())
@@ -42,7 +43,11 @@ const BusinessPage = () => {
                         <p>{business.website}</p>
                         <p>{business.phone_number}</p>
                         <p>{business.price_range}</p>
+                        <h4>
+                            <NavLink to={`/writeareview/biz/${businessId}`}>Write a Review</NavLink>
+                        </h4>
                         <EditBusinessForm />
+                        <BusinessReviews />
                     </div>
                 )}
             </div>

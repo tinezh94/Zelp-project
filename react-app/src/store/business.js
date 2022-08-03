@@ -9,9 +9,9 @@ const load = businesses => ({
     businesses
 })
 
-const loadSingleBusiness = businesses => ({
+const loadSingleBusiness = business => ({
     type: LOAD_SINGLE_BUSINESS,
-    businesses
+    business
 })
 
 const create = business => ({
@@ -64,14 +64,14 @@ export const createBusiness = (payload) => async (dispatch) => {
 };
 
 export const editBusiness = payload => async (dispatch) => {
-    console.log('inside thunK, payload', payload)
+    // console.log('inside thunK, payload', payload)
     const res = await fetch (`/api/businesses/${payload.id}`, {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(payload)
     });
 
-    console.log('inside thunk, res', res)
+    // console.log('inside thunk, res', res)
     if (res.ok) {
         const business = await res.json();
         console.log('inside thunk after res.ok', business)
