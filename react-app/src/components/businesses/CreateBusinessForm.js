@@ -11,6 +11,10 @@ const CreateBusinessForm = () => {
 
     const user = useSelector(state => state?.session?.user);
     const categories = useSelector(state => state?.categories);
+    const businesses = useSelector(state => state?.businesses);
+
+    const businessesArr = businesses ? Object.values(businesses) : null;
+
 
     // console.log('frontent', categories);
 
@@ -41,29 +45,50 @@ const CreateBusinessForm = () => {
     const time = isoTime.slice(12, 19);
     const combined = date + ' ' + time
 
+    const phoneNumber = /^\(?([0-9]{3})\)?(\-[0-9]{3})(\-[0-9]{4})$/;
+
+    // const operatingHours = /^\d{1,2}:\d{2}(am)?$ \-\d{1,2}:\d{2}(pm)?$/;
+
+    useEffect(() => {
+        const errors = [];
+
+        if (!name) errors.push('Business name cannot be empty')
+        if (businessesArr?.map(business => business.name).includes(name)) errors.push('Business name must be unique');
+        if (!description) errors.push('Please tell us what your business does')
+        if (description.length < 50) errors.push('Please describe your business with more details');
+        if (!category) errors.push('Please choose a category')
+        if (!businessHours) errors.push('Please tell us your operating hours')
+        // if (!(businessHours.match(operatingHours))) errors.push ('Pleast enter your operating hours in such format: 10:00 AM - 10:00 PM');
+        if (!priceRange) errors.push('Please choose a price range for your business')
+        if (!(phone.match(phoneNumber))) errors.push('Please enter a valid phone number')
+        setValidationErrors(errors);
+    }, [name, description, category, businessHours, priceRange, phone])
+
     const onSubmit = async (e) => {
         e.preventDefault();
         setHasSubmitted(true);
 
-        const payload = {
-            owner_id: user.id,
-            name: name,
-            description: description,
-            category: category,
-            business_hours: businessHours,
-            website: website,
-            price_range: priceRange,
-            phone_number: phone,
-            created_at: combined,
-            updated_at: combined
+        if (!validationErrors.length) {
+            const payload = {
+                owner_id: user.id,
+                name: name,
+                description: description,
+                category: category,
+                business_hours: businessHours,
+                website: website,
+                price_range: priceRange,
+                phone_number: phone,
+                created_at: combined,
+                updated_at: combined
+            }
+    
+            const createdBusiness = await dispatch(createBusiness(payload));
+            if (createdBusiness) {
+                reset();
+                setHasSubmitted(false);
+                history.push('/');
+            };
         }
-
-        const createdBusiness = await dispatch(createBusiness(payload));
-        if (createdBusiness) {
-            reset();
-            setHasSubmitted(false);
-            history.push('/');
-        };
     };
 
     const reset = () => {
@@ -79,6 +104,13 @@ const CreateBusinessForm = () => {
     return (
         <>  
             <form onSubmit={onSubmit}>
+                {hasSubmitted && validationErrors.length > 0 && (
+                        <ul>
+                            {validationErrors.map(error => (
+                                <li key={error}>{error}</li>
+                            ))}
+                        </ul>
+                    )}
                 <h2>New Business</h2>
                 <label>Business Name</label>
                 <input
@@ -113,6 +145,7 @@ const CreateBusinessForm = () => {
                 />
                 <label>Business Hours</label>
                 <input 
+                    placeholder='i.e 10:00 AM - 11:00 PM'
                     type='text'
                     value={businessHours}
                     onChange={e => setBusinessHours(e.target.value)}

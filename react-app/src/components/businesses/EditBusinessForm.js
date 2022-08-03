@@ -37,7 +37,7 @@ const EditBusinessForm = () => {
     const [ editBusinessHours, setEditBusinessHours ] = useState(business?.business_hours);
     const [ editWebsite, setEditWebsite ] = useState(business?.website ? business?.website : '');
     const [ editPriceRange, setEditPriceRange ] = useState(business?.price_range);
-    const [ editPhone, setEditPhone ] = useState(business?.phone);
+    const [ editPhone, setEditPhone ] = useState(business?.phone_number);
     const [ hasSubmitted, setHasSubmitted ] = useState(false);
     const [ validationErrors, setValidationErrors ] = useState([]);
 
@@ -47,31 +47,50 @@ const EditBusinessForm = () => {
     const time = isoTime.slice(12, 19);
     const combined = date + ' ' + time
 
+    const phoneNumber = /^\(?([0-9]{3})\)?(\-[0-9]{3})(\-[0-9]{4})$/;
+
+    useEffect(() => {
+        const errors = [];
+
+        if (!editName) errors.push('Business name cannot be empty')
+        // if (businessesArr?.map(business => business.name).includes(editName)) errors.push('Business name must be unique');
+        if (!editDescription) errors.push('Please tell us what your business does')
+        if (editDescription.length < 50) errors.push('Please describe your business with more details');
+        if (!editCategory) errors.push('Please choose a category')
+        if (!editBusinessHours) errors.push('Please tell us your operating hours')
+        // if (!(businessHours.match(operatingHours))) errors.push ('Pleast enter your operating hours in such format: 10:00 AM - 10:00 PM');
+        if (!editPriceRange) errors.push('Please choose a price range for your business')
+        if (!(editPhone.match(phoneNumber))) errors.push('Please enter a valid phone number')
+        setValidationErrors(errors);
+    }, [editName, editDescription, editCategory, editBusinessHours, editPriceRange, editPhone])
+
     const onSubmit = async (e) => {
         e.preventDefault();
         setHasSubmitted(true);
 
-        const payload = {
-            id: business?.id,
-            owner_id: user.id,
-            name: editName,
-            description: editDescription,
-            category: editCategory,
-            business_hours: editBusinessHours,
-            website: editWebsite,
-            price_range: editPriceRange,
-            phone_number: editPhone,
-            created_at: combined,
-            updated_at: combined
-        }
+        if (!validationErrors.length) {
 
-        const editedBusiness = await dispatch(editBusiness(payload));
-        if (editedBusiness) {
-            reset();
-            setHasSubmitted(false);
-            history.push('/');
+            const payload = {
+                id: business?.id,
+                owner_id: user.id,
+                name: editName,
+                description: editDescription,
+                category: editCategory,
+                business_hours: editBusinessHours,
+                website: editWebsite,
+                price_range: editPriceRange,
+                phone_number: editPhone,
+                created_at: combined,
+                updated_at: combined
+            }
+    
+            const editedBusiness = await dispatch(editBusiness(payload));
+            if (editedBusiness) {
+                reset();
+                setHasSubmitted(false);
+                history.push('/');
+            }
         }
-
     };
 
     const onDelete = async (id) => {
@@ -92,6 +111,13 @@ const EditBusinessForm = () => {
     return (
         <>
             <form onSubmit={onSubmit}>
+            {hasSubmitted && validationErrors.length > 0 && (
+                        <ul>
+                            {validationErrors.map(error => (
+                                <li key={error}>{error}</li>
+                            ))}
+                        </ul>
+                    )}
                 <h2>Edit Business</h2>
                 <label>Business Name</label>
                 <input
