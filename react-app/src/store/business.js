@@ -1,10 +1,16 @@
 const LOAD = '/businesses/LOAD';
+const LOAD_SINGLE_BUSINESS = '/businesses/LOAD_SINGLE_BUSINESS';
 const CREATE = '/businesses/CREATE';
 const EDIT = '/businesses/EDIT';
 const REMOVE = '/businesses/REMOVE';
 
 const load = businesses => ({
     type: LOAD,
+    businesses
+})
+
+const loadSingleBusiness = businesses => ({
+    type: LOAD_SINGLE_BUSINESS,
     businesses
 })
 
@@ -32,6 +38,15 @@ export const loadBusinesses = () => async (dispatch) => {
         dispatch(load(businesses));
     };
 };
+
+export const loadOneBusiness = (businessId) => async (dispatch) => {
+    const res = await fetch(`/api/businesses/${businessId}`);
+
+    if (res.ok) {
+        const business = await res.json();
+        dispatch(loadSingleBusiness(business));
+    }
+}
 
 export const createBusiness = (payload) => async (dispatch) => {
     console.log('inside create', payload)
@@ -87,6 +102,11 @@ export default function businessesReducer(state = {}, action) {
             businessesList.forEach(business => {
                 newState[business.id] = business
             });
+            return newState;
+
+        case LOAD_SINGLE_BUSINESS:
+            newState = {};
+            newState[action.businessId] = action.business;
             return newState;
 
         case CREATE:

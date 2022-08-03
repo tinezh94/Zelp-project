@@ -9,8 +9,9 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import CreateBusinessForm from './components/businesses/CreateBusinessForm';
-import BusinessesPage from './components/businesses/BusinessesPage';
+import BusinessesPage from './components/businesses/BusinessesList';
 import EditBusinessForm from './components/businesses/EditBusinessForm';
+import BusinessPage from './components/businesses/BusinessPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -44,7 +45,7 @@ function App() {
           <CreateBusinessForm />
         </ProtectedRoute>
         <ProtectedRoute path='/businesses/:businessId' exact={true}>
-          <EditBusinessForm />
+          <BusinessPage />
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />

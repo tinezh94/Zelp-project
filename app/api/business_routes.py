@@ -9,6 +9,11 @@ def all_businesses():
     businesses = Business.query.all()
     return {'businesses': [business.to_dict() for business in businesses]}
 
+@business_routes.route('/<int:id>')
+def one_business(id):
+    business = Business.query.get(id)
+    return business.to_dict()
+
 @business_routes.route('/', methods=['GET', 'POST'])
 def create_business():
     form = BusinessForm();

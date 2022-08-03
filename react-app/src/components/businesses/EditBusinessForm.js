@@ -20,7 +20,7 @@ const EditBusinessForm = () => {
     const categoriesArr = categories ? Object.values(categories) : null;
 
     let business = businessesArr.filter(business => {
-        return business.id === Number(businessId);
+        return business?.id === Number(businessId);
     });
     
     business = business[0];
