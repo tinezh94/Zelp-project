@@ -29,24 +29,33 @@ const CreateReviewForm = () => {
     const time = isoTime.slice(12, 19);
     const combined = date + ' ' + time
 
+    useEffect(() => {
+        const errors = [];
+        if (!rating) errors.push('Rating cannot be empty');
+        if (content.length < 30) errors.push('Review content must be at least 30 characters long');
+        setValidationErrors(errors);
+    }, [rating, content]);
+
     const onSubmit = async (e) => {
         e.preventDefault();
         setHasSubmitted(true);
-
-        const payload = {
-            user_id: user.id,
-            business_id: Number(businessId),
-            rating: rating,
-            review_content: content,
-            created_at: combined,
-            updated_at: combined
-        }
-
-        const createdReview = await dispatch(createReview(payload));
-        if (createdReview) {
-            reset();
-            setHasSubmitted(false)
-            history.push(`/businesses/${businessId}`)
+        
+        if (!validationErrors.length) {
+            const payload = {
+                user_id: user.id,
+                business_id: Number(businessId),
+                rating: rating,
+                review_content: content,
+                created_at: combined,
+                updated_at: combined
+            }
+    
+            const createdReview = await dispatch(createReview(payload));
+            if (createdReview) {
+                reset();
+                setHasSubmitted(false)
+                history.push(`/businesses/${businessId}`)
+            }
         }
 
     }
@@ -59,6 +68,13 @@ const CreateReviewForm = () => {
     return (
         <>
             <form onSubmit={onSubmit}>
+                {hasSubmitted && validationErrors.length > 0 && (
+                    <ul>
+                        {validationErrors.map(error => (
+                            <li key={error}>{error}</li>
+                        ))}
+                    </ul>
+                )}
                 <h2>Write a review</h2>
                 <label>Rating</label>
                 <input 
