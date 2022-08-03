@@ -51,6 +51,7 @@ const BusinessReviews = () => {
                         ))}
                         <p>{review.rating}</p>
                         <p>{review.review_content}</p>
+                        <NavLink to={`/reviews/${review.id}`}>Edit Review</NavLink>
                     </div>
                 ))}
             </div>

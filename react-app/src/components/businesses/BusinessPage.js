@@ -46,7 +46,7 @@ const BusinessPage = () => {
                         <h4>
                             <NavLink to={`/writeareview/biz/${businessId}`}>Write a Review</NavLink>
                         </h4>
-                        <EditBusinessForm />
+                        <EditBusinessForm business={business} />
                         <BusinessReviews />
                     </div>
                 )}

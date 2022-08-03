@@ -13,6 +13,7 @@ import BusinessesPage from './components/businesses/BusinessesList';
 import EditBusinessForm from './components/businesses/EditBusinessForm';
 import BusinessPage from './components/businesses/BusinessPage';
 import CreateReviewForm from './components/reviews/CreateReviewForm';
+import EditReviewForm from './components/reviews/EditReviewForm';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -50,6 +51,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/writeareview/biz/:businessId' exact={true}>
           <CreateReviewForm />
+        </ProtectedRoute>
+        <ProtectedRoute path='/reviews/:reviewId' exact={true}>
+          <EditReviewForm />
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
