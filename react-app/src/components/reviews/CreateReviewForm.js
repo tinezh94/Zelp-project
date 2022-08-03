@@ -31,8 +31,8 @@ const CreateReviewForm = () => {
 
     useEffect(() => {
         const errors = [];
-        if (!rating) errors.push('Rating cannot be empty');
-        if (content.length < 30) errors.push('Review content must be at least 30 characters long');
+        if (!rating) errors.push('Please leave a rating');
+        if (content.length < 30) errors.push('Woah, did you mean to post so soon? We thought your review was just getting started! Please add more details so we can post this review.');
         setValidationErrors(errors);
     }, [rating, content]);
 

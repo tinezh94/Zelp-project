@@ -29,25 +29,34 @@ const EditReviewForm = ({ business }) => {
     const time = isoTime.slice(12, 19);
     const combined = date + ' ' + time
 
+    useEffect(() => {
+        const errors = [];
+        if (!editRating) errors.push('Please leave a rating');
+        if (editContent.length < 30) errors.push('Woah, did you mean to post so soon? We thought your review was just getting started! Please add more details so we can post this review.');
+        setValidationErrors(errors);
+    }, [editRating, editContent]);
+
     const onSubmit = async (e) => {
         e.preventDefault();
         setHasSubmitted(true);
 
-        const payload = {
-            id: review?.id,
-            user_id: user.id,
-            business_id: review?.business_id,
-            rating: editRating,
-            review_content: editContent,
-            created_at: combined,
-            updated_at: combined
-        }
-
-        const editedReview = await dispatch(editReview(payload))
-        if (editedReview) {
-            reset();
-            setHasSubmitted(false);
-            history.push(`/businesses/${review?.business_id}`);
+        if (!validationErrors.length) {
+            const payload = {
+                id: review?.id,
+                user_id: user.id,
+                business_id: review?.business_id,
+                rating: editRating,
+                review_content: editContent,
+                created_at: combined,
+                updated_at: combined
+            }
+    
+            const editedReview = await dispatch(editReview(payload))
+            if (editedReview) {
+                reset();
+                setHasSubmitted(false);
+                history.push(`/businesses/${review?.business_id}`);
+            }
         }
     }
 
@@ -64,6 +73,13 @@ const EditReviewForm = ({ business }) => {
     return (
         <>
             <form onSubmit={onSubmit}>
+            {hasSubmitted && validationErrors.length > 0 && (
+                    <ul>
+                        {validationErrors.map(error => (
+                            <li key={error}>{error}</li>
+                        ))}
+                    </ul>
+                )}
                 <h2>{business?.name}</h2>
                 <label>Rating</label>
                 <input 
