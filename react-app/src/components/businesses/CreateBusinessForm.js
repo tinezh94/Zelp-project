@@ -76,11 +76,6 @@ const CreateBusinessForm = () => {
         setPhone('');
     };
 
-    const handleChange = e => {
-        if (e.target.value) setCategory(e.target.value);
-        else setCategory(categoriesArr[0]?.category_name)
-    }
-
     return (
         <>  
             <form onSubmit={onSubmit}>

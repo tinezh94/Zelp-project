@@ -31,4 +31,5 @@ class User(db.Model, UserMixin):
 
 
     businesses_owned = db.relationship('Business', back_populates='owner')
+    reviews_owned = db.relationship('Review', back_populates='review_owner')
     
