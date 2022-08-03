@@ -143,6 +143,7 @@ const EditBusinessForm = () => {
                 </select>
                 <label>Website</label>
                 <input
+                    // placeholder='Business Website(optional)'
                     type='text'
                     value={editWebsite}
                     onChange={e => e.target.value ? setEditWebsite(e.target.value): null}

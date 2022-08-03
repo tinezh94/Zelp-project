@@ -139,6 +139,7 @@ const CreateBusinessForm = () => {
                 </select>
                 <label>Website</label>
                 <input
+                    placeholder='Business Website(optional)'
                     type='text'
                     value={website}
                     onChange={e => setWebsite(e.target.value)}
