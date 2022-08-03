@@ -8,6 +8,9 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
+import CreateBusinessForm from './components/businesses/CreateBusinessForm';
+import BusinessesPage from './components/businesses/BusinessesPage';
+import EditBusinessForm from './components/businesses/EditBusinessForm';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -37,11 +40,17 @@ function App() {
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>
+        <ProtectedRoute path='/businesses' exact={true}>
+          <CreateBusinessForm />
+        </ProtectedRoute>
+        <ProtectedRoute path='/businesses/:businessId' exact={true}>
+          <EditBusinessForm />
+        </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
-          <h1>My Home Page</h1>
+          <BusinessesPage />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
