@@ -4,6 +4,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { loadOneBusiness } from '../../store/business';
 
 import { createReview } from '../../store/review';
+import UploadPicture from '../images/UploadImage';
 
 const CreateReviewForm = () => {
     const dispatch = useDispatch();
@@ -93,6 +94,7 @@ const CreateReviewForm = () => {
                     <button type='submit'>Post Review</button>
                 </div>
             </form>
+            <UploadPicture />
         </>
     )
 };

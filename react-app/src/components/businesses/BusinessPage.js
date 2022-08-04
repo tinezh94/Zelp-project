@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
 import { loadBusinesses, loadOneBusiness } from '../../store/business';
+import AllImages from '../images/AllImages';
 import BusinessReviews from '../reviews/BusinessReviews';
 import EditBusinessForm from './EditBusinessForm';
 
@@ -43,6 +44,7 @@ const BusinessPage = () => {
                         <p>{business.website}</p>
                         <p>{business.phone_number}</p>
                         <p>{business.price_range}</p>
+                        <AllImages />
                         <h4>
                             <NavLink to={`/writeareview/biz/${businessId}`}>Write a Review</NavLink>
                         </h4>
