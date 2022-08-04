@@ -4,12 +4,14 @@ import session from './session'
 import businesses from './business';
 import categories from './category';
 import reviews from './review';
+import images from './image';
 
 const rootReducer = combineReducers({
   session,
   businesses,
   categories,
-  reviews
+  reviews,
+  images
 });
 
 

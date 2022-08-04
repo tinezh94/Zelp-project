@@ -56,6 +56,7 @@ const CreateBusinessForm = () => {
         if (businessesArr?.map(business => business.name).includes(name)) errors.push('Business name must be unique');
         if (!description) errors.push('Please tell us what your business does')
         if (description.length < 50) errors.push('Please describe your business with more details');
+        if (description.length > 2000) errors.push('Please shorten your description');
         if (!category) errors.push('Please choose a category')
         if (!businessHours) errors.push('Please tell us your operating hours')
         // if (!(businessHours.match(operatingHours))) errors.push ('Pleast enter your operating hours in such format: 10:00 AM - 10:00 PM');
