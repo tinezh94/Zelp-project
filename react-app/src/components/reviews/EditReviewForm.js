@@ -1,19 +1,39 @@
-import React, { useState, useEffect, cloneElement } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+// import { loadOneBusiness } from '../../store/business';
+import { deleteImage, loadImages } from '../../store/image';
 
 import { deleteReview, editReview } from '../../store/review';
+// import EditImage from '../images/EditImage';
+// import UploadPicture from '../images/UploadImage';
+import UploadImageModal from '../UploadImageModal';
 
-const EditReviewForm = ({ business }) => {
+const EditReviewForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { reviewId } = useParams();
+    const { businessId } = useParams();
 
     const user = useSelector(state => state?.session?.user);
     const reviews = useSelector(state => state?.reviews)
+    const images = useSelector(state => state?.images);
+    const businesses = useSelector(state => state?.businesses);
+    const businessesArr = businesses ? Object.values(businesses) : null;
+    let business = businessesArr?.filter(business => {
+        return business?.id === Number(businessId)
+    });
+
+    business = business[0];
+    const bizImagesArr = images ? Object.values(images) : null;
+
+    const bizImages = bizImagesArr?.filter(image => {
+        return image.business_id === Number(businessId);
+    });
+
+    // console.log('Edit review form', bizImages)
 
     let review = Object.values(reviews)?.filter(review => {
-        return review?.id === Number(reviewId)
+        return (review?.business_id === Number(businessId) && review?.user_id === user.id);
     })
     
     review = review[0];
@@ -22,6 +42,10 @@ const EditReviewForm = ({ business }) => {
     const [ editContent, setEditContent ] = useState(review?.review_content);
     const [ hasSubmitted, setHasSubmitted ] = useState(false);
     const [ validationErrors, setValidationErrors ] = useState([]);
+
+    useEffect(() => {
+        dispatch(loadImages());
+    }, [dispatch]);
 
     const dateTime = new Date();
     const isoTime = dateTime.toISOString();
@@ -32,7 +56,7 @@ const EditReviewForm = ({ business }) => {
     useEffect(() => {
         const errors = [];
         if (!editRating) errors.push('Please leave a rating');
-        if (editContent.length < 30) errors.push('Woah, did you mean to post so soon? We thought your review was just getting started! Please add more details so we can post this review.');
+        if (editContent?.length < 30) errors.push('Woah, did you mean to post so soon? We thought your review was just getting started! Please add more details so we can post this review.');
         setValidationErrors(errors);
     }, [editRating, editContent]);
 
@@ -55,14 +79,14 @@ const EditReviewForm = ({ business }) => {
             if (editedReview) {
                 reset();
                 setHasSubmitted(false);
-                history.push(`/businesses/${review?.business_id}`);
+                history.push(`/businesses/${businessId}`);
             }
         }
     }
 
-    const onDelete = async (id) => {
-        await dispatch(deleteReview(id));
-        history.push(`/businesses/${review?.business_id}`);
+    const onDeletePic = async (id) => {
+        await dispatch(deleteImage(id));
+        history.push(`/businesses/${businessId}`);
     }
 
     const reset = () => {
@@ -93,13 +117,20 @@ const EditReviewForm = ({ business }) => {
                     value={editContent}
                     onChange={e => setEditContent(e.target.value)}
                 ></textarea>
+                {bizImages && bizImages.map (image => (
+                    <div>
+                        <img src={image['image_url']} alt='biz review photos' style={{width: 500, height: 350 }} />
+                        <button type='button' onClick={() => onDeletePic(image.id)}>Delete Image</button>
+                    </div>
+                ))}
                 <div>
                     <button type='submit'>Edit Review</button>
                 </div>
-                <div>
+                {/* <div>
                     <button type='button' onClick={() => onDelete(review.id)}>Delete Review</button>
-                </div>
+                </div> */}
             </form>
+            <UploadImageModal />
         </>
     )
 }

@@ -34,7 +34,7 @@ class Business(db.Model):
 
 
     owner = db.relationship('User', back_populates="businesses_owned")
-    business_reviews = db.relationship('Review', back_populates="review_business")
-    business_photos = db.relationship('Bizphoto', back_populates="business")
+    business_reviews = db.relationship('Review', back_populates="review_business", cascade="all, delete")
+    business_photos = db.relationship('Bizphoto', back_populates="business", cascade="all, delete")
     
     # category = db.relationship('Category', back_populates='business_category')

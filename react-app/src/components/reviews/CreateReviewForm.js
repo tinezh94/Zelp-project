@@ -5,6 +5,7 @@ import { loadOneBusiness } from '../../store/business';
 
 import { createReview } from '../../store/review';
 import UploadPicture from '../images/UploadImage';
+import UploadImageModal from '../UploadImageModal';
 
 const CreateReviewForm = () => {
     const dispatch = useDispatch();
@@ -94,7 +95,7 @@ const CreateReviewForm = () => {
                     <button type='submit'>Post Review</button>
                 </div>
             </form>
-            <UploadPicture />
+            <UploadImageModal />
         </>
     )
 };

@@ -1,7 +1,7 @@
 const LOAD = '/imagesLOAD';
 // const LOAD_SINGLE_BUSINESS = '/imagesLOAD_SINGLE_BUSINESS';
 const CREATE = '/imagesCREATE';
-const EDIT = 'images/EDIT';
+// const EDIT = 'images/EDIT';
 const REMOVE = '/imagesREMOVE';
 
 const load = images => ({
@@ -19,10 +19,10 @@ const create = image => ({
     image
 })
 
-const edit = image => ({
-    type: EDIT,
-    image
-})
+// const edit = image => ({
+//     type: EDIT,
+//     image
+// })
 
 const remove = imageId => ({
     type: REMOVE,
@@ -39,14 +39,14 @@ export const loadImages = () => async (dispatch) => {
 };
 
 export const createImage = (payload) => async (dispatch) => {
-    console.log('inside create', payload)
+    // console.log('inside create', payload)
     const { user_id, business_id, image_url } = payload;
     const formData = new FormData();
     formData.append('user_id', user_id);
     formData.append('business_id', business_id);
     formData.append('image_url', image_url);
 
-    const res = await fetch ('/api/images/', {
+    const res = await fetch ('/api/images', {
         method: 'POST',
         body: formData
     });
@@ -58,22 +58,26 @@ export const createImage = (payload) => async (dispatch) => {
     };
 };
 
-export const editImage = payload => async (dispatch) => {
-    // console.log('inside thunK, payload', payload)
-    const res = await fetch (`/api/images/${payload.id}`, {
-        method: 'PUT',
-        // headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(payload)
-    });
+// export const editImage = payload => async (dispatch) => {
+//     console.log('inside thunK, payload', payload)
+//     const { user_id, business_id, image_url } = payload;
+//     const formData = new FormData();
+//     formData.append('user_id', user_id);
+//     formData.append('business_id', business_id);
+//     formData.append('image_url', image_url);
+//     const res = await fetch (`/api/images/${payload.id}`, {
+//         method: 'PUT',
+//         body: formData
+//     });
 
-    // console.log('inside thunk, res', res)
-    if (res.ok) {
-        const image = await res.json();
-        console.log('inside thunk after res.ok', image)
-        dispatch(edit(image));
-        return image;
-    };
-};
+//     // console.log('inside thunk, res', res)
+//     if (res.ok) {
+//         const image = await res.json();
+//         console.log('inside thunk after res.ok', image)
+//         dispatch(edit(image));
+//         return image;
+//     };
+// };
 
 export const deleteImage = imageId => async (dispatch) => {
     const res = await fetch(`/api/images/${imageId}`, {
@@ -102,10 +106,10 @@ export default function imagesReducer(state = {}, action) {
             newState[action.image.id] = action.image;
             return newState;
 
-        case EDIT:
-            newState = { ...state };
-            newState[action.image.id] = action.image;
-            return newState;
+        // case EDIT:
+        //     newState = { ...state };
+        //     newState[action.image.id] = action.image;
+        //     return newState;
 
         case REMOVE:
             newState = { ...state };
