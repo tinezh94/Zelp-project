@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal } from '../../context/Modal';
 import { NavLink, useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
@@ -20,6 +20,15 @@ function UploadImageModal() {
 
     const user = useSelector(state => state?.session?.user);
 
+    const imageTypes = '/\.(jpg|jpeg|png|gif)$/';
+    const MaxFileSize = 1024 * 1024;
+
+    useEffect(() => {
+        const errors = [];
+        // if (!image?.name.includes(imageTypes)) errors.push('Please select a valid image');
+        if (image?.size > 1e6) errors.push('Please upload an image smaller than 1MB');
+        setValidationErrors(errors);
+    }, [image?.name, image?.size]);
     const handleSubmit = async (e) => {
         e.preventDefault();
         // aws uploads can be a bit slow—displaying
@@ -27,18 +36,20 @@ function UploadImageModal() {
         setImageLoading(true);
         setHasSubmitted(true);
         
-        const payload = {
-            user_id: user.id,
-            business_id: Number(businessId),
-            image_url: image
+        if (!validationErrors.length) {
+            const payload = {
+                user_id: user.id,
+                business_id: Number(businessId),
+                image_url: image
+            }
+            const uploadedImage = await dispatch(createImage(payload));
+            if (uploadedImage) {
+                reset();
+                setHasSubmitted(false);
+                hideForm();
+            }
         }
 
-        const uploadedImage = await dispatch(createImage(payload));
-        if (uploadedImage) {
-            reset();
-            setHasSubmitted(false);
-            hideForm();
-        }
 
     }
     const updateImage = (e) => {
@@ -46,6 +57,7 @@ function UploadImageModal() {
         setImage(file);
     }
 
+    console.log('image', image, image?.name, image?.size)
     const reset = () => {
         setImage(null);
     }
@@ -60,13 +72,20 @@ function UploadImageModal() {
             {showModal && (
                 <Modal>
                     <form onSubmit={handleSubmit}>
+                    {hasSubmitted && validationErrors.length > 0 && (
+                        <ul>
+                            {validationErrors.map(error => (
+                                <li key={error}>{error}</li>
+                            ))}
+                        </ul>
+                     )}
                         <input
                             type="file"
                             accept="image/*"
                             onChange={updateImage}
                         />
                         <button type='submit'>Submit</button>
-                        {imageLoading && <p>Loading ...</p>}
+                        {!validationErrors.length && imageLoading && <p>Loading ...</p>}
                     </form>
                 </Modal>
             )}

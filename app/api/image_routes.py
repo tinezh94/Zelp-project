@@ -7,6 +7,16 @@ from app.forms import ImageForm
 
 image_routes = Blueprint("images", __name__)
 
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f'{field} : {error}')
+    return errorMessages
+
 @image_routes.route('/')
 def all_images():
     images=Bizphoto.query.all()
@@ -48,6 +58,7 @@ def upload_image():
         db.session.commit()
 
         return new_image.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 @image_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
