@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory, useParams } from 'react-router-dom';
 
-import { loadReviews } from '../../store/review';
+import { loadReviews, deleteReview } from '../../store/review';
 
 const BusinessReviews = () => {
     const dispatch = useDispatch();
@@ -41,17 +41,26 @@ const BusinessReviews = () => {
         dispatch(loadReviews())
     }, [dispatch])
 
+    const onDelete = async (id) => {
+        await dispatch(deleteReview(id));
+        history.push(`/businesses/${Number(businessId)}`);
+    }
+
     return (
         <>
             <div>
                 {bizReviews && bizReviews.map(review => (
                     <div>
                         {users.filter(user => user.id === review.user_id).map(user => (
-                            <p>{user.username}</p>
+                            <div>
+                                <p>{user.username}</p>
+                                <NavLink to={`/editareview/biz/${businessId}`}>Edit Review</NavLink>
+                                <button type='button' onClick={() => onDelete(review.id)}>Delete Review</button>
+                            </div>
                         ))}
                         <p>{review.rating}</p>
                         <p>{review.review_content}</p>
-                        <NavLink to={`/reviews/${review.id}`}>Edit Review</NavLink>
+                        
                     </div>
                 ))}
             </div>

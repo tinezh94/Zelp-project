@@ -11,6 +11,8 @@ const BusinessPage = () => {
     const { businessId } = useParams();
 
     const businesses = useSelector(state => state?.businesses);
+    const reviews = useSelector(state => state?.reviews);
+    // const images = useSelector(state => state?.images);
     const businessesArr = businesses ? Object.values(businesses) : null;
     // console.log('***', businessesArr)
     let business = businessesArr?.filter(business => {
@@ -20,12 +22,22 @@ const BusinessPage = () => {
     business = business[0];
     // console.log('---', business)
 
+    const reviewsArr = reviews ? Object.values(reviews) : null;
+
+    const review = reviewsArr.filter(review => review.business_id == businessId).length > 0;
+
+    console.log('businesspage',review)
+
     useEffect(() => {
         dispatch(loadBusinesses())
         // dispatch(loadOneBusiness(businessId))
     }, [dispatch]);
 
     // console.log('------', business)
+
+    // const bizImages = Object.values(images)?.filter(image => {
+    //     return image.business_id === Number(businessId)
+    // })
 
     return (
         <>
@@ -45,9 +57,16 @@ const BusinessPage = () => {
                         <p>{business.phone_number}</p>
                         <p>{business.price_range}</p>
                         <AllImages />
-                        <h4>
-                            <NavLink to={`/writeareview/biz/${businessId}`}>Write a Review</NavLink>
-                        </h4>
+
+                        {review ? (
+                            <h4>
+                                <NavLink to={`/editareview/biz/${businessId}`}>Edit Review</NavLink>
+                            </h4>
+                        ) :
+                            <h4>
+                                <NavLink to={`/writeareview/biz/${businessId}`}>Write a Review</NavLink>
+                            </h4>
+                        }
                         <EditBusinessForm business={business} />
                         <BusinessReviews />
                     </div>

@@ -7,12 +7,22 @@ from app.forms import ImageForm
 
 image_routes = Blueprint("images", __name__)
 
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f'{field} : {error}')
+    return errorMessages
+
 @image_routes.route('/')
 def all_images():
     images=Bizphoto.query.all()
     return {'images': [image.to_dict() for image in images]}
 
-@image_routes.route('/', methods=['GET', 'POST'])
+@image_routes.route('', methods=['GET', 'POST'])
 @login_required
 def upload_image():
     form = ImageForm()
@@ -48,3 +58,40 @@ def upload_image():
         db.session.commit()
 
         return new_image.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@image_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def delete_image(id):
+    image = Bizphoto.query.get(id)
+    db.session.delete(image)
+    db.session.commit()
+    return image.to_dict()
+
+# @image_routes.route('/<int:id>', methods=['PUT'])
+# @login_required
+# def edit_image(id):
+#     form = ImageForm()
+#     form['csrf_token'].data = request.cookies['csrf_token']
+
+#     if form.validate_on_submit():
+#         image = Bizphoto.query.get(id)
+#         data = request.json
+#         if not allowed_file(image.filename):
+#             return {"errors": "file type not permitted"}, 400        
+
+#         image.filename = get_unique_filename(image.filename)
+#         upload = upload_file_to_s3(image)
+
+#         if "url" not in upload:
+#             # if the dictionary doesn't have a url key
+#             # it means that there was an error when we tried to upload
+#             # so we send back that error message
+#             return upload, 400
+
+#         image_url = upload['url']
+#         image.user_id = data['user_id']
+#         image.business_id = data['business_id']
+#         image.image_url = image_url    
+#         db.session.commit()
+#         return image.to_dict()

@@ -19,3 +19,4 @@ class Bizphoto(db.Model):
 
     image_owner = db.relationship('User', back_populates='image_uploaded')
     business = db.relationship('Business', back_populates='business_photos')
+    # review = db.relationship('Review', back_populates='review_photos')

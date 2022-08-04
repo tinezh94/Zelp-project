@@ -8,18 +8,22 @@ const AllImages = () => {
     const { businessId } = useParams();
     const dispatch = useDispatch();
 
-    const bizImages = useSelector(state => state?.images);
+    const images = useSelector(state => state?.images);
 
-    const bizImagesArr = bizImages ? Object.values(bizImages) : null;
+    const bizImagesArr = images ? Object.values(images) : null;
 
     useEffect(() => {
         dispatch(loadImages());
     }, [dispatch])
 
+    const bizImages = bizImagesArr?.filter(image => {
+        return image.business_id === Number(businessId);
+    })
+
     return (
         <>
             <div>
-                {bizImagesArr && bizImagesArr.map(image => (
+                {bizImages && bizImages.map(image => (
                     <img src={image.image_url} style={{width: 500, height: 350 }} />
                 ))}
             </div>
