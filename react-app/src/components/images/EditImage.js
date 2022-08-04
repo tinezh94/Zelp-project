@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { editImage } from "../../store/image";
 
 const EditImage = () => {
-    const history = useHistory();
+    // const history = useHistory();
     const { businessId } = useParams();
     const dispatch = useDispatch();
 
