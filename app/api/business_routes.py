@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 from app.forms import BusinessForm
 from app.models import Business, db
+import os
 
 business_routes = Blueprint('businesses', __name__)
 
@@ -13,6 +14,11 @@ def validation_errors_to_error_messages(validation_errors):
         for error in validation_errors[field]:
             errorMessages.append(f'{field} : {error}')
     return errorMessages
+
+@business_routes.route('/google_maps_api')
+def google_map_api():
+    print('backend', os.environ.get('API_KEY'))
+    return {'api_key': os.environ.get('API_KEY')}
 
 @business_routes.route('/')
 def all_businesses():
