@@ -70,7 +70,7 @@ function UploadImageModal() {
         <>
             <button onClick={() => setShowModal(true)}>Upload Images Here</button>
             {showModal && (
-                <Modal>
+                <Modal onClose={() => setShowModal(false)}>
                     <form onSubmit={handleSubmit}>
                     {hasSubmitted && validationErrors.length > 0 && (
                         <ul>

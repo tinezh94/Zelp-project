@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 from app.forms import BusinessForm
 from app.models import Business, db
+import os
 
 business_routes = Blueprint('businesses', __name__)
 
@@ -13,6 +14,11 @@ def validation_errors_to_error_messages(validation_errors):
         for error in validation_errors[field]:
             errorMessages.append(f'{field} : {error}')
     return errorMessages
+
+@business_routes.route('/google_maps_api')
+def google_map_api():
+    print('backend', os.environ.get('API_KEY'))
+    return {'api_key': os.environ.get('API_KEY')}
 
 @business_routes.route('/')
 def all_businesses():
@@ -39,6 +45,12 @@ def create_business():
                             website=form.data['website'],
                             price_range=form.data['price_range'],
                             phone_number=form.data['phone_number'],
+                            address=form.data['address'],
+                            city=form.data['city'],
+                            state=form.data['state'],
+                            zipcode=form.data['zipcode'],
+                            latitude=form.data['latitude'],
+                            longitude=form.data['longitude'],
                             created_at=form.data['created_at'],
                             updated_at=form.data['updated_at']
         )
@@ -64,6 +76,12 @@ def edit_business(id):
         business.website = data['website']
         business.price_range = data['price_range']
         business.phone_number = data['phone_number']
+        business.address=data['address']
+        business.city=data['city']
+        business.state=data['state']
+        business.zipcode=data['zipcode']
+        business.latitude=data['latitude']
+        business.longitude=data['longitude']
         business.created_at = data['created_at']
         business.updated_at = data['updated_at']
         db.session.commit()

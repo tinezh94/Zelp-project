@@ -5,13 +5,15 @@ import businesses from './business';
 import categories from './category';
 import reviews from './review';
 import images from './image';
+import key from './map';
 
 const rootReducer = combineReducers({
   session,
   businesses,
   categories,
   reviews,
-  images
+  images,
+  key
 });
 
 

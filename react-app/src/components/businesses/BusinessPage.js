@@ -5,6 +5,7 @@ import { loadBusinesses, loadOneBusiness } from '../../store/business';
 import AllImages from '../images/AllImages';
 import BusinessReviews from '../reviews/BusinessReviews';
 import EditBusinessForm from './EditBusinessForm';
+import MapContainer from '../MapContainer';
 
 const BusinessPage = () => {
     const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const BusinessPage = () => {
     });
 
     business = business[0];
-    // console.log('---', business)
+    console.log('---', business)
 
     const reviewsArr = reviews ? Object.values(reviews) : null;
 
@@ -45,6 +46,7 @@ const BusinessPage = () => {
                 {business && (
                     <div>
                         <h1>{business?.name}</h1>
+                        <MapContainer latitude={business?.latitude} longitude={business?.longitude} />
                         <p>{business.category}</p>
                         <p>Mon {business.business_hours}</p>
                         <p>Tue {business.business_hours}</p>

@@ -14,6 +14,12 @@ class Business(db.Model):
     website = db.Column(db.String(100), nullable=True)
     price_range = db.Column(db.String(50), nullable=False)
     phone_number = db.Column(db.String(20), nullable=False)
+    address = db.Column(db.String(250), nullable=False)
+    city = db.Column(db.String(100), nullable=False)
+    state = db.Column(db.String(50), nullable=False)
+    zipcode = db.Column(db.String(25), nullable=False)
+    longitude =db.Column(db.Float(25), nullable=False)
+    latitude = db.Column(db.Float(25), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, server_default=func.now())
     updated_at = db.Column(db.DateTime, nullable=False, server_default=func.now())
 
@@ -28,10 +34,15 @@ class Business(db.Model):
             'website': self.website,
             'price_range': self.price_range,
             'phone_number': self.phone_number,
+            'address': self.address,
+            'city': self.city,
+            'state': self.state,
+            'zipcode': self.zipcode,
+            'longitude': self.longitude,
+            'latitude': self.latitude,
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }
-
 
     owner = db.relationship('User', back_populates="businesses_owned")
     business_reviews = db.relationship('Review', back_populates="review_business", cascade="all, delete")

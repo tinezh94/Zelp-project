@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { Wrapper } from '@googlemaps/react-wrapper';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
@@ -14,6 +15,8 @@ import EditBusinessForm from './components/businesses/EditBusinessForm';
 import BusinessPage from './components/businesses/BusinessPage';
 import CreateReviewForm from './components/reviews/CreateReviewForm';
 import EditReviewForm from './components/reviews/EditReviewForm';
+import MapContainer from './components/MapContainer';
+import { loadKey } from './store/map';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -26,12 +29,17 @@ function App() {
     })();
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(loadKey());
+  }, [dispatch]);
+
   if (!loaded) {
     return null;
   }
 
   return (
     <BrowserRouter>
+    <Wrapper libraries={'places'}>
       <NavBar />
       <Switch>
         <Route path='/login' exact={true}>
@@ -60,8 +68,10 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <BusinessesPage />
+          {/* <MapContainer /> */}
         </ProtectedRoute>
       </Switch>
+    </Wrapper>
     </BrowserRouter>
   );
 }
