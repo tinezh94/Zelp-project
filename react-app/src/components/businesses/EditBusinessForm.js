@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+import { geocodeByPlaceId, geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
+
 
 import { deleteBusiness, editBusiness, loadBusinesses } from '../../store/business';
 import { loadCategories } from '../../store/category';
@@ -15,6 +18,7 @@ const EditBusinessForm = () => {
     const user = useSelector(state => state?.session?.user);
     const categories = useSelector(state => state?.categories);
     const businesses = useSelector(state => state?.businesses);
+    const apiKey = useSelector(state => state?.key);
     console.log("edit business")
     const businessesArr = businesses ? Object.values(businesses) : null;
     const categoriesArr = categories ? Object.values(categories) : null;
@@ -38,8 +42,41 @@ const EditBusinessForm = () => {
     const [ editWebsite, setEditWebsite ] = useState(business?.website ? business?.website : '');
     const [ editPriceRange, setEditPriceRange ] = useState(business?.price_range);
     const [ editPhone, setEditPhone ] = useState(business?.phone_number);
+    const [ editStreetAddress, setEditStreetAddress ] = useState(business?.address);
+    const [ editCity, setEditCity ] = useState(business?.city);
+    const [ editState, setEditState ] = useState(business?.state);
+    const [ editZipcode, setEditZipcode ] = useState(business?.zipcode);
+    const [ editLatitude, setEditLatitude ] = useState(business?.latitude);
+    const [ ediLongitude, setEditLongitude ] = useState(business?.longitude);
+    const [ autoValue, setAutoValue ] = useState(null);
+    const [ address, setAddress ] = useState('');
     const [ hasSubmitted, setHasSubmitted ] = useState(false);
     const [ validationErrors, setValidationErrors ] = useState([]);
+
+    let placeId = autoValue ? autoValue.value.place_id : null;
+
+    if (placeId) {
+        geocodeByPlaceId(placeId)
+        .then(results => {
+            setAddress(results[0].formatted_address);
+            setEditStreetAddress(address.split(',')[0]);
+            setEditCity(address.split(', ')[1]);
+            let stateZip = address.split(', ')[2];
+            setEditState(stateZip.split(' ')[0]);
+            setEditZipcode(stateZip.split(' ')[1]);
+        })
+        .catch(error => console.error(error));
+    }
+
+    if (address.length > 0) {
+        geocodeByAddress(address)
+            .then(res => getLatLng(res[0]))
+            .then(({lat, lng}) => {
+                setEditLatitude(lat);
+                setEditLongitude(lng);
+            })
+            .catch(error => console.error(error));    
+    }
 
     const dateTime = new Date();
     const isoTime = dateTime.toISOString();
@@ -81,6 +118,12 @@ const EditBusinessForm = () => {
                 website: editWebsite,
                 price_range: editPriceRange,
                 phone_number: editPhone,
+                address: editStreetAddress,
+                city: editCity,
+                state: editState,
+                zipcode: editZipcode,
+                latitude: editLatitude,
+                longitude: ediLongitude,
                 created_at: combined,
                 updated_at: combined
             }
@@ -107,6 +150,12 @@ const EditBusinessForm = () => {
         setEditWebsite('');
         setEditPriceRange('');
         setEditPhone('');
+        setEditStreetAddress('');
+        setEditCity('');
+        setEditState('');
+        setEditZipcode('');
+        setEditLatitude('');
+        setEditLongitude('');
     }
 
     return (
@@ -125,6 +174,56 @@ const EditBusinessForm = () => {
                     type='text'
                     value={editName}
                     onChange={e => setEditName(e.target.value)}
+                />
+                <label>Address</label>
+                <div>
+                    {apiKey && 
+                    <GooglePlacesAutocomplete
+                        apiKey={apiKey}
+                        selectProps={{
+                            styles: {
+                                input: (provided) => ({
+                                ...provided,
+                                color: 'blue',
+                                }),
+                                option: (provided) => ({
+                                ...provided,
+                                color: 'blue',
+                                }),
+                                singleValue: (provided) => ({
+                                ...provided,
+                                color: 'blue',
+                                }),
+                            },
+                            value: autoValue,
+                            onChange: setAutoValue
+                        }}
+                    />
+                    }
+                </div>
+                <label>Address</label>
+                <input
+                    type='text'
+                    value={editStreetAddress}
+                    onChange={e => setEditStreetAddress(e.target.value)} 
+                />
+                <label>City</label>
+                <input
+                    type='text'
+                    value={editCity}
+                    onChange={e => setEditCity(e.target.value)} 
+                />
+                <label>State</label>
+                <input
+                    type='text'
+                    value={editState}
+                    onChange={e => setEditState(e.target.value)}
+                />
+                <label>Zip Code</label>
+                <input 
+                    type='text'
+                    value={editZipcode}
+                    onChange={e => setEditZipcode(e.target.value)}
                 />
                 <label>Description</label>
                 <textarea

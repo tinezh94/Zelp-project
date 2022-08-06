@@ -76,6 +76,12 @@ def edit_business(id):
         business.website = data['website']
         business.price_range = data['price_range']
         business.phone_number = data['phone_number']
+        business.address=data['address']
+        business.city=data['city']
+        business.state=data['state']
+        business.zipcode=data['zipcode']
+        business.latitude=data['latitude']
+        business.longitude=data['longitude']
         business.created_at = data['created_at']
         business.updated_at = data['updated_at']
         db.session.commit()

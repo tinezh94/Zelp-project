@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { loadKey } from '../../store/map';
 
 const libraries = ['places']
-const Maps = ({ apiKey }) => {
+const Maps = ({ apiKey, latitude, longitude }) => {
 //     const { isLoaded } = useLoadScript({
 //         id: 'google-map-script',
 //         googleMapsApiKey: apiKey,
@@ -19,9 +19,10 @@ const Maps = ({ apiKey }) => {
     //     lng: 73.833352,
     // }), [])
 
+    console.log('lat, lng', latitude, longitude)
     const center = {
-        lat:40.76260743077762,
-        lng: -73.8311564442085
+        lat: latitude,
+        lng: longitude
     }
     const [ isLoaded, setIsLoad ] = useState(false);
 

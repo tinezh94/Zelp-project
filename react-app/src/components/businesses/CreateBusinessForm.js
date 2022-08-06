@@ -65,26 +65,29 @@ const CreateBusinessForm = () => {
     //     })
     //     .catch(error => console.error(error));
 
-    
-    // if (address.length > 0) {
-    //     geocodeByAddress(address)
-    //         .then(res => getLatLng(res[0]))
-    //         .then((latitude, longitude) => {
-    //             setLatitude(latitude);
-    //             setLongitude(longitude);
-    //         })
-    //         .catch(error => console.error(error));
-            
-    // }
-
-    const handleSelect = async (value) => {
-        const results = await geocodeByAddress(value);
-        const coordinates = await getLatLng(results[0]);
-        setAddress(address)
-        console.log('coordinates', coordinates)
-
+    if (placeId) {
+        geocodeByPlaceId(placeId)
+        .then(results => {
+            setAddress(results[0].formatted_address);
+            setStreetAddress(address.split(',')[0]);
+            setCity(address.split(', ')[1]);
+            let stateZip = address.split(', ')[2];
+            setState(stateZip.split(' ')[0]);
+            setZipcode(stateZip.split(' ')[1]);
+        })
+        .catch(error => console.error(error));
     }
 
+    
+    if (address.length > 0) {
+        geocodeByAddress(address)
+            .then(res => getLatLng(res[0]))
+            .then(({lat, lng}) => {
+                setLatitude(lat);
+                setLongitude(lng);
+            })
+            .catch(error => console.error(error));    
+    }
 
     const dateTime = new Date();
     const isoTime = dateTime.toISOString();
@@ -199,12 +202,35 @@ const CreateBusinessForm = () => {
                                 }),
                             },
                             value: autoValue,
-                            onChange: setAutoValue,
-                            onselect: handleSelect
+                            onChange: setAutoValue
                         }}
                     />
                     }
                 </div>
+                <label>Address</label>
+                <input
+                    type='text'
+                    value={streetAddress}
+                    onChange={e => setStreetAddress(e.target.value)} 
+                />
+                <label>City</label>
+                <input
+                    type='text'
+                    value={city}
+                    onChange={e => setCity(e.target.value)} 
+                />
+                <label>State</label>
+                <input
+                    type='text'
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                />
+                <label>Zip Code</label>
+                <input 
+                    type='text'
+                    value={zipcode}
+                    onChange={e => setZipcode(e.target.value)}
+                />
                 <label>Description</label>
                 <textarea
                     placeholder='Please describe your business here...'

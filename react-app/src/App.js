@@ -68,7 +68,7 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <BusinessesPage />
-          <MapContainer />
+          {/* <MapContainer /> */}
         </ProtectedRoute>
       </Switch>
     </Wrapper>

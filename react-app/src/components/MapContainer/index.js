@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadKey } from '../../store/map';
 import Maps from './Map';
 
-const MapContainer = () => {
+const MapContainer = ({ latitude, longitude}) => {
     const dispatch = useDispatch();
     // const [ key, setKey ] = useState(null);
 
@@ -29,7 +29,7 @@ const MapContainer = () => {
     console.log('key', key)
 
     return (
-        <Maps apiKey={key}></Maps>
+        <Maps apiKey={key} latitude={latitude} longitude={longitude}></Maps>
     )
 };
 
