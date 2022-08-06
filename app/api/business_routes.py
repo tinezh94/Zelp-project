@@ -45,6 +45,12 @@ def create_business():
                             website=form.data['website'],
                             price_range=form.data['price_range'],
                             phone_number=form.data['phone_number'],
+                            address=form.data['address'],
+                            city=form.data['city'],
+                            state=form.data['state'],
+                            zipcode=form.data['zipcode'],
+                            latitude=form.data['latitude'],
+                            longitude=form.data['longitude'],
                             created_at=form.data['created_at'],
                             updated_at=form.data['updated_at']
         )

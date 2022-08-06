@@ -37,19 +37,19 @@ const Maps = ({ apiKey }) => {
     // const [ map, setMap] = useState(/**@type google.maps.Map */(null))
 
     return (
-        <>
-        {isLoaded && (
-            <GoogleMap 
-                mapContainerStyle={{width: 400, height:350}}
-                zoom={10}
-                center={center}
-                apiKey={apiKey}
-                onLoad={onLoad}
-            >
-                <Marker position={center}></Marker>
-            </GoogleMap>
-        )}
-        </>
+        <div>
+            {isLoaded && (
+                <GoogleMap 
+                    mapContainerStyle={{width: 400, height:350}}
+                    zoom={10}
+                    center={center}
+                    apiKey={apiKey}
+                    onLoad={onLoad}
+                >
+                    <Marker position={center}></Marker>
+                </GoogleMap>
+            )}
+        </div>
         // <h1>MapContainer</h1>
     )
 }

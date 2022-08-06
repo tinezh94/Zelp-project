@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+import { geocodeByPlaceId, geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
+
 import { createBusiness } from '../../store/business';
 import { loadCategories } from '../../store/category';
 
@@ -12,6 +15,7 @@ const CreateBusinessForm = () => {
     const user = useSelector(state => state?.session?.user);
     const categories = useSelector(state => state?.categories);
     const businesses = useSelector(state => state?.businesses);
+    const apiKey = useSelector(state => state?.key);
 
     const businessesArr = businesses ? Object.values(businesses) : null;
 
@@ -28,6 +32,14 @@ const CreateBusinessForm = () => {
     const [ website, setWebsite ] = useState('');
     const [ priceRange, setPriceRange ] = useState(priceRangeArr[0]);
     const [ phone, setPhone ] = useState('');
+    const [ streetAddress, setStreetAddress ] = useState('');
+    const [ city, setCity ] = useState('');
+    const [ state, setState ] = useState('');
+    const [ zipcode, setZipcode ] = useState('');
+    const [ latitude, setLatitude ] = useState('');
+    const [ longitude, setLongitude ] = useState('');
+    const [ autoValue, setAutoValue ] = useState(null);
+    const [ address, setAddress ] = useState('');
     const [ hasSubmitted, setHasSubmitted ] = useState(false);
     const [ validationErrors, setValidationErrors ] = useState([]);
     
@@ -38,6 +50,41 @@ const CreateBusinessForm = () => {
     useEffect(() => {
         dispatch(loadCategories());
     }, [dispatch]);
+
+    let placeId = autoValue ? autoValue.value.place_id : null;
+    console.log('placeId', placeId)
+    console.log('apiKey', apiKey)
+    // geocodeByPlaceId(placeId)
+    //     .then(results => {
+    //         setAddress(results[0].formatted_address);
+    //         setStreetAddress(address.split(',')[0]);
+    //         setCity(address.split(',')[1]);
+    //         setState(address.split(',').split(' ')[0]);
+    //         setZipcode(address.split(',').split(' ')[1]);
+
+    //     })
+    //     .catch(error => console.error(error));
+
+    
+    // if (address.length > 0) {
+    //     geocodeByAddress(address)
+    //         .then(res => getLatLng(res[0]))
+    //         .then((latitude, longitude) => {
+    //             setLatitude(latitude);
+    //             setLongitude(longitude);
+    //         })
+    //         .catch(error => console.error(error));
+            
+    // }
+
+    const handleSelect = async (value) => {
+        const results = await geocodeByAddress(value);
+        const coordinates = await getLatLng(results[0]);
+        setAddress(address)
+        console.log('coordinates', coordinates)
+
+    }
+
 
     const dateTime = new Date();
     const isoTime = dateTime.toISOString();
@@ -63,7 +110,7 @@ const CreateBusinessForm = () => {
         if (!priceRange) errors.push('Please choose a price range for your business')
         if (!(phone.match(phoneNumber))) errors.push('Please enter a valid phone number')
         setValidationErrors(errors);
-    }, [name, description, category, businessHours, priceRange, phone])
+    }, [name, description, category, businessHours, priceRange, phone, streetAddress, city, state, zipcode])
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -79,6 +126,12 @@ const CreateBusinessForm = () => {
                 website: website,
                 price_range: priceRange,
                 phone_number: phone,
+                address: streetAddress,
+                city: city,
+                state: state,
+                zipcode: zipcode,
+                longitude: longitude,
+                latitude: latitude,
                 created_at: combined,
                 updated_at: combined
             }
@@ -100,6 +153,12 @@ const CreateBusinessForm = () => {
         setWebsite('');
         setPriceRange('');
         setPhone('');
+        setStreetAddress('');
+        setCity('');
+        setState('');
+        setZipcode('');
+        setLongitude('');
+        setLatitude('');
     };
 
     return (
@@ -119,6 +178,33 @@ const CreateBusinessForm = () => {
                     value={name}
                     onChange={e => setName(e.target.value)}
                 />
+                <label>Address</label>
+                <div>
+                    {apiKey && 
+                    <GooglePlacesAutocomplete
+                        apiKey={apiKey}
+                        selectProps={{
+                            styles: {
+                                input: (provided) => ({
+                                ...provided,
+                                color: 'blue',
+                                }),
+                                option: (provided) => ({
+                                ...provided,
+                                color: 'blue',
+                                }),
+                                singleValue: (provided) => ({
+                                ...provided,
+                                color: 'blue',
+                                }),
+                            },
+                            value: autoValue,
+                            onChange: setAutoValue,
+                            onselect: handleSelect
+                        }}
+                    />
+                    }
+                </div>
                 <label>Description</label>
                 <textarea
                     placeholder='Please describe your business here...'
