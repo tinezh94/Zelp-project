@@ -91,6 +91,7 @@ const EditBusinessForm = () => {
 
         if (!editName) errors.push('Business name cannot be empty')
         // if (businessesArr?.map(business => business.name).includes(editName)) errors.push('Business name must be unique');
+        if (!address) errors.push('Business address cannot be empty');
         if (!editDescription) errors.push('Please tell us what your business does')
         if (editDescription.length < 50) errors.push('Please describe your business with more details');
         if (editDescription.length > 2000) errors.push('Please shorten your description');
@@ -100,7 +101,7 @@ const EditBusinessForm = () => {
         if (!editPriceRange) errors.push('Please choose a price range for your business')
         if (!(editPhone.match(phoneNumber))) errors.push('Please enter a valid phone number')
         setValidationErrors(errors);
-    }, [editName, editDescription, editCategory, editBusinessHours, editPriceRange, editPhone])
+    }, [editName, editDescription, editCategory, editBusinessHours, editPriceRange, editPhone, address])
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -169,13 +170,13 @@ const EditBusinessForm = () => {
                         </ul>
                     )}
                 <h2>Edit Business</h2>
-                <label>Business Name</label>
+                <label>Business Name*</label>
                 <input
                     type='text'
                     value={editName}
                     onChange={e => setEditName(e.target.value)}
                 />
-                <label>Address</label>
+                <label>Address*</label>
                 <div>
                     {apiKey && 
                     <GooglePlacesAutocomplete
@@ -201,38 +202,38 @@ const EditBusinessForm = () => {
                     />
                     }
                 </div>
-                <label>Address</label>
+                {/* <label>Address*</label>
                 <input
                     type='text'
                     value={editStreetAddress}
                     onChange={e => setEditStreetAddress(e.target.value)} 
                 />
-                <label>City</label>
+                <label>City*</label>
                 <input
                     type='text'
                     value={editCity}
                     onChange={e => setEditCity(e.target.value)} 
                 />
-                <label>State</label>
+                <label>State*</label>
                 <input
                     type='text'
                     value={editState}
                     onChange={e => setEditState(e.target.value)}
                 />
-                <label>Zip Code</label>
+                <label>Zip Code*</label>
                 <input 
                     type='text'
                     value={editZipcode}
                     onChange={e => setEditZipcode(e.target.value)}
-                />
-                <label>Description</label>
+                /> */}
+                <label>Description*</label>
                 <textarea
                     rows={'10'}
                     cols={'50'}
                     value={editDescription}
                     onChange={e => setEditDescription(e.target.value)}
                 ></textarea>
-                <label>Category</label>
+                <label>Category*</label>
                 <select
                     value={editCategory}
                     onChange={e => setEditCategory(e.target.value)}
@@ -248,13 +249,13 @@ const EditBusinessForm = () => {
                     value={editWebsite}
                     onChange={e => e.target.value ? setEditWebsite(e.target.value): null}
                 />
-                <label>Business Hours</label>
+                <label>Business Hours*</label>
                 <input 
                     type='text'
                     value={editBusinessHours}
                     onChange={e => setEditBusinessHours(e.target.value)}
                 />
-                <label>Price Range</label>
+                <label>Price Range*</label>
                 <select
                     value={editPriceRange}
                     onChange={e => setEditPriceRange(e.target.value)}
@@ -263,7 +264,7 @@ const EditBusinessForm = () => {
                         <option value={priceRange} key={idx}>{priceRange}</option>
                     ))}
                 </select>
-                <label>Business Phone Number</label>
+                <label>Business Phone Number*</label>
                 <input 
                     type='text'
                     value={editPhone}
