@@ -20,8 +20,8 @@ const Maps = ({ apiKey }) => {
     // }), [])
 
     const center = {
-        lat: 40.771479,
-        lng: 73.833352,
+        lat:40.76260743077762,
+        lng: -73.8311564442085
     }
     const [ isLoaded, setIsLoad ] = useState(false);
 
