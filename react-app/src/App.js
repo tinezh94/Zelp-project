@@ -20,6 +20,9 @@ import { loadKey } from './store/map';
 import BizUploadImage from './components/businesses/BizUploadImage';
 import UserProfilePage from './components/UserProfile/UserProfilePage';
 import UserBiz from './components/businesses/userBiz';
+import { loadBusinesses } from './store/business';
+import { loadCategories } from './store/category';
+import SearchBar from './components/SearchBar';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -32,8 +35,10 @@ function App() {
     })();
   }, [dispatch]);
 
-  useEffect(() => {
+  useEffect( () => {
     dispatch(loadKey());
+    dispatch(loadBusinesses());
+    dispatch(loadCategories());
   }, [dispatch]);
 
   if (!loaded) {
@@ -71,6 +76,7 @@ function App() {
           <UserProfilePage />
         </ProtectedRoute>
         <Route path='/' exact={true} >
+          <SearchBar />
           <BusinessesPage />
           {/* <MapContainer /> */}
         </Route>
