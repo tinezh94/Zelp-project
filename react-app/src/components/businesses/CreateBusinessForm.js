@@ -106,7 +106,7 @@ const CreateBusinessForm = () => {
     
     const validateOperation = () => {
         if (morning === 'am' || morning === 'AM') {
-            if (openingHour > closingHour || openingHour < closingHour) return true;
+            if (openingHour > closingHour || openingHour <= closingHour) return true;
         }
         else if ((morning === 'pm' || morning === 'PM') && (afternoon === 'am' || afternoon === 'AM')) {
             console.log('inside if statement', openingHour > closingHour)
@@ -166,7 +166,7 @@ const CreateBusinessForm = () => {
             if (createdBusiness) {
                 reset();
                 setHasSubmitted(false);
-                history.push('/');
+                history.push(`/biz/${createdBusiness.id}/images-upload`);
             };
         }
     };
