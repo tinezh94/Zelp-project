@@ -13,6 +13,7 @@ const BusinessPage = () => {
 
     const businesses = useSelector(state => state?.businesses);
     const reviews = useSelector(state => state?.reviews);
+    const user = useSelector(state => state.session.user);
     // const images = useSelector(state => state?.images);
     const businessesArr = businesses ? Object.values(businesses) : null;
     // console.log('***', businessesArr)
@@ -25,7 +26,7 @@ const BusinessPage = () => {
 
     const reviewsArr = reviews ? Object.values(reviews) : null;
 
-    const review = reviewsArr.filter(review => review.business_id == businessId).length > 0;
+    const review = reviewsArr.filter(review => (review.business_id == businessId && review.user_id === user.id)).length > 0;
 
     console.log('businesspage',review)
 

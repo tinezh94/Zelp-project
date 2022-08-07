@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+import { FaStar } from 'react-icons/fa';
 // import { loadOneBusiness } from '../../store/business';
 import { deleteImage, loadImages } from '../../store/image';
 
@@ -8,6 +9,7 @@ import { deleteReview, editReview } from '../../store/review';
 // import EditImage from '../images/EditImage';
 // import UploadPicture from '../images/UploadImage';
 import UploadImageModal from '../UploadImageModal';
+import './reviews.css'
 
 const EditReviewForm = () => {
     const dispatch = useDispatch();
@@ -38,7 +40,16 @@ const EditReviewForm = () => {
     
     review = review[0];
 
+    const colors = {
+        'orange': "#f15c00",
+        'grey': "#a9a9a9"
+    }
+
+    const stars = Array(5).fill(0);
+
     const [ editRating, setEditRating ] = useState(review?.rating);
+    const [ hoverValue, setHoverValue ] = useState(undefined);
+
     const [ editContent, setEditContent ] = useState(review?.review_content);
     const [ hasSubmitted, setHasSubmitted ] = useState(false);
     const [ validationErrors, setValidationErrors ] = useState([]);
@@ -59,6 +70,19 @@ const EditReviewForm = () => {
         if (editContent?.length < 30) errors.push('Woah, did you mean to post so soon? We thought your review was just getting started! Please add more details so we can post this review.');
         setValidationErrors(errors);
     }, [editRating, editContent]);
+
+    const handleClick = value => {
+        setEditRating(value)
+    };
+
+    const handleMouseOver = value => {
+        setHoverValue(value)
+    };
+
+    const handleMouseLeave = () => {
+        setHoverValue(undefined)
+    };
+
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -105,12 +129,41 @@ const EditReviewForm = () => {
                     </ul>
                 )}
                 <h2>{business?.name}</h2>
-                <label>Rating</label>
+                {/* <label>Rating</label>
                 <input 
                     type='text'
                     value={editRating}
                     onChange={e => setEditRating(e.target.value)}
-                />
+                /> */}
+                <div style={styles.container}>
+                    <div style={styles.stars}>
+                        {stars.map((_, index) => {
+                            const ratingValue = index + 1;
+                            return (
+                                <label>
+                                    <input 
+                                        type='radio' 
+                                        display='none'
+                                        name='rating' 
+                                        value={ratingValue}
+                                        onClick={() => setEditRating(ratingValue )} />
+                                    <FaStar 
+                                        key={index}
+                                        size={50}
+                                        style={{
+                                            marginRight: 10,
+                                            cursor: 'pointer'
+                                        }}
+                                        color={ratingValue <= (editRating || hoverValue) ? colors.orange : colors.grey}
+                                        // onClick={() => handleClick(index + 1)}
+                                        onMouseEnter={() => handleMouseOver(ratingValue)}
+                                        onMouseLeave={handleMouseLeave}
+                                        ></FaStar>
+                                </label>
+                            )
+                        })}
+                    </div>
+                </div>
                 <textarea
                     rows={'10'}
                     cols={'50'}
@@ -133,6 +186,14 @@ const EditReviewForm = () => {
             <UploadImageModal />
         </>
     )
+}
+
+const styles = {
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+    }
 }
 
 export default EditReviewForm;
