@@ -29,6 +29,7 @@ function UploadImageModal() {
         if (image?.size > 1e6) errors.push('Please upload an image smaller than 1MB');
         setValidationErrors(errors);
     }, [image?.name, image?.size]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         // aws uploads can be a bit slow—displaying
@@ -43,6 +44,7 @@ function UploadImageModal() {
                 image_url: image
             }
             const uploadedImage = await dispatch(createImage(payload));
+            console.log('uploadedimage', uploadedImage)
             if (uploadedImage) {
                 reset();
                 setHasSubmitted(false);
