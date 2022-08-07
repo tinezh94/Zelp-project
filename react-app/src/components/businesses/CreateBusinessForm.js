@@ -96,8 +96,28 @@ const CreateBusinessForm = () => {
     const combined = date + ' ' + time
 
     const phoneNumber = /^\(?([0-9]{3})\)?(\-[0-9]{3})(\-[0-9]{4})$/;
+    const operatingHours = /^(0?[1-9]|1[0-2]):([0-5]\d)\s((?:A|P)\.?M\.?)\s([\-])\s(0?[1-9]|1[0-2]):([0-5]\d)\s((?:A|P)\.?M\.?)$/i;
+    
+    // console.log(businessHours?.split('-')[1].split(':')[0])
+    const morning = businessHours?.split(' - ')[0]?.split(' ')[1];
+    const afternoon = businessHours?.split(' - ')[1]?.split(' ')[1];
+    const openingHour = parseInt(businessHours?.split(' - ')[0]?.split(':')[0]);
+    const closingHour = parseInt(businessHours?.split(' - ')[1]?.split(':')[0]);
+    
+    const validateOperation = () => {
+        if (morning === 'am' || morning === 'AM') {
+            if (openingHour > closingHour || openingHour < closingHour) return true;
+        }
+        else if ((morning === 'pm' || morning === 'PM') && (afternoon === 'am' || afternoon === 'AM')) {
+            console.log('inside if statement', openingHour > closingHour)
+            if (openingHour > closingHour && closingHour <= '5') return true;
+        }
+        else if ((morning === 'pm' || morning === 'PM') && (afternoon === 'pm' || afternoon === 'PM')) {
+            if (openingHour > closingHour && closingHour >= '10') return true;
+        }
+        return false;
+    }
 
-    // const operatingHours = /^\d{1,2}:\d{2}(am)?$ \-\d{1,2}:\d{2}(pm)?$/;
 
     useEffect(() => {
         const errors = [];
@@ -110,6 +130,8 @@ const CreateBusinessForm = () => {
         if (description.length > 2000) errors.push('Please shorten your description');
         if (!category) errors.push('Please choose a category')
         if (!businessHours) errors.push('Please tell us your operating hours')
+        if (!businessHours.match(operatingHours)) errors.push('Please have your business hours in valid format: ie. 10:00 AM - 11:00 PM');
+        if (!validateOperation()) errors.push('Please enter valid operating hours');
         // if (!(businessHours.match(operatingHours))) errors.push ('Pleast enter your operating hours in such format: 10:00 AM - 10:00 PM');
         if (!priceRange) errors.push('Please choose a price range for your business')
         if (!(phone.match(phoneNumber))) errors.push('Please enter a valid phone number')
