@@ -96,24 +96,47 @@ const CreateBusinessForm = () => {
     const combined = date + ' ' + time
 
     const phoneNumber = /^\(?([0-9]{3})\)?(\-[0-9]{3})(\-[0-9]{4})$/;
+    const operatingHours = /^(0?[1-9]|1[0-2]):([0-5]\d)\s((?:A|P)\.?M\.?)\s([\-])\s(0?[1-9]|1[0-2]):([0-5]\d)\s((?:A|P)\.?M\.?)$/i;
+    
+    // console.log(businessHours?.split('-')[1].split(':')[0])
+    const morning = businessHours?.split(' - ')[0]?.split(' ')[1];
+    const afternoon = businessHours?.split(' - ')[1]?.split(' ')[1];
+    const openingHour = parseInt(businessHours?.split(' - ')[0]?.split(':')[0]);
+    const closingHour = parseInt(businessHours?.split(' - ')[1]?.split(':')[0]);
+    
+    const validateOperation = () => {
+        if (morning === 'am' || morning === 'AM') {
+            if (openingHour > closingHour || openingHour <= closingHour) return true;
+        }
+        else if ((morning === 'pm' || morning === 'PM') && (afternoon === 'am' || afternoon === 'AM')) {
+            console.log('inside if statement', openingHour > closingHour)
+            if (openingHour > closingHour && closingHour <= '5') return true;
+        }
+        else if ((morning === 'pm' || morning === 'PM') && (afternoon === 'pm' || afternoon === 'PM')) {
+            if (openingHour > closingHour && closingHour >= '10') return true;
+        }
+        return false;
+    }
 
-    // const operatingHours = /^\d{1,2}:\d{2}(am)?$ \-\d{1,2}:\d{2}(pm)?$/;
 
     useEffect(() => {
         const errors = [];
 
         if (!name) errors.push('Business name cannot be empty')
         if (businessesArr?.map(business => business.name).includes(name)) errors.push('Business name must be unique');
+        if (!address) errors.push('Business address cannot be empty');
         if (!description) errors.push('Please tell us what your business does')
         if (description.length < 50) errors.push('Please describe your business with more details');
         if (description.length > 2000) errors.push('Please shorten your description');
         if (!category) errors.push('Please choose a category')
         if (!businessHours) errors.push('Please tell us your operating hours')
+        if (!businessHours.match(operatingHours)) errors.push('Please have your business hours in valid format: ie. 10:00 AM - 11:00 PM');
+        if (!validateOperation()) errors.push('Please enter valid operating hours');
         // if (!(businessHours.match(operatingHours))) errors.push ('Pleast enter your operating hours in such format: 10:00 AM - 10:00 PM');
         if (!priceRange) errors.push('Please choose a price range for your business')
         if (!(phone.match(phoneNumber))) errors.push('Please enter a valid phone number')
         setValidationErrors(errors);
-    }, [name, description, category, businessHours, priceRange, phone, streetAddress, city, state, zipcode])
+    }, [name, description, category, businessHours, priceRange, phone, address])
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -143,7 +166,7 @@ const CreateBusinessForm = () => {
             if (createdBusiness) {
                 reset();
                 setHasSubmitted(false);
-                history.push('/');
+                history.push(`/biz/${createdBusiness.id}/images-upload`);
             };
         }
     };
@@ -175,13 +198,13 @@ const CreateBusinessForm = () => {
                         </ul>
                     )}
                 <h2>New Business</h2>
-                <label>Business Name</label>
+                <label>Business Name*</label>
                 <input
                     type='text'
                     value={name}
                     onChange={e => setName(e.target.value)}
                 />
-                <label>Address</label>
+                <label>Address*</label>
                 <div>
                     {apiKey && 
                     <GooglePlacesAutocomplete
@@ -207,31 +230,31 @@ const CreateBusinessForm = () => {
                     />
                     }
                 </div>
-                <label>Address</label>
+                {/* <label>Address*</label>
                 <input
                     type='text'
                     value={streetAddress}
                     onChange={e => setStreetAddress(e.target.value)} 
                 />
-                <label>City</label>
+                <label>City*</label>
                 <input
                     type='text'
                     value={city}
                     onChange={e => setCity(e.target.value)} 
                 />
-                <label>State</label>
+                <label>State*</label>
                 <input
                     type='text'
                     value={state}
                     onChange={e => setState(e.target.value)}
                 />
-                <label>Zip Code</label>
+                <label>Zip Code*</label>
                 <input 
                     type='text'
                     value={zipcode}
                     onChange={e => setZipcode(e.target.value)}
-                />
-                <label>Description</label>
+                /> */}
+                <label>Description*</label>
                 <textarea
                     placeholder='Please describe your business here...'
                     rows={'10'}
@@ -239,7 +262,7 @@ const CreateBusinessForm = () => {
                     value={description}
                     onChange={e => setDescription(e.target.value)}
                 ></textarea>
-                <label>Category</label>
+                <label>Category*</label>
                 <select
                     value={category}
                     // defaultValue={'default'}
@@ -257,14 +280,14 @@ const CreateBusinessForm = () => {
                     value={website}
                     onChange={e => setWebsite(e.target.value)}
                 />
-                <label>Business Hours</label>
+                <label>Business Hours*</label>
                 <input 
                     placeholder='i.e 10:00 AM - 11:00 PM'
                     type='text'
                     value={businessHours}
                     onChange={e => setBusinessHours(e.target.value)}
                 />
-                <label>Price Range</label>
+                <label>Price Range*</label>
                 <select
                     value={priceRange}
                     onChange={e =>  setPriceRange(e.target.value)}
@@ -273,7 +296,7 @@ const CreateBusinessForm = () => {
                         <option value={priceRange} key={idx}>{priceRange}</option>
                     ))}
                 </select>
-                <label>Business Phone Number</label>
+                <label>Business Phone Number*</label>
                 <input 
                     placeholder='123-456-7890'
                     type='text'

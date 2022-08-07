@@ -17,6 +17,7 @@ import CreateReviewForm from './components/reviews/CreateReviewForm';
 import EditReviewForm from './components/reviews/EditReviewForm';
 import MapContainer from './components/MapContainer';
 import { loadKey } from './store/map';
+import BizUploadImage from './components/businesses/BizUploadImage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -69,6 +70,9 @@ function App() {
         <ProtectedRoute path='/' exact={true} >
           <BusinessesPage />
           {/* <MapContainer /> */}
+        </ProtectedRoute>
+        <ProtectedRoute path='/biz/:businessId/images-upload' exact={true}>
+          <BizUploadImage />
         </ProtectedRoute>
       </Switch>
     </Wrapper>
