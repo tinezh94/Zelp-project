@@ -2,10 +2,13 @@ import React, { useState, useEffect, cloneElement } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { loadOneBusiness } from '../../store/business';
+import { FaStar } from 'react-icons/fa';
 
 import { createReview } from '../../store/review';
 import UploadPicture from '../images/UploadImage';
+import RateStar from '../Rate';
 import UploadImageModal from '../UploadImageModal';
+import './reviews.css'
 
 const CreateReviewForm = () => {
     const dispatch = useDispatch();
@@ -20,7 +23,16 @@ const CreateReviewForm = () => {
         dispatch(loadOneBusiness(Number(businessId)));
     }, [dispatch]);
 
-    const [ rating, setRating ] = useState('');
+    const colors = {
+        'orange': "#f15c00",
+        'grey': "#a9a9a9"
+    }
+
+    const stars = Array(5).fill(0);
+    const [ rating, setRating ] = useState(0);
+    // const [ currValue, setCurrValue ] = useState(0);
+    const [ hoverValue, setHoverValue ] = useState(null);
+
     const [ content, setContent ] = useState('');
     const [ hasSubmitted, setHasSubmitted ] = useState(false);
     const [ validationErrors, setValidationErrors ] = useState([]);
@@ -33,10 +45,22 @@ const CreateReviewForm = () => {
 
     useEffect(() => {
         const errors = [];
-        if (!rating) errors.push('Please leave a rating');
+        if (rating === 0) errors.push('Please leave a rating');
         if (content.length < 30) errors.push('Woah, did you mean to post so soon? We thought your review was just getting started! Please add more details so we can post this review.');
         setValidationErrors(errors);
     }, [rating, content]);
+
+    const handleClick = value => {
+        setRating(value)
+    };
+
+    const handleMouseOver = value => {
+        setHoverValue(value)
+    };
+
+    const handleMouseLeave = () => {
+        setHoverValue(null)
+    };
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -79,12 +103,41 @@ const CreateReviewForm = () => {
                     </ul>
                 )}
                 <h2>Write a review</h2>
-                <label>Rating</label>
+                {/* <label>Rating</label>
                 <input 
                     type='text'
                     value={rating}
                     onChange={e => setRating(e.target.value)}
-                />
+                /> */}
+                <div style={styles.container}>
+                    <div style={styles.stars}>
+                        {stars.map((_, index) => {
+                            const ratingValue = index + 1;
+                            return (
+                                <label>
+                                    <input 
+                                        type='radio' 
+                                        display='none'
+                                        name='rating' 
+                                        value={ratingValue}
+                                        onClick={() => setRating(ratingValue )} />
+                                    <FaStar 
+                                        key={index}
+                                        size={50}
+                                        style={{
+                                            marginRight: 10,
+                                            cursor: 'pointer'
+                                        }}
+                                        color={ratingValue <= (rating || hoverValue) ? colors.orange : colors.grey}
+                                        // onClick={() => handleClick(index + 1)}
+                                        onMouseEnter={() => handleMouseOver(ratingValue)}
+                                        onMouseLeave={handleMouseLeave}
+                                        ></FaStar>
+                                </label>
+                            )
+                        })}
+                    </div>
+                </div>
                 <textarea
                     placeholder='Write your review here...'
                     rows={'10'}
@@ -100,5 +153,13 @@ const CreateReviewForm = () => {
         </>
     )
 };
+
+const styles = {
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+    }
+}
 
 export default CreateReviewForm;

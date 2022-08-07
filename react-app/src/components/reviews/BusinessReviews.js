@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory, useParams } from 'react-router-dom';
+import { FaStar } from 'react-icons/fa';
 
 import { loadReviews, deleteReview } from '../../store/review';
 
@@ -11,6 +12,7 @@ const BusinessReviews = () => {
 
     // const user = useSelector(state => state?.session?.user);
     const businesses = useSelector(state => state?.businesses);
+    const user = useSelector(state => state.session.user);
 
     const reviews = useSelector(state => state?.reviews)
     console.log('reviews', reviews)
@@ -20,13 +22,11 @@ const BusinessReviews = () => {
     });
 
     console.log('bizreviews', bizReviews)
-
+    
     const [users, setUsers] = useState([]);
-    // console.log('users', users)
+    console.log('users', users)
 
-    // users.filter(user => {
-    //     return user.id === 
-    // })
+    const stars = Array(5).fill(0);
 
     useEffect(() => {
         async function fetchData() {
@@ -49,16 +49,33 @@ const BusinessReviews = () => {
     return (
         <>
             <div>
-                {bizReviews && bizReviews.map(review => (
+                {bizReviews && bizReviews.map((review) => (
                     <div>
                         {users.filter(user => user.id === review.user_id).map(user => (
                             <div>
-                                <p>{user.username}</p>
+                                <p>{user.first_name} {user.last_name[0].toUpperCase()}</p>
+                                <img src={user.profile_pic} style={{width: 40, height: 40}} alt='user profile pic' />
+                            </div>
+                        ))}
+                        {(user.id === review.user_id) && (
+                            <div>
+                                {/* {console.log(user.id)}
+                                {console.log(review.user_id)} */}
                                 <NavLink to={`/editareview/biz/${businessId}`}>Edit Review</NavLink>
                                 <button type='button' onClick={() => onDelete(review.id)}>Delete Review</button>
                             </div>
-                        ))}
-                        <p>{review.rating}</p>
+                        )}
+                        <div>
+                            {stars.map((_, index) => (
+                                <FaStar
+                                    key={index}
+                                    isFilled={review.rating}
+                                    color={index < review.rating ? "#f15c00" :  "#a9a9a9"}
+                                    size={25}
+                                >
+                                </FaStar>
+                            ))}
+                        </div>
                         <p>{review.review_content}</p>
                         
                     </div>

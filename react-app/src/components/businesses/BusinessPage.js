@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useParams } from 'react-router-dom';
+import { FaStar } from 'react-icons/fa';
+
 import { loadBusinesses, loadOneBusiness } from '../../store/business';
 import AllImages from '../images/AllImages';
 import BusinessReviews from '../reviews/BusinessReviews';
@@ -13,6 +15,7 @@ const BusinessPage = () => {
 
     const businesses = useSelector(state => state?.businesses);
     const reviews = useSelector(state => state?.reviews);
+    const user = useSelector(state => state.session.user);
     // const images = useSelector(state => state?.images);
     const businessesArr = businesses ? Object.values(businesses) : null;
     // console.log('***', businessesArr)
@@ -25,9 +28,26 @@ const BusinessPage = () => {
 
     const reviewsArr = reviews ? Object.values(reviews) : null;
 
-    const review = reviewsArr.filter(review => review.business_id == businessId).length > 0;
+    const review = reviewsArr.filter(review => (review.business_id == businessId && review.user_id === user.id)).length > 0;
 
     console.log('businesspage',review)
+
+    const bizReviews = Object.values(reviews)?.filter(review => {
+        return review.business_id === Number(businessId)
+    });
+
+    
+    console.log('bizreviews', bizReviews)
+    
+    const bizRatings = bizReviews.map(review => review.rating)
+    console.log('bizratings', bizRatings)
+    
+    const getAvrg = bizRatings.reduce((a, b) => a + b, 0) / bizRatings.length
+    console.log('getAverg', getAvrg)
+
+    const totalFilled = Math.floor(getAvrg);
+    console.log('totalfilled', totalFilled)
+    const stars = Array(5).fill(0);
 
     useEffect(() => {
         dispatch(loadBusinesses())
@@ -46,6 +66,16 @@ const BusinessPage = () => {
                 {business && (
                     <div>
                         <h1>{business?.name}</h1>
+                        <div>
+                            {stars.map((_, index) => (                                
+                                <FaStar
+                                    key={index}
+                                    isFilled={index + 1 < totalFilled}
+                                    color={index < totalFilled ? "#f15c00" :  "#a9a9a9"}
+                                    size={35}
+                                ></FaStar>
+                            ))}
+                        </div>
                         <MapContainer latitude={business?.latitude} longitude={business?.longitude} />
                         <p>{business.category}</p>
                         <p>Mon {business.business_hours}</p>
