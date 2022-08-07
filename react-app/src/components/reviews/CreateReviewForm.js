@@ -53,6 +53,7 @@ const CreateReviewForm = () => {
             }
     
             const createdReview = await dispatch(createReview(payload));
+            console.log('new review', createReview)
             if (createdReview) {
                 reset();
                 setHasSubmitted(false)

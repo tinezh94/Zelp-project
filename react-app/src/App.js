@@ -18,6 +18,8 @@ import EditReviewForm from './components/reviews/EditReviewForm';
 import MapContainer from './components/MapContainer';
 import { loadKey } from './store/map';
 import BizUploadImage from './components/businesses/BizUploadImage';
+import UserProfilePage from './components/UserProfile/UserProfilePage';
+import UserBiz from './components/businesses/userBiz';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -65,14 +67,18 @@ function App() {
           <EditReviewForm />
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
+          {/* <User /> */}
+          <UserProfilePage />
         </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
+        <Route path='/' exact={true} >
           <BusinessesPage />
           {/* <MapContainer /> */}
-        </ProtectedRoute>
+        </Route>
         <ProtectedRoute path='/biz/:businessId/images-upload' exact={true}>
           <BizUploadImage />
+        </ProtectedRoute>
+        <ProtectedRoute path='/users/:userId/businesses' exact={true}>
+          <UserBiz />
         </ProtectedRoute>
       </Switch>
     </Wrapper>
