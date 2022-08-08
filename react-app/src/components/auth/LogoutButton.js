@@ -8,7 +8,12 @@ const LogoutButton = () => {
     await dispatch(logout());
   };
 
-  return <button onClick={onLogout}>Logout</button>;
+  return (
+    <div className='dropdown-logout-btn-div'>
+      <i className="fa-solid fa-arrow-right-from-bracket"></i>
+      <button className='logout-btn' onClick={onLogout}>Log Out</button>
+    </div>
+  )
 };
 
 export default LogoutButton;
