@@ -39,7 +39,7 @@ export const loadImages = () => async (dispatch) => {
 };
 
 export const createImage = (payload) => async (dispatch) => {
-    // console.log('inside create', payload)
+    console.log('inside create', payload)
     const { user_id, business_id, image_url } = payload;
     const formData = new FormData();
     formData.append('user_id', user_id);

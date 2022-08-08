@@ -10,6 +10,26 @@ import './navbar.css';
 const NavBar = () => {
   const user = useSelector(state => state?.session?.user);
 
+  let sessionLinks;
+  if (!user) {
+    sessionLinks = (
+      <div className='session-actions-div'>
+        <li>
+          <NavLink to='/' style={{textDecoration: 'none'}} className='navbar-businesses-link'>Businesses</NavLink>
+        </li>
+        <li>
+          <NavLink to='/login' exact={true} activeClassName='active'>
+            <button className='login-btn'>Log In</button>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to='/sign-up' exact={true} activeClassName='active'>
+            <button className='signup-btn'>Sign Up</button>
+          </NavLink>
+        </li>
+      </div>
+    )
+  }
   return (
     <nav>
       <div className='logo-div'>
@@ -25,8 +45,9 @@ const NavBar = () => {
           </button>
         </div>
       </div>
-      <ul className='session-actions-div'>
-        <li>
+      <ul>
+        {sessionLinks}
+        {/* <li>
           <NavLink to='/' style={{textDecoration: 'none'}} className='navbar-businesses-link'>Businesses</NavLink>
         </li>
         <li>
@@ -38,7 +59,7 @@ const NavBar = () => {
           <NavLink to='/sign-up' exact={true} activeClassName='active'>
             <button className='signup-btn'>Sign Up</button>
           </NavLink>
-        </li>
+        </li> */}
         <li>
           {user && <LogoutButton />}
         </li>
