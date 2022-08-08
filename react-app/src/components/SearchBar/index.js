@@ -12,38 +12,61 @@ import { NavLink } from 'react-router-dom';
     const categoriesArr = categories ? Object.values(categories) : null;
 
     const [ searchTerm, setSearchTerm ] = useState('');
+    const [ showMenu, setShowMenu ] = useState(false);
+
+    const openMenu = () => {
+        if (showMenu) return;
+        setShowMenu(true)
+    }
+
+    useEffect(() => {
+        if (!showMenu) return;
+        const closeMenu = () => {
+            setShowMenu(false);
+        };
+
+        document.addEventListener('click', closeMenu);
+        return () => document.removeEventListener('click', closeMenu);
+    }, [showMenu])
+
 
     return (
         <>
             <div>
                 <input 
+                    className='search-bar-input'
                     placeholder='Search here...'
                     type='text'
-                    onChange={(e) => setSearchTerm(e.target.value)}
+                    value={searchTerm}
+                    onChange={(e) => {openMenu(); setSearchTerm(e.target.value)}}
                 />
-                {businessesArr.filter(biz => {
-                    if (searchTerm == '') {
-                        return;
-                    } else if (biz.name.toLowerCase().includes(searchTerm.toLowerCase())) {
-                        return biz;
-                    }
-                }).map((biz, idx) => (
-                    <div key={idx}>
-                        {/* <p>{biz.name}</p> */}
-                        <NavLink to={`/businesses/${biz.id}`}>{biz.name}</NavLink>
+                {showMenu && (
+                    <div className='search-results-container'>
+                        {businessesArr.filter(biz => {
+                            if (searchTerm == '') {
+                                return;
+                            } else if (biz.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+                                return biz;
+                            }
+                        }).map((biz, idx) => (
+                            <div key={idx}>
+                                {/* <p>{biz.name}</p> */}
+                                <NavLink to={`/businesses/${biz.id}`} className='filtered-search-results'>{biz.name}</NavLink>
+                            </div>
+                        ))}
+                        {categoriesArr.filter(category => {
+                            if (searchTerm == '') {
+                                return;
+                            } else if (category.category_name.toLowerCase().includes(searchTerm.toLowerCase())) {
+                                return category;
+                            }
+                        }).map((category, idx) => (
+                            <div key={idx}>
+                                <p className='filtered-search-results'>{category.category_name}</p>
+                            </div>
+                        ))}
                     </div>
-                ))}
-                {categoriesArr.filter(category => {
-                    if (searchTerm == '') {
-                        return;
-                    } else if (category.category_name.toLowerCase().includes(searchTerm.toLowerCase())) {
-                        return category;
-                    }
-                }).map((category, idx) => (
-                    <div key={idx}>
-                        <p>{category.category_name}</p>
-                    </div>
-                ))}
+                )}
             </div>
         </>
     )

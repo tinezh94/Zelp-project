@@ -23,6 +23,7 @@ import UserBiz from './components/businesses/userBiz';
 import { loadBusinesses } from './store/business';
 import { loadCategories } from './store/category';
 import SearchBar from './components/SearchBar';
+import SplashPage from './components/SplashPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -53,7 +54,7 @@ function App() {
         <Route path='/login' exact={true}>
           <LoginForm />
         </Route>
-        <Route path='/sign-up' exact={true}>
+        <Route path='/signup' exact={true}>
           <SignUpForm />
         </Route>
         <ProtectedRoute path='/users' exact={true} >
@@ -76,9 +77,8 @@ function App() {
           <UserProfilePage />
         </ProtectedRoute>
         <Route path='/' exact={true} >
-          <SearchBar />
           <BusinessesPage />
-          {/* <MapContainer /> */}
+          {/* <SplashPage /> */}
         </Route>
         <ProtectedRoute path='/biz/:businessId/images-upload' exact={true}>
           <BizUploadImage />
