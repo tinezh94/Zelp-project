@@ -102,7 +102,7 @@ def seed_reviews():
         business_id=2,
         rating=5,
         review_content='Great restaurant with great selections of menu. This place is a like a Diamond in the rough. Lamb Rib is a MUST try. Surprisingly...very friendly and attentive service as well!',
-        created_at='20212-02-12 10:23:45',
+        created_at='2021-02-12 10:23:45',
         updated_at='2022-02-23 10:23:48'
     )
     review14 = Review(
