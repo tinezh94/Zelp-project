@@ -88,6 +88,7 @@ const BusinessPage = () => {
                         <p>{business.website}</p>
                         <p>{business.phone_number}</p>
                         <p>{business.price_range}</p>
+                        
                         <AllImages />
 
                         {review ? (

@@ -20,12 +20,17 @@ const AllImages = () => {
         return image.business_id === Number(businessId);
     })
 
+    console.log('bizimages', bizImages[0]?.image_url)
+
     return (
         <>
             <div>
-                {bizImages && bizImages.map(image => (
-                    <img src={image.image_url} style={{width: 500, height: 350 }} />
-                ))}
+                {bizImages && bizImages.map(image => {
+                    Object.values(image.image_url).map(image => (
+                        <img src={image} style={{width: 500, height: 350 }} />
+                    ))
+                })}
+                 {/* <img src={image.image_url} style={{width: 500, height: 350 }} /> */}
             </div>
         </>
     )
