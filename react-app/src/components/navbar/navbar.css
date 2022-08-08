@@ -1,0 +1,40 @@
+/* .logo-div {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+} */
+
+nav {
+    padding: 24px 40px 0;
+    display: flex;
+}
+
+.search-submit-btn {
+    background-color: #E00707;
+    border-radius: 0 4px 4px 0;
+    border: none;
+    box-sizing: border-box;
+    max-width: 56px;
+    text-align: center;
+    max-height: 48px;
+    /* padding: 2px; */
+    
+}
+button > i.fa-solid.fa-magnifying-glass {
+    padding: 12px 12px;
+    font-weight: 600;
+    color: white;
+    width: 24px;
+    height: 24px;
+    vertical-align: center;
+    text-align: center;
+}
+
+.search-submit-btn:hover {
+    cursor: pointer;
+    background-color: #fd2e2e;
+}
+
+li {
+    list-style: none;
+}
