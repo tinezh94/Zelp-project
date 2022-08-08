@@ -25,6 +25,7 @@ import { loadCategories } from './store/category';
 import SearchBar from './components/SearchBar';
 import SplashPage from './components/SplashPage';
 import { loadReviews } from './store/review';
+import Footer from './components/Footer/Footer';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -88,6 +89,7 @@ function App() {
           <UserBiz />
         </ProtectedRoute>
       </Switch>
+      <Footer />
     </Wrapper>
     </BrowserRouter>
   );
