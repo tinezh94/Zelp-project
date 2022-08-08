@@ -1,12 +1,12 @@
-.login-container {
+.signup-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
-form.login-form {
+
+form.signup-form {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
     margin-top: 4rem;
     margin-right: 4rem;
@@ -14,7 +14,7 @@ form.login-form {
     padding-bottom: 3px;
 }
 
-.login-to-zelp {
+.signup-to-zelp {
     color: #d32323;
     font-size: 22px;
     font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
@@ -23,7 +23,7 @@ form.login-form {
     margin-bottom: 6px;
 }
 
-.login-subheading {
+.signup-subheading {
     color: #333333;
     font-weight: bold;
     font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
@@ -32,20 +32,11 @@ form.login-form {
     font-size: 14px;
 }
 
-a.subheading-signup {
-    text-decoration: none;
-    color: #0073bb;
-    cursor: pointer;
-    padding-left: 3px;
+.signup-name-div {
+    display: flex;
 }
 
-/* .login-form-label {
-    text-align: left;
-    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
-    color: #333333;
-} */
-
-input.login-form-input {
+input.signup-form-input {
     width: 300px;
     box-sizing: border-box;
     display: block;
@@ -58,7 +49,15 @@ input.login-form-input {
     font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
 }
 
-.login-form-submit-btn {
+input.signup-form-input#signup-name {
+    width: 150px;
+    box-sizing: border-box;
+    margin: 2px;
+    margin-bottom: 18px;
+    margin-top: 18px;
+}
+
+.signup-form-submit-btn {
     width: 300px;
     line-height: 1.3em;
     margin: 0 0 9px;
@@ -73,12 +72,12 @@ input.login-form-input {
     font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
 }
 
-.login-form-submit-btn:hover {
+.signup-form-submit-btn:hover {
     background-color: #de4040;
     cursor: pointer;
 }
 
-.login-form-subtle-text {
+.signup-form-subtle-text {
     text-align: right;
     font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
     color: #999;
@@ -88,18 +87,22 @@ input.login-form-input {
     margin-right: 6rem;
 }
 
-a.login-form-subtle-signup {
+.signup-form-subtle-signup {
     text-decoration: none;
     padding-left: 3px;
     color: #0073bb;
     cursor: pointer;
 }
 
-a.login-form-subtle-signup:hover,
-a.subheading-signup:hover {
+.signup-form-subtle-signup:hover {
     text-decoration: underline;
 }
 
-.login-illustration {
+.signup-illustration {
     margin-top: 4rem;
+}
+
+.signup-form-text-container {
+    display: flex;
+    flex-direction: column;
 }

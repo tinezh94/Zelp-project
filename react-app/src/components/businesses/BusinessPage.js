@@ -8,6 +8,7 @@ import AllImages from '../images/AllImages';
 import BusinessReviews from '../reviews/BusinessReviews';
 import EditBusinessForm from './EditBusinessForm';
 import MapContainer from '../MapContainer';
+import { loadReviews } from '../../store/review';
 
 const BusinessPage = () => {
     const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const BusinessPage = () => {
 
     const review = reviewsArr.filter(review => (review.business_id == businessId && review.user_id === user.id)).length > 0;
 
-    console.log('businesspage',review)
+    console.log('businesspage',reviews)
 
     const bizReviews = Object.values(reviews)?.filter(review => {
         return review.business_id === Number(businessId)
@@ -51,6 +52,7 @@ const BusinessPage = () => {
 
     useEffect(() => {
         dispatch(loadBusinesses())
+        dispatch(loadReviews());
         // dispatch(loadOneBusiness(businessId))
     }, [dispatch]);
 
@@ -85,7 +87,8 @@ const BusinessPage = () => {
                         <p>Fri {business.business_hours}</p>
                         <p>Sat {business.business_hours}</p>
                         <p>Sun {business.business_hours}</p>
-                        <p>{business.website}</p>
+                        <p>
+                            {business.website}</p>
                         <p>{business.phone_number}</p>
                         <p>{business.price_range}</p>
                         

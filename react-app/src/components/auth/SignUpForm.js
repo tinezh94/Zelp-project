@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import './signup.css';
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -65,60 +66,88 @@ const SignUpForm = () => {
   }
 
   return (
-    <form onSubmit={onSignUp}>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
+    <div className='signup-container'>
+      <div className='signup-form-text-container'>
+        <form onSubmit={onSignUp} className='signup-form'>
+          <div>
+            {errors.map((error, ind) => (
+              <div key={ind}>{error}</div>
+            ))}
+          </div>
+          <div>
+            <h2 className='signup-to-zelp'>Sign Up for Zelp</h2>
+            <h3 className='signup-subheading'>Connect with great local businesses</h3>
+          </div>
+          <div className='signup-name-div'>
+            {/* <label>First Name</label> */}
+            <input
+              className='signup-form-input'
+              id='signup-name'
+              placeholder='First Name'
+              type='text'
+              name='firstname'
+              onChange={(e) => setFirstName(e.target.value)}
+              value={firstName}
+            />
+            {/* <label>Last Name</label> */}
+            <input
+              className='signup-form-input'
+              id='signup-name'
+              placeholder='Last Name'
+              type='text'
+              name='lastname'
+              onChange={(e) => setLastName(e.target.value)}
+              value={lastName}
+            ></input>
+          </div>
+          <div>
+            {/* <label>Email</label> */}
+            <input
+              className='signup-form-input'
+              placeholder='Email'
+              type='text'
+              name='email'
+              onChange={updateEmail}
+              value={email}
+            />
+          </div>
+          <div>
+            {/* <label>Password</label> */}
+            <input
+              className='signup-form-input'
+              placeholder='Password'
+              type='password'
+              name='password'
+              onChange={updatePassword}
+              value={password}
+            />
+          </div>
+          <div>
+            {/* <label>Repeat Password</label> */}
+            <input
+              className='signup-form-input'
+              placeholder='Confirm Password'
+              type='password'
+              name='repeat_password'
+              onChange={updateRepeatPassword}
+              value={repeatPassword}
+              required={true}
+            />
+          </div>
+          <div>
+            <button className='signup-form-submit-btn' type='submit'>Sign Up</button>
+          </div>
+        </form>
+        <div className='signup-form-subtle-text'>
+          <p>Already on Zelp?
+            <NavLink to='/login' className='signup-form-subtle-signup'>Log in</NavLink>
+          </p>
+        </div>
       </div>
       <div>
-        <label>First Name</label>
-        <input
-          type='text'
-          name='firstname'
-          onChange={(e) => setFirstName(e.target.value)}
-          value={firstName}
-        ></input>
+        <img className='signup-illustration' src='https://s3-media0.fl.yelpcdn.com/assets/2/www/img/7922e77f338d/signup/signup_illustration.png' alt='signup illustration' />
       </div>
-      <div>
-        <label>Last Name</label>
-        <input
-          type='text'
-          name='lastname'
-          onChange={(e) => setLastName(e.target.value)}
-          value={lastName}
-        ></input>
-      </div>
-      <div>
-        <label>Email</label>
-        <input
-          type='text'
-          name='email'
-          onChange={updateEmail}
-          value={email}
-        ></input>
-      </div>
-      <div>
-        <label>Password</label>
-        <input
-          type='password'
-          name='password'
-          onChange={updatePassword}
-          value={password}
-        ></input>
-      </div>
-      <div>
-        <label>Repeat Password</label>
-        <input
-          type='password'
-          name='repeat_password'
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-          required={true}
-        ></input>
-      </div>
-      <button type='submit'>Sign Up</button>
-    </form>
+    </div>
   );
 };
 

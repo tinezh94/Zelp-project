@@ -24,6 +24,7 @@ import { loadBusinesses } from './store/business';
 import { loadCategories } from './store/category';
 import SearchBar from './components/SearchBar';
 import SplashPage from './components/SplashPage';
+import { loadReviews } from './store/review';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
