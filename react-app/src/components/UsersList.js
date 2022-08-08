@@ -24,6 +24,8 @@ function UsersList() {
   return (
     <>
       <h1>User List: </h1>
+      {/* <h4 style={{fontFamily: 'valera round'}}>zelp</h4>
+      <img src="https://www.clipartmax.com/png/middle/72-729977_yelp-logo-png-vector.png" alt="Yelp Logo Png Vector@clipartmax.com"></img> */}
       <ul>{userComponents}</ul>
     </>
   );
