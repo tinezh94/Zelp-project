@@ -69,3 +69,24 @@ input.login-form-input {
     background-color: #de4040;
     cursor: pointer;
 }
+
+.login-form-subtle-text {
+    text-align: right;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+    color: #999;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 1.5em;
+}
+
+a.login-form-subtle-signup {
+    text-decoration: none;
+    padding-left: 3px;
+    color: #0073bb;
+    cursor: pointer;
+}
+
+a.login-form-subtle-signup:hover,
+a.subheading-signup:hover {
+    text-decoration: underline;
+}

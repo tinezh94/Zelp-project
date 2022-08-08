@@ -72,6 +72,11 @@ const LoginForm = () => {
       <div>
         <DemoUser />
       </div>
+      <div className='login-form-subtle-text'>
+        <p>New to Zelp?
+          <NavLink to='/signup' className='login-form-subtle-signup'>Sign up</NavLink>
+        </p>
+      </div>
       </div>
     </form>
   );
