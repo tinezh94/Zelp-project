@@ -15,21 +15,26 @@ const NavBar = () => {
       <div className='logo-div'>
           <img src={logo} width='95px' height='40px' />
       </div>
-      <SearchBar />
-      <div>
-        <button type='submit' className='search-submit-btn'>
-          <i className="fa-solid fa-magnifying-glass fa-2x"></i>
-        </button>
+      <div className='search-bar-container'>
+        <SearchBar />
+        <div>
+          <button type='submit' className='search-submit-btn'>
+            <i className="fa-solid fa-magnifying-glass fa-2x"></i>
+          </button>
+        </div>
       </div>
-      <ul>
+      <ul className='session-actions-div'>
+        <li>
+          <NavLink to='/businesses' style={{textDecoration: 'none'}} className='navbar-businesses-link'>Businesses</NavLink>
+        </li>
         <li>
           <NavLink to='/login' exact={true} activeClassName='active'>
-            Login
+            <button className='login-btn'>Log In</button>
           </NavLink>
         </li>
         <li>
           <NavLink to='/sign-up' exact={true} activeClassName='active'>
-            Sign Up
+            <button className='signup-btn'>Sign Up</button>
           </NavLink>
         </li>
         <li>

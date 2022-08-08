@@ -18,7 +18,7 @@ function DemoUser() {
   }
 
   return (
-    <button className='log-in-splash-btn' onClick={handleDemoUser}>Demo</button>
+    <button className='login-form-submit-btn' onClick={handleDemoUser}>Demo</button>
   )
 }
 
