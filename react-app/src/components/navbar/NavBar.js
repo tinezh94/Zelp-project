@@ -13,7 +13,9 @@ const NavBar = () => {
   return (
     <nav>
       <div className='logo-div'>
-          <img src={logo} width='95px' height='40px' />
+          <NavLink to='/'>
+            <img src={logo} width='95px' height='40px' />
+          </NavLink>
       </div>
       <div className='search-bar-container'>
         <SearchBar />
