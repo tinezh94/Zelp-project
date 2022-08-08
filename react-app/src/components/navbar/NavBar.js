@@ -27,7 +27,7 @@ const NavBar = () => {
       </div>
       <ul className='session-actions-div'>
         <li>
-          <NavLink to='/businesses' style={{textDecoration: 'none'}} className='navbar-businesses-link'>Businesses</NavLink>
+          <NavLink to='/' style={{textDecoration: 'none'}} className='navbar-businesses-link'>Businesses</NavLink>
         </li>
         <li>
           <NavLink to='/login' exact={true} activeClassName='active'>
