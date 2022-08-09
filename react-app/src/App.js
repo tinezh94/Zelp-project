@@ -25,6 +25,7 @@ import { loadCategories } from './store/category';
 import SearchBar from './components/SearchBar';
 import SplashPage from './components/SplashPage';
 import { loadReviews } from './store/review';
+import Footer from './components/Footer/Footer';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -67,6 +68,9 @@ function App() {
         <ProtectedRoute path='/businesses/:businessId' exact={true}>
           <BusinessPage />
         </ProtectedRoute>
+        <ProtectedRoute path='/businesses/:businessId/edit' exact={true}>
+          <EditBusinessForm />
+        </ProtectedRoute>
         <ProtectedRoute path='/writeareview/biz/:businessId' exact={true}>
           <CreateReviewForm />
         </ProtectedRoute>
@@ -88,6 +92,7 @@ function App() {
           <UserBiz />
         </ProtectedRoute>
       </Switch>
+      <Footer />
     </Wrapper>
     </BrowserRouter>
   );

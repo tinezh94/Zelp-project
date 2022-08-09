@@ -4,7 +4,7 @@ nav {
     /* min-width: 100vw; */
     /* justify-content: start; */
     border-bottom: 1px solid #ebebeb;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
     /* position: fixed */
 }
 
@@ -144,6 +144,7 @@ li {
     border-right: 1px solid rgba(200,201,202,1);
     margin-top: 2px;
     overflow: auto;
+    z-index: 1012;
 }
 
 a.filtered-search-results,
@@ -152,4 +153,90 @@ p.filtered-search-results {
     color: #2d2e2f;
     padding: 15px;
     display: block;
+}
+
+.profile-div {
+    display: flex;
+    flex-direction: row;
+    margin-left: 33rem;
+}
+.user-profile-pic {
+    border-radius: 50%;
+    margin-top: 10px;
+
+}
+
+.user-profile-pic:hover {
+    cursor: pointer;
+}
+
+.navbar-businesses {
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    color: #2d2e2f;
+    text-align: left;
+    line-height: 20px;
+    font-weight: 600;
+    margin-right: 22px;
+}
+
+.profile-dropdown {
+    position: absolute;
+    width: 258px;
+    height: auto;
+    right: 2rem;
+    z-index: 1282;
+    border: 0;
+    box-shadow: 0 0 5px 2px rgb(0 0 0 / 10%);
+    border-radius: 4px;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    color: #2d2e2f;
+    font-weight: 400;
+    padding: 16px;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+a.dropdown-links {
+    text-decoration: none;
+    color: rgba(45,46,47,1);
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    width: auto;
+    padding-left: 3px;
+
+}
+
+a.dropdown-links:hover,
+.dropdown-logout-btn-div:hover {
+    background-color: #c8c9ca;
+    border-radius: 3px;
+}
+
+.dropdown-p {
+    padding-left: 8px;
+    text-align: left;
+}
+
+.dropdown-logout-btn-div {
+    border-top: 1px solid rgba(200,201,202,1);
+    margin-top: 10px;
+    padding-left: 3px;
+}
+
+.logout-btn {
+    border: none;
+    background-color: transparent;
+    color: rgba(45,46,47,1);
+    padding-left: 8px;
+    text-align: left;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 16px;
+    padding-bottom: 10px;
+    padding-top: 8px;
 }

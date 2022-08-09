@@ -12,8 +12,8 @@ const BusinessReviews = () => {
 
     // const user = useSelector(state => state?.session?.user);
     const businesses = useSelector(state => state?.businesses);
-    const user = useSelector(state => state.session.user);
-
+    const sessionUser = useSelector(state => state.session.user);
+    console.log('user', sessionUser.id)
     const reviews = useSelector(state => state?.reviews)
     console.log('reviews', reviews)
 
@@ -25,6 +25,23 @@ const BusinessReviews = () => {
     
     const [users, setUsers] = useState([]);
     console.log('users', users)
+
+    const [showMenu, setShowMenu] = useState(false);
+
+    const openMenu = () => {
+        if (showMenu) return;
+        setShowMenu(true)
+      }
+    
+      useEffect(() => {
+        if (!showMenu) return;
+        const closeMenu = () => {
+            setShowMenu(false);
+        };
+    
+        document.addEventListener('click', closeMenu);
+        return () => document.removeEventListener('click', closeMenu);
+      }, [showMenu])
 
     const stars = Array(5).fill(0);
 
@@ -50,33 +67,45 @@ const BusinessReviews = () => {
         <>
             <div>
                 {bizReviews && bizReviews.map((review) => (
-                    <div>
-                        {users.filter(user => user.id === review.user_id).map(user => (
-                            <div>
-                                <p>{user.first_name} {user.last_name[0].toUpperCase()}</p>
-                                <img src={user.profile_pic} style={{width: 40, height: 40}} alt='user profile pic' />
-                            </div>
-                        ))}
-                        {(user.id === review.user_id) && (
-                            <div>
-                                {/* {console.log(user.id)}
-                                {console.log(review.user_id)} */}
-                                <NavLink to={`/editareview/biz/${businessId}`}>Edit Review</NavLink>
-                                <button type='button' onClick={() => onDelete(review.id)}>Delete Review</button>
-                            </div>
-                        )}
+                    <div className='reviews-container'>
                         <div>
+                            {users.filter(user => user.id === review.user_id).map(user => (
+                                <div className='review-profile-container'>
+                                    <div className='review-pic-name'>
+                                        <img className='review-profile-pic' src={user.profile_pic} alt='user profile pic' />
+                                        <p className='review-name'>{user.first_name} {user.last_name[0].toUpperCase()}</p>
+                                    </div>
+                                    <div>
+                                        {(sessionUser.id === review.user_id) && (
+                                            <div>
+                                                <button className='review-dot-btn' onClick={() => openMenu()}>
+                                                    <i className="fa-solid fa-ellipsis"></i>
+                                                </button>
+                                                {showMenu && (
+                                                    <div className='review-edit-delete'>
+                                                        <NavLink  className='dropdown-links' to={`/editareview/biz/${businessId}`}>Edit Review</NavLink>
+                                                        <button className='biz-review-delete-btn' type='button' onClick={() => onDelete(review.id)}>Delete Review</button>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <div className='biz-review-star-rating'>
                             {stars.map((_, index) => (
                                 <FaStar
                                     key={index}
                                     isFilled={review.rating}
                                     color={index < review.rating ? "#f15c00" :  "#a9a9a9"}
-                                    size={25}
+                                    size={18}
                                 >
                                 </FaStar>
                             ))}
+                            {/* <div>{review.updated_at.toDateString()}</div> */}
                         </div>
-                        <p>{review.review_content}</p>
+                        <p className='biz-page-review-content'>{review.review_content}</p>
                         
                     </div>
                 ))}

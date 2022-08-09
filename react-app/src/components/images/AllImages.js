@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadImages } from "../../store/image";
+import '../businesses/business.css';
 
 const AllImages = () => {
     const history = useHistory();
@@ -24,9 +25,12 @@ const AllImages = () => {
 
     return (
         <>
-            <div>
-                {bizImages && bizImages.map(image => (
-                    <img src={image.image_url} style={{width: 500, height: 350 }} />
+            <div className="images-container">
+                {bizImages && bizImages.map((image,idx) => (
+                    <div className="biz-img-container" key={idx}>
+                        <div className="biz-img" style={{ backgroundImage: `linear-gradient(180deg,#0000 31.42%,#000), url(${image.image_url})`}}></div>
+                        {/* <img src={image.image_url} style={{width: 500, height: 350 }} /> */}
+                    </div>
                 ))}
             </div>
         </>
