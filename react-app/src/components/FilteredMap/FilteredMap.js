@@ -41,9 +41,17 @@ const MultiMapView = ({ filteredBiz, apiKey, businessesArr }) => {
     const lgnAvrg = lgnSum / allCoordinates.length;
         // console.log('sums',  latAvrg, lgnAvrg)
 
-    const center = {
-        lat: latAvrg,
-        lng: lgnAvrg
+    let center;
+    if (filteredBiz.length === 0) {
+        center = {
+            lat: latAvrg,
+            lng: lgnAvrg
+        }
+    } else {
+        center = {
+            lat: coordinates[0]?.lat,
+            lng: coordinates[0]?.lng
+        }
     }
 
     useEffect(() => {
