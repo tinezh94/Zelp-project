@@ -41,7 +41,7 @@ const Maps = ({ apiKey, latitude, longitude }) => {
         <div>
             {isLoaded && (
                 <GoogleMap 
-                    mapContainerStyle={{width: 400, height:350}}
+                    mapContainerStyle={{width: 375, height: 325}}
                     zoom={10}
                     center={center}
                     apiKey={apiKey}

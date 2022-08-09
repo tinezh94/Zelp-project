@@ -9,6 +9,7 @@ import BusinessReviews from '../reviews/BusinessReviews';
 import EditBusinessForm from './EditBusinessForm';
 import MapContainer from '../MapContainer';
 import { loadReviews } from '../../store/review';
+import './business.css';
 
 const BusinessPage = () => {
     const dispatch = useDispatch();
@@ -27,16 +28,16 @@ const BusinessPage = () => {
     business = business[0];
     console.log('---', business)
 
+
     const reviewsArr = reviews ? Object.values(reviews) : null;
-
+    
     const review = reviewsArr.filter(review => (review.business_id == businessId && review.user_id === user.id)).length > 0;
-
+    
     console.log('businesspage',reviews)
-
+    
     const bizReviews = Object.values(reviews)?.filter(review => {
         return review.business_id === Number(businessId)
     });
-
     
     console.log('bizreviews', bizReviews)
     
@@ -64,47 +65,141 @@ const BusinessPage = () => {
 
     return (
         <>
-            <div>
+            <div className='biz-main-content-container'>
                 {business && (
                     <div>
-                        <h1>{business?.name}</h1>
                         <div>
+                            <AllImages />
+                        </div>
+                        <h1 className='biz-name'>{business?.name}</h1>
+                        <div className='biz-rating'>
                             {stars.map((_, index) => (                                
                                 <FaStar
                                     key={index}
                                     isFilled={index + 1 < totalFilled}
                                     color={index < totalFilled ? "#f15c00" :  "#a9a9a9"}
-                                    size={35}
+                                    size={33}
                                 ></FaStar>
                             ))}
                         </div>
-                        <MapContainer latitude={business?.latitude} longitude={business?.longitude} />
-                        <p>{business.category}</p>
-                        <p>Mon {business.business_hours}</p>
-                        <p>Tue {business.business_hours}</p>
-                        <p>Wed {business.business_hours}</p>
-                        <p>Thu {business.business_hours}</p>
-                        <p>Fri {business.business_hours}</p>
-                        <p>Sat {business.business_hours}</p>
-                        <p>Sun {business.business_hours}</p>
-                        <p>
-                            {business.website}</p>
-                        <p>{business.phone_number}</p>
-                        <p>{business.price_range}</p>
+                        <div className='biz-reviews-count'>
+                            <p>{bizReviews?.length} reviews</p>
+                        </div>
+                        <div className='claimed'>
+                            <i className="fa-solid fa-check"></i>
+                            <p className='claimed-p'>Claimed</p>
+                            <p className='bullet-pt'>•</p>
+                            <p id='biz-price'>{business.price_range}</p>
+                            <p className='bullet-pt'>•</p>
+                            <p id='biz-category'>{business.category}</p>
+                        </div>
+                        <div>
+                            <p className='biz-hour'>{business.business_hours}</p>
+                        </div>
+                        <div className='biz-page-bottom-container'>
+                            <div className='biz-page-bottom-left-div'>
+                                <div className='add-review-photo-div'>
+                                    {review ? (
+                                        <h4>
+                                            <NavLink to={`/editareview/biz/${businessId}`}>
+                                                <button className='biz-write-review'>
+                                                    <i className="fa-solid fa-star"></i>
+                                                    Edit a review
+                                                    </button>
+                                            </NavLink>
+                                        </h4>
+                                    ) :
+                                        <h4>
+                                            <NavLink to={`/writeareview/biz/${businessId}`}>
+                                                <button className='biz-write-review'>
+                                                    <i className="fa-solid fa-star"></i>
+                                                    Write a review
+                                                </button>
+                                            </NavLink>
+                                        </h4>
+                                    }
+                                    <div>
+                                        <button className='add-photo'>
+                                            <i className="fa-solid fa-camera"></i>
+                                            Add photo
+                                        </button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h2 className='biz-page-h2'>Location & Hours</h2>
+                                    <div className='map-hrs-div'>
+                                        <div>
+                                            <MapContainer latitude={business?.latitude} longitude={business?.longitude} />
+                                            <p className='biz-street'>{business.address}</p>
+                                            <p className='biz-city-state'>{business.city}, {business.state}</p>
+                                            <p className='biz-zip'>{business.zipcode} US</p>
+                                        </div>
+                                        <div>
+                                            <table>
+                                                <tr className='biz-opt-hrs'>
+                                                    <th>Mon</th>
+                                                    <td>{business.business_hours}</td>
+                                                </tr>
+                                                <tr className='biz-opt-hrs'>
+                                                    <th>Tue</th>
+                                                    <td>{business.business_hours}</td>
+                                                </tr>
+                                                <tr className='biz-opt-hrs'>
+                                                    <th>Wed</th>
+                                                    <td>{business.business_hours}</td>
+                                                </tr>
+                                                <tr className='biz-opt-hrs'>
+                                                    <th>Thu</th>
+                                                    <td>{business.business_hours}</td>
+                                                </tr>
+                                                <tr className='biz-opt-hrs'>
+                                                    <th>Fri</th>
+                                                    <td>{business.business_hours}</td>
+                                                </tr>
+                                                <tr className='biz-opt-hrs'>
+                                                    <th>Sat</th>
+                                                    <td>{business.business_hours}</td>
+                                                </tr>
+                                                <tr className='biz-opt-hrs'>
+                                                    <th>Sun</th>
+                                                    <td>{business.business_hours}</td>
+                                                </tr>
+                                            </table>
+                                            <div className='biz-pg-edit-biz'>
+                                                <i className="fa-solid fa-pencil"></i>
+                                                <NavLink  className='edit-biz' to={`/businesses/${business.id}/edit`}>
+                                                    <p>Edit Business Info</p>
+                                                </NavLink>
+                                            </div>
+                                            {/* <EditBusinessForm /> */}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h2 className='biz-page-h2'>About the Business</h2>
+                                    <div className='description-div'>
+                                        <p className='biz-description'>{business.description}</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h2 className='biz-page-h2'>Recommended Reviews</h2>
+                                </div>
+                                <BusinessReviews /> 
+                            </div>
+                            <div className='biz-info-div'>
+                                <div className='info-container'>
+                                    <a className='biz-website' href={business.website} target='_blank'>{business.website}</a>
+                                    <i className="fa-solid fa-location-arrow fa-lg"></i>
+                                </div>
+                                <div className='info-container'>
+                                    <p className='biz-phone'>{business.phone_number}</p>
+                                    <i className="fa-solid fa-phone-volume fa-lg"></i>
+                                </div>
+                            </div>
+                        </div>
                         
-                        <AllImages />
 
-                        {review ? (
-                            <h4>
-                                <NavLink to={`/editareview/biz/${businessId}`}>Edit Review</NavLink>
-                            </h4>
-                        ) :
-                            <h4>
-                                <NavLink to={`/writeareview/biz/${businessId}`}>Write a Review</NavLink>
-                            </h4>
-                        }
-                        <EditBusinessForm business={business} />
-                        <BusinessReviews />
+                        {/* <EditBusinessForm business={business} /> */}
                     </div>
                 )}
             </div>

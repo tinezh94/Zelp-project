@@ -38,17 +38,17 @@ const NavBar = () => {
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true)
-}
+  }
 
-useEffect(() => {
-  if (!showMenu) return;
-  const closeMenu = () => {
-      setShowMenu(false);
-  };
+  useEffect(() => {
+    if (!showMenu) return;
+    const closeMenu = () => {
+        setShowMenu(false);
+    };
 
-  document.addEventListener('click', closeMenu);
-  return () => document.removeEventListener('click', closeMenu);
-}, [showMenu])
+    document.addEventListener('click', closeMenu);
+    return () => document.removeEventListener('click', closeMenu);
+  }, [showMenu])
 
   return (
     <nav>

@@ -68,6 +68,9 @@ function App() {
         <ProtectedRoute path='/businesses/:businessId' exact={true}>
           <BusinessPage />
         </ProtectedRoute>
+        <ProtectedRoute path='/businesses/:businessId/edit' exact={true}>
+          <EditBusinessForm />
+        </ProtectedRoute>
         <ProtectedRoute path='/writeareview/biz/:businessId' exact={true}>
           <CreateReviewForm />
         </ProtectedRoute>
