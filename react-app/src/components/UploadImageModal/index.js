@@ -48,6 +48,7 @@ function UploadImageModal() {
             if (uploadedImage) {
                 reset();
                 setHasSubmitted(false);
+                setImageLoading(false);
                 hideForm();
             }
         }
@@ -100,7 +101,7 @@ function UploadImageModal() {
                                     <button className='cancel-upload-image-btn' type='button' onClick={() => setShowModal(false)}>Cancel</button>
                                     <button className='upload-image-btn' type='submit'>Attach</button>
                                 </div>
-                                {!validationErrors.length && imageLoading && <p>Loading ...</p>}
+                                {!validationErrors.length && imageLoading && <p className='loading-pic'>Loading ...</p>}
                             </form>
                         </div>
                     </Modal>

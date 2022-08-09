@@ -26,29 +26,29 @@ const BusinessPage = () => {
     });
 
     business = business[0];
-    console.log('---', business)
+    // console.log('---', business)
 
 
     const reviewsArr = reviews ? Object.values(reviews) : null;
     
     const review = reviewsArr.filter(review => (review.business_id == businessId && review.user_id === user.id)).length > 0;
     
-    console.log('businesspage',reviews)
+    // console.log('businesspage',reviews)
     
     const bizReviews = Object.values(reviews)?.filter(review => {
         return review.business_id === Number(businessId)
     });
     
-    console.log('bizreviews', bizReviews)
+    // console.log('bizreviews', bizReviews)
     
     const bizRatings = bizReviews.map(review => review.rating)
-    console.log('bizratings', bizRatings)
+    // console.log('bizratings', bizRatings)
     
     const getAvrg = bizRatings.reduce((a, b) => a + b, 0) / bizRatings.length
-    console.log('getAverg', getAvrg)
+    // console.log('getAverg', getAvrg)
 
     const totalFilled = Math.floor(getAvrg);
-    console.log('totalfilled', totalFilled)
+    // console.log('totalfilled', totalFilled)
     const stars = Array(5).fill(0);
 
     useEffect(() => {

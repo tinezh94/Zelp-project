@@ -26,6 +26,7 @@ import SearchBar from './components/SearchBar';
 import SplashPage from './components/SplashPage';
 import { loadReviews } from './store/review';
 import Footer from './components/Footer/Footer';
+import CategoryPage from './components/category/CategoryPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -91,6 +92,9 @@ function App() {
         <ProtectedRoute path='/users/:userId/businesses' exact={true}>
           <UserBiz />
         </ProtectedRoute>
+        <Route path='/search/:categoryId'>
+          <CategoryPage />
+        </Route>
       </Switch>
       <Footer />
     </Wrapper>

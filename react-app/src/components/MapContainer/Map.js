@@ -11,7 +11,7 @@ const Maps = ({ apiKey, latitude, longitude }) => {
 //         googleMapsApiKey: apiKey,
 //         libraries
 // })
-
+    // console.log('apikey', apiKey)
     const mapRef = useRef();
     const onLoad = useCallback(map => (mapRef.current = map), [])
     // const center = useMemo(() => ({
@@ -19,7 +19,7 @@ const Maps = ({ apiKey, latitude, longitude }) => {
     //     lng: 73.833352,
     // }), [])
 
-    console.log('lat, lng', latitude, longitude)
+    // console.log('lat, lng', latitude, longitude)
     const center = {
         lat: latitude,
         lng: longitude
@@ -51,7 +51,6 @@ const Maps = ({ apiKey, latitude, longitude }) => {
                 </GoogleMap>
             )}
         </div>
-        // <h1>MapContainer</h1>
     )
 }
 
