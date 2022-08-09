@@ -62,7 +62,8 @@ import { NavLink } from 'react-router-dom';
                             }
                         }).map((category, idx) => (
                             <div key={idx}>
-                                <p className='filtered-search-results'>{category.category_name}</p>
+                                <NavLink to={`/search/${category.id}`} className='filtered-search-results'>{category.category_name}</NavLink>
+                                {/* <p className='filtered-search-results'></p> */}
                             </div>
                         ))}
                     </div>
