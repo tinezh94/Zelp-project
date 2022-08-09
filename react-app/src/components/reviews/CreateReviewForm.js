@@ -16,12 +16,21 @@ const CreateReviewForm = () => {
     const { businessId } = useParams();
 
     const user = useSelector(state => state?.session?.user);
-    const businesses = useSelector(state => state?.businesses);
+    const business = useSelector(state => state?.businesses);
     
+    let currBiz = business ? Object.values(business) : null;
+
 
     useEffect(() => {
         dispatch(loadOneBusiness(Number(businessId)));
     }, [dispatch]);
+
+    // let business = Object.values(businesses)?.filter(biz => {
+    //     return business.id === Number(businessId);
+    // })
+
+    currBiz = currBiz[0]
+    console.log('biz', currBiz)
 
     const colors = {
         'orange': "#f15c00",
@@ -93,8 +102,9 @@ const CreateReviewForm = () => {
     }
 
     return (
-        <>
-            <form onSubmit={onSubmit}>
+        <div className='write-review-content-container'>
+            <h1 className='write-review-biz-name'>{currBiz?.name}</h1>
+            <form onSubmit={onSubmit} className='write-review-form'>
                 {hasSubmitted && validationErrors.length > 0 && (
                     <ul>
                         {validationErrors.map(error => (
@@ -102,15 +112,14 @@ const CreateReviewForm = () => {
                         ))}
                     </ul>
                 )}
-                <h2>Write a review</h2>
                 {/* <label>Rating</label>
                 <input 
                     type='text'
                     value={rating}
                     onChange={e => setRating(e.target.value)}
                 /> */}
-                <div style={styles.container}>
-                    <div style={styles.stars}>
+                <div style={styles.container} className='write-review-rating-container'>
+                    <div style={styles.stars} className='star-p'>
                         {stars.map((_, index) => {
                             const ratingValue = index + 1;
                             return (
@@ -123,7 +132,7 @@ const CreateReviewForm = () => {
                                         onClick={() => setRating(ratingValue )} />
                                     <FaStar 
                                         key={index}
-                                        size={50}
+                                        size={30}
                                         style={{
                                             marginRight: 10,
                                             cursor: 'pointer'
@@ -136,21 +145,25 @@ const CreateReviewForm = () => {
                                 </label>
                             )
                         })}
+                        <p className='write-review-rate-label'>Select your rating</p>
                     </div>
                 </div>
                 <textarea
+                    className='review-content'
                     placeholder='Write your review here...'
                     rows={'10'}
                     cols={'50'}
                     value={content}
                     onChange={e => setContent(e.target.value)}
-                ></textarea>
-                <div>
-                    <button type='submit'>Post Review</button>
+                >
+                </textarea>
+                <h3 className='write-review-h3'>Attach Photos</h3>
+                <UploadImageModal />
+                <div className='post-review-btn-div'>
+                    <button className='post-review-btn' type='submit'>Post Review</button>
                 </div>
             </form>
-            <UploadImageModal />
-        </>
+        </div>
     )
 };
 

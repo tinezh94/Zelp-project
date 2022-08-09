@@ -69,29 +69,43 @@ function UploadImageModal() {
     }
     
     return (
-        <>
-            <button onClick={() => setShowModal(true)}>Upload Images Here</button>
+        <div>
+            <div className='add-photos-icon-container'>
+                <button className='add-photo-btn' onClick={() => setShowModal(true)}>
+                    <i className="fa-solid fa-plus"></i>
+                </button>
+            </div>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <form onSubmit={handleSubmit}>
-                    {hasSubmitted && validationErrors.length > 0 && (
-                        <ul>
-                            {validationErrors.map(error => (
-                                <li key={error}>{error}</li>
-                            ))}
-                        </ul>
-                     )}
-                        <input
-                            type="file"
-                            accept="image/*"
-                            onChange={updateImage}
-                        />
-                        <button type='submit'>Submit</button>
-                        {!validationErrors.length && imageLoading && <p>Loading ...</p>}
-                    </form>
-                </Modal>
+                        <div className='add-photos-modal'>
+                            <form onSubmit={handleSubmit}>
+                                {hasSubmitted && validationErrors.length > 0 && (
+                                    <ul>
+                                        {validationErrors.map(error => (
+                                            <li key={error}>{error}</li>
+                                        ))}
+                                    </ul>
+                                )}
+                                <div className='attach-photos-container'>
+                                    <img className='drop-photos' src='https://s3-media0.fl.yelpcdn.com/assets/public/photo_review_325x200_v2.yji-4a099f5381e9ea0301bb.svg' alt='add-photos' />
+                                    <h2 className='select-your-photos'>Select your photos here</h2>
+                                    <input
+                                        className='choose-file-btn'
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={updateImage}
+                                    />
+                                </div>
+                                <div className='cancel-submit-pic-div'>
+                                    <button className='cancel-upload-image-btn' type='button' onClick={() => setShowModal(false)}>Cancel</button>
+                                    <button className='upload-image-btn' type='submit'>Attach</button>
+                                </div>
+                                {!validationErrors.length && imageLoading && <p>Loading ...</p>}
+                            </form>
+                        </div>
+                    </Modal>
             )}
-        </>
+        </div>
     )
 };
 

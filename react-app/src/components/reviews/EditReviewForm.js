@@ -119,7 +119,8 @@ const EditReviewForm = () => {
     }
 
     return (
-        <>
+        <div className='write-review-content-container'>
+            <h1 className='write-review-biz-name'>{business?.name}</h1>
             <form onSubmit={onSubmit}>
             {hasSubmitted && validationErrors.length > 0 && (
                     <ul>
@@ -128,15 +129,14 @@ const EditReviewForm = () => {
                         ))}
                     </ul>
                 )}
-                <h2>{business?.name}</h2>
                 {/* <label>Rating</label>
                 <input 
                     type='text'
                     value={editRating}
                     onChange={e => setEditRating(e.target.value)}
                 /> */}
-                <div style={styles.container}>
-                    <div style={styles.stars}>
+                <div style={styles.container} className='write-review-rating-container'>
+                    <div style={styles.stars} className='star-p'>
                         {stars.map((_, index) => {
                             const ratingValue = index + 1;
                             return (
@@ -149,7 +149,7 @@ const EditReviewForm = () => {
                                         onClick={() => setEditRating(ratingValue )} />
                                     <FaStar 
                                         key={index}
-                                        size={50}
+                                        size={30}
                                         style={{
                                             marginRight: 10,
                                             cursor: 'pointer'
@@ -162,29 +162,34 @@ const EditReviewForm = () => {
                                 </label>
                             )
                         })}
+                        <p className='write-review-rate-label'>Select your rating</p>
                     </div>
                 </div>
                 <textarea
+                    className='review-content'
                     rows={'10'}
                     cols={'50'}
                     value={editContent}
                     onChange={e => setEditContent(e.target.value)}
-                ></textarea>
-                {bizImages && bizImages.map (image => (
-                    <div>
-                        <img src={image['image_url']} alt='biz review photos' style={{width: 500, height: 350 }} />
-                        <button type='button' onClick={() => onDeletePic(image.id)}>Delete Image</button>
-                    </div>
-                ))}
-                <div>
-                    <button type='submit'>Edit Review</button>
+                >
+                </textarea>
+                <h3 className='write-review-h3'>Attach Photos</h3>
+                <UploadImageModal />
+                <div className='review-images-div'>
+                    {bizImages && bizImages.map (image => (
+                            <div className='review-img'>
+                                <img src={image['image_url']} alt='biz review photos' style={{width: 142.5, height: 120 }} />
+                                <button className='delete-pic-btn' type='button' onClick={() => onDeletePic(image.id)}>
+                                    <i className="fa-solid fa-xmark"></i>
+                                </button>
+                            </div>
+                    ))}
                 </div>
-                {/* <div>
-                    <button type='button' onClick={() => onDelete(review.id)}>Delete Review</button>
-                </div> */}
+                <div className='post-review-btn-div'>
+                    <button className='post-review-btn' type='submit'>Post Review</button>
+                </div>
             </form>
-            <UploadImageModal />
-        </>
+        </div>
     )
 }
 
