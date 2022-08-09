@@ -279,3 +279,11 @@ input::file-selector-button:hover {
     font-size: 20px;
     color:#6e7072;
 }
+
+.loading-pic {
+    font-family: 'Poppins','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    padding-left: 30px;
+    padding-bottom: 30px;
+}
