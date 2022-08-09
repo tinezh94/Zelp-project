@@ -84,7 +84,7 @@ const BusinessReviews = () => {
                                                 {showMenu && (
                                                     <div className='review-edit-delete'>
                                                         <NavLink  className='dropdown-links' to={`/editareview/biz/${businessId}`}>Edit Review</NavLink>
-                                                        <button className='biz-review-delete-btn' type='button' onClick={() => onDelete(review.id)}>Delete Review</button>
+                                                        <button className='biz-review-delete-btn' type='button' onClick={() => onDelete(review.id)}>Remove Review</button>
                                                     </div>
                                                 )}
                                             </div>
