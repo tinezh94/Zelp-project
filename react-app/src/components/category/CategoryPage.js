@@ -106,7 +106,7 @@ const CategoryPage = () => {
                         )}
                     </div>
                 </div>
-                <MultiMapContainer filteredBiz={filteredBiz} />
+                <MultiMapContainer filteredBiz={filteredBiz} businessesArr={businessesArr} />
             </div>
         </>
     )

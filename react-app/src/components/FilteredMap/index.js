@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadKey } from '../../store/map';
 import MultiMapView from './FilteredMap';
 
-const MultiMapContainer = ({ filteredBiz }) => {
+const MultiMapContainer = ({ filteredBiz, businessesArr }) => {
     const dispatch = useDispatch();
     const key = useSelector(state => state?.key);
 
@@ -13,7 +13,7 @@ const MultiMapContainer = ({ filteredBiz }) => {
     }, [dispatch])
 
     return (
-        <MultiMapView apiKey={key} filteredBiz={filteredBiz}></MultiMapView>
+        <MultiMapView apiKey={key} filteredBiz={filteredBiz} businessesArr={businessesArr}></MultiMapView>
     )
 };
 
