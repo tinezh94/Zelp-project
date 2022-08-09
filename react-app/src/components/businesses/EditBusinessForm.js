@@ -191,7 +191,7 @@ const EditBusinessForm = () => {
 
     return (
         <>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} className='create-biz-form'>
             {hasSubmitted && validationErrors.length > 0 && (
                         <ul>
                             {validationErrors.map(error => (
@@ -199,38 +199,46 @@ const EditBusinessForm = () => {
                             ))}
                         </ul>
                     )}
-                <h2>Edit Business</h2>
-                <label>Business Name*</label>
-                <input
-                    type='text'
-                    value={editName}
-                    onChange={e => setEditName(e.target.value)}
-                />
-                <label>Address*</label>
-                <div>
-                    {apiKey && 
-                    <GooglePlacesAutocomplete
-                        apiKey={apiKey}
-                        selectProps={{
-                            styles: {
-                                input: (provided) => ({
-                                ...provided,
-                                color: 'blue',
-                                }),
-                                option: (provided) => ({
-                                ...provided,
-                                color: 'blue',
-                                }),
-                                singleValue: (provided) => ({
-                                ...provided,
-                                color: 'blue',
-                                }),
-                            },
-                            value: autoValue,
-                            onChange: setAutoValue
-                        }}
+                <div className='create-biz-single-sec'> 
+                    <h2 className='create-biz-h2'>{business?.name}</h2>
+                    <h5 className='create-biz-h2-sub'>Fields with * are required!</h5>
+                </div>
+                <div className='create-biz-single-sec'>
+                    <label className='create-biz-label'>Business Name*</label>
+                    <input
+                        className='create-biz-input'
+                        type='text'
+                        value={editName}
+                        onChange={e => setEditName(e.target.value)}
                     />
-                    }
+                </div>
+                <div className='create-biz-single-sec'>
+                    <label className='create-biz-label'>Address*</label>
+                    <div>
+                        {apiKey && 
+                        <GooglePlacesAutocomplete
+                            apiKey={apiKey}
+                            selectProps={{
+                                styles: {
+                                    input: (provided) => ({
+                                    ...provided,
+                                    color: 'blue',
+                                    }),
+                                    option: (provided) => ({
+                                    ...provided,
+                                    color: 'blue',
+                                    }),
+                                    singleValue: (provided) => ({
+                                    ...provided,
+                                    color: 'blue',
+                                    }),
+                                },
+                                value: autoValue,
+                                onChange: setAutoValue
+                            }}
+                        />
+                        }
+                    </div>
                 </div>
                 {/* <label>Address*</label>
                 <input
@@ -256,55 +264,71 @@ const EditBusinessForm = () => {
                     value={editZipcode}
                     onChange={e => setEditZipcode(e.target.value)}
                 /> */}
-                <label>Description*</label>
-                <textarea
-                    rows={'10'}
-                    cols={'50'}
-                    value={editDescription}
-                    onChange={e => setEditDescription(e.target.value)}
-                ></textarea>
-                <label>Category*</label>
-                <select
-                    value={editCategory}
-                    onChange={e => setEditCategory(e.target.value)}
-                >
-                    {categoriesArr?.map(category => (
-                        <option value={category.category_name} key={category}>{category.category_name}</option>
-                    ))}
-                </select>
-                <label>Website</label>
-                <input
-                    // placeholder='Business Website(optional)'
-                    type='text'
-                    value={editWebsite}
-                    onChange={e => e.target.value ? setEditWebsite(e.target.value): null}
-                />
-                <label>Business Hours*</label>
-                <input 
-                    type='text'
-                    value={editBusinessHours}
-                    onChange={e => setEditBusinessHours(e.target.value)}
-                />
-                <label>Price Range*</label>
-                <select
-                    value={editPriceRange}
-                    onChange={e => setEditPriceRange(e.target.value)}
-                >
-                    {priceRangeArr.map((priceRange, idx) => (
-                        <option value={priceRange} key={idx}>{priceRange}</option>
-                    ))}
-                </select>
-                <label>Business Phone Number*</label>
-                <input 
-                    type='text'
-                    value={editPhone}
-                    onChange={e => setEditPhone(e.target.value)}
-                />
-                <div>
-                    <button type='submit'>Edit Business</button>
+                <div className='create-biz-single-sec'>
+                    <label className='create-biz-label'>Description*</label>
+                    <textarea
+                        className='create-biz-text'
+                        rows={'12'}
+                        cols={'50'}
+                        value={editDescription}
+                        onChange={e => setEditDescription(e.target.value)}
+                    ></textarea>
                 </div>
-                <div>
-                    <button type='button' onClick={() => onDelete(business.id)}>Delete Business</button>
+                <div className='create-biz-single-sec'>
+                    <label className='create-biz-label'>Category*</label>
+                    <select
+                        className='create-biz-select'
+                        value={editCategory}
+                        onChange={e => setEditCategory(e.target.value)}
+                    >
+                        {categoriesArr?.map(category => (
+                            <option value={category.category_name} key={category}>{category.category_name}</option>
+                        ))}
+                    </select>
+                </div>
+                <div className='create-biz-single-sec'>
+                    <label className='create-biz-label'>Website</label>
+                    <input
+                        className='create-biz-input'
+                        // placeholder='Business Website(optional)'
+                        type='text'
+                        value={editWebsite}
+                        onChange={e => e.target.value ? setEditWebsite(e.target.value): null}
+                    />
+                </div>
+                <div className='create-biz-single-sec'>
+                    <label className='create-biz-label'>Business Hours*</label>
+                    <input 
+                        className='create-biz-input'
+                        type='text'
+                        value={editBusinessHours}
+                        onChange={e => setEditBusinessHours(e.target.value)}
+                    />
+                </div>
+                <div className='create-biz-single-sec'>
+                    <label className='create-biz-label'>Price Range*</label>
+                    <select
+                        className='create-biz-select'
+                        value={editPriceRange}
+                        onChange={e => setEditPriceRange(e.target.value)}
+                    >
+                        {priceRangeArr.map((priceRange, idx) => (
+                            <option value={priceRange} key={idx}>{priceRange}</option>
+                        ))}
+                    </select>
+                </div>
+                <div className='create-biz-single-sec'>
+                    <label className='create-biz-label'>Business Phone Number*</label>
+                    <input 
+                        className='create-biz-input'
+                        type='text'
+                        value={editPhone}
+                        onChange={e => setEditPhone(e.target.value)}
+                    />
+                </div>
+                <div className='edit-biz-btns-div'>
+                    <button className='edit-biz-submit-btn' type='submit'>Edit Business</button>
+                    <button className='edit-biz-delete-btn' type='button' onClick={() => onDelete(business.id)}>Delete Business</button>
                 </div>
             </form>
         </>

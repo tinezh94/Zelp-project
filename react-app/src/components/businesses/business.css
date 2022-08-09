@@ -570,3 +570,149 @@ a.biz-card-link:hover {
 .main-page-bottom-container {
     padding-bottom: 40px;
 }
+
+
+
+/* Create Business Page */
+
+.create-biz-h2 {
+    text-align: left;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    font-family: 'Poppins','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 30px;
+    font-weight: 900;
+    color:#2d2e2f;
+}
+
+.create-biz-h2-sub {
+    font-family: 'Poppins','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color:#0073bb;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ebebeb;
+    margin-bottom: 20px;
+}
+
+.create-biz-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-biz-single-sec {
+    display: flex;
+    flex-direction: column;
+    width: 650px;
+    line-height: 26px;
+}
+
+.create-biz-label {
+    font-family: 'Poppins','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    color:#2d2e2f;
+    line-height: 24px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.create-biz-input {
+    line-height: 30px;
+    font-family: 'Poppins','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    color:#2d2e2f;
+    border: 1px solid #ebebeb;
+    border-radius: 4px;
+    padding-left: 10px;
+}
+
+.create-biz-text {
+    border: 1px solid #ebebeb;
+    border-radius: 4px;
+    padding-left: 10px;
+    padding-top: 10px;
+    font-family: 'Poppins','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    color:#2d2e2f;
+    line-height: 20px;
+}
+
+select.create-biz-select {
+    line-height: 30px;
+    font-size: 14px;
+    color: #2d2e2f;
+    border: 1px solid #ebebeb;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 8px;
+}
+
+.create-biz-btns-div {
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+    margin-right: -21.5rem;
+}
+
+.create-biz-cancel-btn,
+.edit-biz-delete-btn {
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 40px;
+    cursor: pointer;
+    padding-bottom: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 8px;
+    background-color: transparent;
+    border: 1px solid rgba(200,201,202,1);
+    color: #2d2e2f;
+    transition: all 0.8s;
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.create-biz-cancel-btn:hover,
+.edit-biz-delete-btn:hover {
+    background-color: #f1efef;
+}
+
+.create-biz-submit-btn,
+.edit-biz-submit-btn {
+    cursor: pointer;
+    height: 40px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    width: 200px;
+    background-color: #e00707;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 450;
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    box-sizing: border-box;
+    margin-left: 14px;
+}
+
+.create-biz-submit-btn:hover,
+.edit-biz-submit-btn:hover {
+    background-color: #fd2e2e;
+}
+
+.edit-biz-btns-div {
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+    margin-right: -17rem;
+}
+
+.edit-biz-delete-btn {
+    margin-left: 12px;
+}

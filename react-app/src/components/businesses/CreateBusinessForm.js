@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, NavLink } from 'react-router-dom';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { geocodeByPlaceId, geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 
@@ -189,7 +189,7 @@ const CreateBusinessForm = () => {
 
     return (
         <>  
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} className='create-biz-form'>
                 {hasSubmitted && validationErrors.length > 0 && (
                         <ul>
                             {validationErrors.map(error => (
@@ -197,38 +197,47 @@ const CreateBusinessForm = () => {
                             ))}
                         </ul>
                     )}
-                <h2>New Business</h2>
-                <label>Business Name*</label>
-                <input
-                    type='text'
-                    value={name}
-                    onChange={e => setName(e.target.value)}
-                />
-                <label>Address*</label>
-                <div>
-                    {apiKey && 
-                    <GooglePlacesAutocomplete
-                        apiKey={apiKey}
-                        selectProps={{
-                            styles: {
-                                input: (provided) => ({
-                                ...provided,
-                                color: 'blue',
-                                }),
-                                option: (provided) => ({
-                                ...provided,
-                                color: 'blue',
-                                }),
-                                singleValue: (provided) => ({
-                                ...provided,
-                                color: 'blue',
-                                }),
-                            },
-                            value: autoValue,
-                            onChange: setAutoValue
-                        }}
+                <div className='create-biz-single-sec'>
+                    <h2 className='create-biz-h2'>Add your listing to Zelp!</h2>
+                    <h5 className='create-biz-h2-sub'>Fields with * are required!</h5>
+                </div>
+                <div className='create-biz-single-sec'>
+                    <label className='create-biz-label'>Business Name*</label>
+                    <input
+                        className='create-biz-input'
+                        placeholder='Your business name here...'
+                        type='text'
+                        value={name}
+                        onChange={e => setName(e.target.value)}
                     />
-                    }
+                </div>
+                <div className='create-biz-single-sec'>
+                    <label className='create-biz-label'>Address*</label>
+                    <div>
+                        {apiKey && 
+                        <GooglePlacesAutocomplete
+                            apiKey={apiKey}
+                            selectProps={{
+                                styles: {
+                                    input: (provided) => ({
+                                    ...provided,
+                                    color: '#2d2e2f',
+                                    }),
+                                    option: (provided) => ({
+                                    ...provided,
+                                    color: '#2d2e2f',
+                                    }),
+                                    singleValue: (provided) => ({
+                                    ...provided,
+                                    color: '#2d2e2f',
+                                    }),
+                                },
+                                value: autoValue,
+                                onChange: setAutoValue
+                            }}
+                        />
+                        }
+                    </div>
                 </div>
                 {/* <label>Address*</label>
                 <input
@@ -254,57 +263,78 @@ const CreateBusinessForm = () => {
                     value={zipcode}
                     onChange={e => setZipcode(e.target.value)}
                 /> */}
-                <label>Description*</label>
-                <textarea
-                    placeholder='Please describe your business here...'
-                    rows={'10'}
-                    cols={'50'}
-                    value={description}
-                    onChange={e => setDescription(e.target.value)}
-                ></textarea>
-                <label>Category*</label>
-                <select
-                    value={category}
-                    // defaultValue={'default'}
-                    onChange={e => setCategory(e.target.value)}
-                >
-                    <option value={'default'} disabled hidden>Please choose a category</option>
-                    {categoriesArr?.map((category, idx) => (
-                        <option value={category.category_name} key={idx}>{category.category_name}</option>
-                    ))}
-                </select>
-                <label>Website</label>
-                <input
-                    placeholder='Business Website(optional)'
-                    type='text'
-                    value={website}
-                    onChange={e => setWebsite(e.target.value)}
-                />
-                <label>Business Hours*</label>
-                <input 
-                    placeholder='i.e 10:00 AM - 11:00 PM'
-                    type='text'
-                    value={businessHours}
-                    onChange={e => setBusinessHours(e.target.value)}
-                />
-                <label>Price Range*</label>
-                <select
-                    value={priceRange}
-                    onChange={e =>  setPriceRange(e.target.value)}
-                >
-                    {priceRangeArr.map((priceRange, idx) => (
-                        <option value={priceRange} key={idx}>{priceRange}</option>
-                    ))}
-                </select>
-                <label>Business Phone Number*</label>
-                <input 
-                    placeholder='123-456-7890'
-                    type='text'
-                    value={phone}
-                    onChange={e => setPhone(e.target.value)}
-                />
-                <div>
-                    <button type='submit'>Create Business</button>
+                <div className='create-biz-single-sec'>
+                    <label className='create-biz-label'>Description*</label>
+                    <textarea
+                        className='create-biz-text'
+                        placeholder='Please describe your business here...'
+                        rows={'12'}
+                        cols={'50'}
+                        value={description}
+                        onChange={e => setDescription(e.target.value)}
+                    ></textarea>
+                </div>
+                <div className='create-biz-single-sec'>
+                    <label className='create-biz-label'>Category*</label>
+                    <select
+                        className='create-biz-select'
+                        value={category}
+                        // defaultValue={'default'}
+                        onChange={e => setCategory(e.target.value)}
+                    >
+                        <option value={'default'} disabled hidden>Please choose a category</option>
+                        {categoriesArr?.map((category, idx) => (
+                            <option value={category.category_name} key={idx}>{category.category_name}</option>
+                        ))}
+                    </select>
+                </div>
+                <div className='create-biz-single-sec'>
+                    <label className='create-biz-label'>Website</label>
+                    <input
+                        className='create-biz-input'
+                        placeholder='Business website (optional)'
+                        type='text'
+                        value={website}
+                        onChange={e => setWebsite(e.target.value)}
+                    />
+                </div>
+                <div className='create-biz-single-sec'>
+                    <label className='create-biz-label'>Business Hours*</label>
+                    <input 
+                        className='create-biz-input'
+                        placeholder='i.g 10:00 AM - 11:00 PM'
+                        type='text'
+                        value={businessHours}
+                        onChange={e => setBusinessHours(e.target.value)}
+                    />
+                </div>
+                <div className='create-biz-single-sec'>
+                    <label className='create-biz-label'>Price Range*</label>
+                    <select
+                        className='create-biz-select'
+                        value={priceRange}
+                        onChange={e =>  setPriceRange(e.target.value)}
+                    >
+                        {priceRangeArr.map((priceRange, idx) => (
+                            <option value={priceRange} key={idx}>{priceRange}</option>
+                        ))}
+                    </select>
+                </div>
+                <div className='create-biz-single-sec'>
+                    <label className='create-biz-label'>Business Phone Number*</label>
+                    <input 
+                        className='create-biz-input'
+                        placeholder='123-456-7890'
+                        type='text'
+                        value={phone}
+                        onChange={e => setPhone(e.target.value)}
+                    />
+                </div>
+                <div className='create-biz-btns-div'>
+                    <NavLink to='/'>
+                        <button className='create-biz-cancel-btn'>Cancel</button>
+                    </NavLink>
+                    <button className='create-biz-submit-btn' type='submit'>Create Business</button>
                 </div>
             </form>
         </>
