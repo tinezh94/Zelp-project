@@ -38,13 +38,9 @@ const BusinessesPage = () => {
 
     const getAvrg = (businessId) => {
         const reviewsList = reviewsArr.filter(review => review.business_id === businessId)
-        console.log(reviews)
         const bizRatings = reviewsList.map(review => review.rating)
-        console.log('bizratings', bizRatings)
         const avrgRating = (bizRatings.reduce((a, b) => a + b, 0) / bizRatings.length)
-        console.log('avrgrating', avrgRating)
         const totalFilled = Math.floor(Number(avrgRating))
-        console.log('total',totalFilled )
         return totalFilled;
     }
 
@@ -94,42 +90,54 @@ const BusinessesPage = () => {
             <div className='main-page-bottom-container'>
                 <h2 className='main-pg-h2'>Categories</h2>
                 <div className='biz-categories'>
-                   <div className='category-container'>
-                    <p className='emoji-icon'>🍔</p>
                     <NavLink to={`/search/${cateArr[0].id}`}>
-                    <p className='category-name'>{cateArr[0].category_name}</p>
+                        <div className='category-container'>
+                            <p className='emoji-icon'>🍔</p>
+                            <p className='category-name'>{cateArr[0].category_name}</p>
+                        </div>
                     </NavLink>
-                   </div>
-                   <div className='category-container'>
-                    <p className='emoji-icon'>🥟</p>
                     <NavLink to={`/search/${cateArr[1].id}`}>
-                        <p className='category-name'>{cateArr[1].category_name}</p>
+                        <div className='category-container'>
+                            <p className='emoji-icon'>🥟</p>
+                                <p className='category-name'>{cateArr[1].category_name}</p>
+                        </div>
                     </NavLink>
-                   </div>
-                   <div className='category-container'>
-                    <p className='emoji-icon'>🥪</p>
-                    <p className='category-name'>{cateArr[2].category_name}</p>
-                   </div>
-                   <div className='category-container'>
-                    <p className='emoji-icon'>🍙</p>
-                    <p className='category-name'>{cateArr[3].category_name}</p>
-                   </div>
-                   <div className='category-container'>
-                    <p className='emoji-icon'>🍰</p>
-                    <p className='category-name'>{cateArr[4].category_name}</p>
-                   </div>
-                   <div className='category-container'>
-                    <p className='emoji-icon'>🍣</p>
-                    <p className='category-name'>{cateArr[5].category_name}</p>
-                   </div>
-                   <div className='category-container'>
-                    <p className='emoji-icon'>🍝</p>
-                    <p className='category-name'>{cateArr[6].category_name}</p>
-                   </div>
-                   <div className='category-container'>
-                    <p className='emoji-icon'>🍜</p>
-                    <p className='category-name'>{cateArr[7].category_name}</p>
-                   </div>
+                    <NavLink to={`/search/${cateArr[2].id}`}>
+                        <div className='category-container'>
+                            <p className='emoji-icon'>🥪</p>
+                                <p className='category-name'>{cateArr[2].category_name}</p>
+                        </div>
+                    </NavLink>
+                    <NavLink to={`/search/${cateArr[3].id}`}>
+                        <div className='category-container'>
+                            <p className='emoji-icon'>🍙</p>
+                            <p className='category-name'>{cateArr[3].category_name}</p>
+                        </div>
+                    </NavLink>
+                    <NavLink to={`/search/${cateArr[4].id}`}>
+                        <div className='category-container'>
+                            <p className='emoji-icon'>🍰</p>
+                            <p className='category-name'>{cateArr[4].category_name}</p>
+                        </div>
+                    </NavLink>
+                    <NavLink to={`/search/${cateArr[5].id}`}>
+                        <div className='category-container'>
+                            <p className='emoji-icon'>🍣</p>
+                            <p className='category-name'>{cateArr[5].category_name}</p>
+                        </div>
+                    </NavLink>
+                    <NavLink to={`/search/${cateArr[6].id}`}>
+                        <div className='category-container'>
+                            <p className='emoji-icon'>🍝</p>
+                            <p className='category-name'>{cateArr[6].category_name}</p>
+                        </div>
+                    </NavLink>
+                    <NavLink to={`/search/${cateArr[7].id}`}>
+                        <div className='category-container'>
+                            <p className='emoji-icon'>🍜</p>
+                            <p className='category-name'>{cateArr[7].category_name}</p>
+                        </div>
+                    </NavLink>
                 </div>
             </div>
         </>

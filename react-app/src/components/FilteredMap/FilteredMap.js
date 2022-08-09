@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { loadKey } from '../../store/map';
 
-const MultiMapView = ({ filteredBiz, apiKey }) => {
+const MultiMapView = ({ filteredBiz, apiKey, businessesArr }) => {
     const dispatch = useDispatch();
 
     const [ isLoaded, setIsLoad ] = useState(false);
@@ -12,23 +12,46 @@ const MultiMapView = ({ filteredBiz, apiKey }) => {
     const mapRef = useRef();
     const onLoad = useCallback(map => (mapRef.current = map), [])
 
-    console.log('filtered', filteredBiz)
+    // console.log('filtered', filteredBiz)
 
     let coordinates = [];
 
-    filteredBiz.forEach(biz => {
+    filteredBiz?.forEach(biz => {
         coordinates.push({lat: biz.latitude, lng: biz.longitude})
     });
 
-    console.log('coordinates', coordinates)
+    
+    // let center = [];
+    let allCoordinates = [];
+    businessesArr?.forEach(biz => {
+        allCoordinates.push({lat: biz.latitude, lng: biz.longitude})
+    });
+    
+    // console.log('coordinates', allCoordinates)
+    let latSum = 0;
+    let lgnSum = 0;
+    for (let i = 0; i < allCoordinates.length; i++) {
+            let set = allCoordinates[i];
+            latSum += set.lat
+            lgnSum += set.lng
 
-    // coordinates.map(set => {
+    }
 
-    // })
+    const latAvrg = latSum / allCoordinates.length;
+    const lgnAvrg = lgnSum / allCoordinates.length;
+        // console.log('sums',  latAvrg, lgnAvrg)
 
-    const center = {
-        lat: 40.76119499307807,
-        lng: -73.82777500027217
+    let center;
+    if (filteredBiz.length === 0) {
+        center = {
+            lat: latAvrg,
+            lng: lgnAvrg
+        }
+    } else {
+        center = {
+            lat: coordinates[0]?.lat,
+            lng: coordinates[0]?.lng
+        }
     }
 
     useEffect(() => {
