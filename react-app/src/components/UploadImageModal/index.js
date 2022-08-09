@@ -48,6 +48,7 @@ function UploadImageModal() {
             if (uploadedImage) {
                 reset();
                 setHasSubmitted(false);
+                setImageLoading(false);
                 hideForm();
             }
         }

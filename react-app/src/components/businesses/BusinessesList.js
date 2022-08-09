@@ -96,11 +96,15 @@ const BusinessesPage = () => {
                 <div className='biz-categories'>
                    <div className='category-container'>
                     <p className='emoji-icon'>🍔</p>
+                    <NavLink to={`/search/${cateArr[0].id}`}>
                     <p className='category-name'>{cateArr[0].category_name}</p>
+                    </NavLink>
                    </div>
                    <div className='category-container'>
                     <p className='emoji-icon'>🥟</p>
-                    <p className='category-name'>{cateArr[1].category_name}</p>
+                    <NavLink to={`/search/${cateArr[1].id}`}>
+                        <p className='category-name'>{cateArr[1].category_name}</p>
+                    </NavLink>
                    </div>
                    <div className='category-container'>
                     <p className='emoji-icon'>🥪</p>
