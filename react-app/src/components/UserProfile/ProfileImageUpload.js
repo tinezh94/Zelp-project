@@ -18,6 +18,14 @@ const ProfileImage = () => {
 
     const user = useSelector(state => state?.session?.user);
 
+    const fileExtensions = '([a-zA-Z0-9\s_\\.\-:])+(.png|.jpg|.gif|.jpeg|.pdf)$'
+    useEffect(() => {
+        const errors = [];
+        if (!image?.name.match(fileExtensions)) errors.push('Please select a valid image type');
+        if (image?.size > 1e6) errors.push('Please upload an image smaller than 1MB');
+        setValidationErrors(errors);
+    }, [image?.name, image?.size]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setImageLoading(true);
@@ -54,19 +62,21 @@ const ProfileImage = () => {
         <div>
             <button onClick={() => setShowModal(true)} className='add-profile-pic-btn'>
                 <i className="fa-solid fa-images"></i>
-                <p className='add-profile-pic-p'>Add Profile Photos</p>
+                <p className='add-profile-pic-p'>Edit Profile Photo</p>
             </button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <div className='add-photos-modal'>
                         <form onSubmit={handleSubmit}>
-                            {/* {hasSubmitted && validationErrors.length > 0 (
-                                <ul>
-                                    {validationErrors.map(error => (
-                                        <li key={error}>{error}</li>
-                                    ))}
-                                </ul>
-                            )} */}
+                            <div className='profile-pg-img-errors-div'>
+                                {hasSubmitted && validationErrors.length > 0 && (
+                                    <ul>
+                                        {validationErrors.map(error => (
+                                            <li key={error}>{error}</li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </div>
                             <div className='attach-photos-container'>
                                 <img className='drop-photos' src='https://s3-media0.fl.yelpcdn.com/assets/public/photo_review_325x200_v2.yji-4a099f5381e9ea0301bb.svg' alt='add-photos' />
                                 <h2 className='select-your-photos'>Select your photos here</h2>

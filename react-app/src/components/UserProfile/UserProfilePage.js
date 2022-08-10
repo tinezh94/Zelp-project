@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import UploadImageModal from '../UploadImageModal';
 import ProfileImage from './ProfileImageUpload';
-import { loadReviews } from '../../store/review';
-import { loadImages } from '../../store/image';
+import { loadReviews, deleteReview } from '../../store/review';
+import { loadImages, deleteImage } from '../../store/image';
 import { FaStar } from 'react-icons/fa';
 
 import './profilepage.css';
@@ -76,6 +76,16 @@ const UserProfilePage = () => {
         dispatch(loadBusinesses());
     }, [dispatch, user?.profile_pic]);
 
+    const onDeletePic = async (id) => {
+        await dispatch(deleteImage(id));
+        // history.push(`/businesses/${businessId}`);
+    }
+
+    const onDelete = async (id) => {
+        await dispatch(deleteReview(id));
+        // history.push(`/businesses/${Number(businessId)}`);
+    }
+
     const month = user.created_at.split(' ')[2]
     const year = user.created_at.split(' ')[3]
 
@@ -141,7 +151,9 @@ const UserProfilePage = () => {
                                                         <img className='profile-pg-biz-pic' src={bizPhoto(biz?.id)?.image_url}/>
                                                     </div>
                                                     <div className='review-biz-info'>
-                                                        <h3 className='review-biz-info-name'>{biz.name}</h3>
+                                                        <NavLink to={`/businesses/${biz.id}`}>
+                                                            <h3 className='review-biz-info-name'>{biz.name}</h3>
+                                                        </NavLink>
                                                         <div className='review-biz-info-price-cat'>
                                                             <p className='review-biz-info-price'>{biz.price_range}</p>
                                                             <p className='review-biz-info-cate'>• {biz.category}</p>
@@ -166,6 +178,16 @@ const UserProfilePage = () => {
                                                     </div>
                                                 </div>
                                                 <p className='profile-pg-review-content'>{review.review_content}</p>
+                                                <div className='profile-pg-review-edit-delete'>
+                                                    <NavLink to={`/editareview/biz/${biz.id}`}>
+                                                        <button className='profile-pg-review-edit'>
+                                                            <i className="fa-solid fa-pen-to-square"></i>
+                                                        </button>
+                                                    </NavLink>
+                                                    <button className='profile-pg-review-delete' onClick={() => onDelete(review.id)}>
+                                                        <i className="fa-solid fa-trash-can"></i>
+                                                    </button>
+                                                </div>
                                             </div>
                                         ))}
                                 </div>
@@ -203,6 +225,9 @@ const UserProfilePage = () => {
                                 {userImages && userImages.map(image => (
                                     <div className='profile-pg-imgs-div'>
                                         <img  className='profile-pg-img' src={image.image_url} />
+                                        <button className='delete-pic-btn' type='button' onClick={() => onDeletePic(image.id)}>
+                                            <i className="fa-solid fa-xmark"></i>
+                                        </button>
                                     </div>
                                 ))}
                             </div>

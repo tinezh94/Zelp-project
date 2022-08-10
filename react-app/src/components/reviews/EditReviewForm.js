@@ -110,7 +110,7 @@ const EditReviewForm = () => {
 
     const onDeletePic = async (id) => {
         await dispatch(deleteImage(id));
-        history.push(`/businesses/${businessId}`);
+        // history.push(`/businesses/${businessId}`);
     }
 
     const reset = () => {
@@ -122,13 +122,15 @@ const EditReviewForm = () => {
         <div className='write-review-content-container'>
             <h1 className='write-review-biz-name'>{business?.name}</h1>
             <form onSubmit={onSubmit}>
-            {hasSubmitted && validationErrors.length > 0 && (
-                    <ul>
-                        {validationErrors.map(error => (
-                            <li key={error}>{error}</li>
-                        ))}
-                    </ul>
-                )}
+                <div className='create-review-errors-div'>
+                    {hasSubmitted && validationErrors.length > 0 && (
+                            <ul>
+                                {validationErrors.map(error => (
+                                    <li key={error}>{error}</li>
+                                ))}
+                            </ul>
+                        )}
+                </div>
                 {/* <label>Rating</label>
                 <input 
                     type='text'
@@ -173,12 +175,12 @@ const EditReviewForm = () => {
                     onChange={e => setEditContent(e.target.value)}
                 >
                 </textarea>
-                <h3 className='write-review-h3'>Attach Photos</h3>
-                <UploadImageModal />
+                {/* <h3 className='write-review-h3'>Attach Photos</h3>
+                <UploadImageModal /> */}
                 <div className='review-images-div'>
                     {bizImages && bizImages.map (image => (
                             <div className='review-img'>
-                                <img src={image['image_url']} alt='biz review photos' style={{width: 142.5, height: 120 }} />
+                                <img src={image['image_url']} alt='biz review photos' style={{width: 142.5, height: 120 }} className='edit-review' />
                                 <button className='delete-pic-btn' type='button' onClick={() => onDeletePic(image.id)}>
                                     <i className="fa-solid fa-xmark"></i>
                                 </button>
