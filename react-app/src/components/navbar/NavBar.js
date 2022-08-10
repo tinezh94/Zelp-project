@@ -65,11 +65,6 @@ const NavBar = () => {
       </div>
       <div>
         <SearchBar />
-        {/* <div>
-          <button type='submit' className='search-submit-btn' onClick={submitSearch}>
-            <i className="fa-solid fa-magnifying-glass fa-2x"></i>
-          </button>
-        </div> */}
       </div>
       <ul>
         {sessionLinks}
