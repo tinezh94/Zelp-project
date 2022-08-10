@@ -6,8 +6,8 @@ import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/navbar/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import UsersList from './components/UsersList';
-import User from './components/User';
+// import UsersList from './components/UsersList';
+// import User from './components/User';
 import { authenticate } from './store/session';
 import CreateBusinessForm from './components/businesses/CreateBusinessForm';
 import BusinessesPage from './components/businesses/BusinessesList';
@@ -23,12 +23,12 @@ import UserBiz from './components/businesses/userBiz';
 import { loadBusinesses } from './store/business';
 import { loadCategories } from './store/category';
 // import SearchBar from './components/SearchBar';
-// import SplashPage from './components/SplashPage';
 // import { loadReviews } from './store/review';
 import Footer from './components/Footer/Footer';
 import CategoryPage from './components/category/CategoryPage';
-import AllImages from './components/images/AllImages';
+// import AllImages from './components/images/AllImages';
 import BizPhotos from './components/images/BizPhotos';
+import PageNotFound from './components/PageNotFound';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -64,10 +64,7 @@ function App() {
         <Route path='/signup' exact={true}>
           <SignUpForm />
         </Route>
-        {/* <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
-        </ProtectedRoute> */}
-        <Route path='/businesses' exact={true}>
+        <Route path='/businesses/new' exact={true}>
           <CreateBusinessForm />
         </Route>
         <Route path='/businesses/:businessId' exact={true}>
@@ -83,12 +80,10 @@ function App() {
           <EditReviewForm />
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
-          {/* <User /> */}
           <UserProfilePage />
         </ProtectedRoute>
         <Route path='/' exact={true} >
           <BusinessesPage businesses={businesses} />
-          {/* <SplashPage /> */}
         </Route>
         <ProtectedRoute path='/biz/:businessId/images-upload' exact={true}>
           <BizUploadImage />
@@ -101,6 +96,9 @@ function App() {
         </Route>
         <Route path='/biz-photos/:businessId' exact={true}>
           <BizPhotos businesses={businesses} />
+        </Route>
+        <Route>
+          <PageNotFound />
         </Route>
       </Switch>
       <Footer />
