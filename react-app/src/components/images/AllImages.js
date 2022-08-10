@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadImages } from "../../store/image";
 import '../businesses/business.css';
@@ -32,6 +32,11 @@ const AllImages = () => {
                         {/* <img src={image.image_url} style={{width: 500, height: 350 }} /> */}
                     </div>
                 ))}
+            </div>
+            <div className="see-all-photos-div">
+                <NavLink to={`/biz-photos/${businessId}`}>
+                    <button className="see-all-photos-btn">See {bizImages.length} Photos</button>
+                </NavLink>
             </div>
         </>
     )

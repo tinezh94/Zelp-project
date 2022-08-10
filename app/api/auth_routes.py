@@ -86,11 +86,11 @@ def unauthorized():
     """
     return {'errors': ['Unauthorized']}, 401
 
-@auth_routes.route('/profile_pic', methods=['PUT'])
+@auth_routes.route('/profile_pic', methods=['GET','PUT'])
 def profile_pic():
     form = ProfilePicForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('backend', form)
+    print('backend', form.data)
     if form.validate_on_submit():
         if 'profile_pic' in request.files:
             image = request.files['profile_pic']

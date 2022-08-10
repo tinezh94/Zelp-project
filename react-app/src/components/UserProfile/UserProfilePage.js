@@ -21,7 +21,7 @@ const UserProfilePage = () => {
     const businesses = useSelector(state => state?.businesses);
     const businessesArr = businesses ? Object.values(businesses) : null;
 
-    console.log('biz', businessesArr)
+    // console.log('biz', businessesArr)
     const userReviews = Object.values(reviews)?.filter(review => {
         return review.user_id === user.id
     });
@@ -30,19 +30,15 @@ const UserProfilePage = () => {
         return image.user_id === user.id
     });
 
-    console.log(userReviews);
-    console.log(userImages)
+    // console.log(userReviews);
+    // console.log(userImages)
 
     const [ showReviews, setShowReviews ] = useState(false);
     const [ showBiz, setShowBiz ] = useState(false);
     const [ showPics, setShowPics ] = useState(false);
 
     const [ showProfile, setShowProfile ] = useState(true);
-    const colors = {
-        'orange': "#f15c00",
-        'grey': "#a9a9a9"
-    }
-
+ 
     const stars = Array(5).fill(0);
 
 
@@ -78,7 +74,6 @@ const UserProfilePage = () => {
         dispatch(loadReviews());
         dispatch(loadImages());
         dispatch(loadBusinesses());
-        dispatch(AddProfilePic(user));
     }, [dispatch, user?.profile_pic]);
 
     const month = user.created_at.split(' ')[2]

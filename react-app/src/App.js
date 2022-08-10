@@ -27,6 +27,8 @@ import { loadCategories } from './store/category';
 // import { loadReviews } from './store/review';
 import Footer from './components/Footer/Footer';
 import CategoryPage from './components/category/CategoryPage';
+import AllImages from './components/images/AllImages';
+import BizPhotos from './components/images/BizPhotos';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -96,6 +98,9 @@ function App() {
         </ProtectedRoute>
         <Route path='/search/:searchTerm' exact={true}>
           <CategoryPage businesses={businesses} />
+        </Route>
+        <Route path='/biz-photos/:businessId' exact={true}>
+          <BizPhotos businesses={businesses} />
         </Route>
       </Switch>
       <Footer />
