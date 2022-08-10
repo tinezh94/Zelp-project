@@ -7,7 +7,6 @@ import { loadReviews } from '../../store/review';
 import { FaStar } from 'react-icons/fa';
 import './categorypage.css';
 import { loadImages } from '../../store/image';
-import MultiMapView from '../FilteredMap/FilteredMap';
 import MultiMapContainer from '../FilteredMap';
 
 const CategoryPage = () => {

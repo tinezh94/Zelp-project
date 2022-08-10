@@ -147,12 +147,16 @@ li {
     z-index: 1012;
 }
 
-a.filtered-search-results,
-p.filtered-search-results {
+a.filtered-search-results {
     text-decoration: none;
     color: #2d2e2f;
     padding: 15px;
     display: block;
+}
+
+a.filtered-search-results:hover {
+    background-color: #ebebeb;
+    border-radius: 4px;
 }
 
 .profile-div {

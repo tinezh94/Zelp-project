@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
  const SearchBar = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const businesses = useSelector(state => state?.businesses);
     const categories = useSelector(state => state?.categories);
@@ -29,22 +30,32 @@ import { NavLink } from 'react-router-dom';
         return () => document.removeEventListener('click', closeMenu);
     }, [showMenu])
 
+    const submitSearch = () => {
+        history.push(`/search/${searchTerm}`)
+      }
 
     return (
         <>
             <div>
-                <input 
-                    className='search-bar-input'
-                    placeholder='Search here...'
-                    type='text'
-                    value={searchTerm}
-                    onChange={(e) => {openMenu(); setSearchTerm(e.target.value)}}
-                />
+                <div className='search-bar-container'>
+                    <input 
+                        className='search-bar-input'
+                        placeholder='Search here...'
+                        type='text'
+                        value={searchTerm}
+                        onChange={(e) => {openMenu(); setSearchTerm(e.target.value)}}
+                    />
+                    <div>
+                        <button type='submit' className='search-submit-btn' onClick={submitSearch}>
+                            <i className="fa-solid fa-magnifying-glass fa-2x"></i>
+                        </button>
+                    </div>
+                </div>
                 {showMenu && (
                     <div className='search-results-container'>
-                        {businessesArr.filter(biz => {
+                        {searchTerm && businessesArr?.filter(biz => {
                             if (searchTerm == '') {
-                                return;
+                                return biz;
                             } else if (biz.name.toLowerCase().includes(searchTerm.toLowerCase())) {
                                 return biz;
                             }
@@ -54,7 +65,7 @@ import { NavLink } from 'react-router-dom';
                                 <NavLink to={`/businesses/${biz.id}`} className='filtered-search-results'>{biz.name}</NavLink>
                             </div>
                         ))}
-                        {categoriesArr.filter(category => {
+                        {searchTerm && categoriesArr?.filter(category => {
                             if (searchTerm == '') {
                                 return;
                             } else if (category.category_name.toLowerCase().includes(searchTerm.toLowerCase())) {
@@ -62,7 +73,7 @@ import { NavLink } from 'react-router-dom';
                             }
                         }).map((category, idx) => (
                             <div key={idx}>
-                                <p className='filtered-search-results'>{category.category_name}</p>
+                                <NavLink to={`/search/${category.id}`} className='filtered-search-results'>{category.category_name}</NavLink>
                             </div>
                         ))}
                     </div>
