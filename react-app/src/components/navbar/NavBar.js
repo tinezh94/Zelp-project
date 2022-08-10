@@ -77,7 +77,7 @@ const NavBar = () => {
                 <img className='user-profile-pic'  src={user.profile_pic} style={{width: 40, height: 40}} onClick={() => openMenu()} />
               {showMenu && (
                 <div className='profile-dropdown'>
-                  <NavLink className='dropdown-links' to='/businesses'>
+                  <NavLink className='dropdown-links' to='/businesses/new'>
                     <i className="fa-solid fa-plus"></i>
                     <p className='dropdown-p'>Create New Business Listing</p>
                   </NavLink>
