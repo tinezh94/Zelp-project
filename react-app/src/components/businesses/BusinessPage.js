@@ -119,10 +119,12 @@ const BusinessPage = () => {
                                         </h4>
                                     }
                                     <div>
-                                        <button className='add-photo'>
-                                            <i className="fa-solid fa-camera"></i>
-                                            Add photo
-                                        </button>
+                                        <NavLink to={`/biz/${businessId}/images-upload`}>
+                                            <button className='add-photo'>
+                                                <i className="fa-solid fa-camera"></i>
+                                                Add photo
+                                            </button>
+                                        </NavLink>
                                     </div>
                                 </div>
                                 <div>

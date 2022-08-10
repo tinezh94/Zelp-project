@@ -716,3 +716,105 @@ select.create-biz-select {
 .edit-biz-delete-btn {
     margin-left: 12px;
 }
+
+
+/* biz upload images */
+
+.image-upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 700px;
+    margin-left: 26rem;
+}
+
+.image-upload-h1 {
+    font-family: 'Poppins', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 48px;
+    font-weight: 900;
+    letter-spacing: -0.4px;
+    line-height: 56px;
+    color: #2d2e2f;
+    margin-top: 40px;
+    margin-bottom: 16px;
+}
+
+.image-upload-p {
+    font-size: 14px;
+    line-height: 20px;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color:#2d2e2f;
+    text-align: left;
+}
+
+.upload-manage-div {
+    display: flex;
+    padding-top: 20px;
+    margin-bottom: 30px;
+}
+
+.image-upload-h3 {
+    font-family: 'Poppins', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 28px;
+    padding-left: 11px;
+    padding-top: 5px;
+    color:#2d2e2f;
+}
+
+.image-upload-div {
+    border: 1px solid #c8c9ca;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: 700px;
+    height: 400px;
+}
+
+.add-your-photos {
+    padding: 24px;
+    color: #2d2e2f;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 24px;
+}
+
+.choose-file-btn#choose-file-btn {
+    padding-left: 24px;
+    padding-bottom: 30px;
+}
+
+.image-preview {
+    width: 200px;
+    height: 200px;
+    border-radius: 4px;
+    margin-left: 15rem;
+}
+
+.upload-image-save-btn {
+    border: none;
+    background-color:#e00707;
+    height: 40px;
+    width: auto;
+    color: white;
+    border-radius: 4px;
+    padding-top: 11px;
+    padding-bottom: 13px;
+    padding-left: 16px;
+    padding-right: 16px;
+    font-family: 'Poppins', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.6;
+    transition: all 0.6s;
+}
+
+.upload-image-save-btn:hover {
+    cursor: pointer;
+    background-color: #fd2e2e;
+}
+.upload-image-save-div {
+    margin-top: 30px;
+    margin-bottom: 40px;
+}

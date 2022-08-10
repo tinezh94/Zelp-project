@@ -1,8 +1,8 @@
 const LOAD = '/imagesLOAD';
 // const LOAD_SINGLE_BUSINESS = '/imagesLOAD_SINGLE_BUSINESS';
-const CREATE = '/imagesCREATE';
+const CREATE = '/images/CREATE';
 // const EDIT = 'images/EDIT';
-const REMOVE = '/imagesREMOVE';
+const REMOVE = '/images/REMOVE';
 
 const load = images => ({
     type: LOAD,
