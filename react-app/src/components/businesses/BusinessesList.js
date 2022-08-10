@@ -90,49 +90,49 @@ const BusinessesPage = () => {
             <div className='main-page-bottom-container'>
                 <h2 className='main-pg-h2'>Categories</h2>
                 <div className='biz-categories'>
-                    <NavLink to={`/search/${cateArr[0].id}`}>
+                    <NavLink to={`/search/${cateArr[0]?.id}`}>
                         <div className='category-container'>
                             <p className='emoji-icon'>🍔</p>
                             <p className='category-name'>{cateArr[0].category_name}</p>
                         </div>
                     </NavLink>
-                    <NavLink to={`/search/${cateArr[1].id}`}>
+                    <NavLink to={`/search/${cateArr[1]?.id}`}>
                         <div className='category-container'>
                             <p className='emoji-icon'>🥟</p>
                                 <p className='category-name'>{cateArr[1].category_name}</p>
                         </div>
                     </NavLink>
-                    <NavLink to={`/search/${cateArr[2].id}`}>
+                    <NavLink to={`/search/${cateArr[2]?.id}`}>
                         <div className='category-container'>
                             <p className='emoji-icon'>🥪</p>
                                 <p className='category-name'>{cateArr[2].category_name}</p>
                         </div>
                     </NavLink>
-                    <NavLink to={`/search/${cateArr[3].id}`}>
+                    <NavLink to={`/search/${cateArr[3]?.id}`}>
                         <div className='category-container'>
                             <p className='emoji-icon'>🍙</p>
                             <p className='category-name'>{cateArr[3].category_name}</p>
                         </div>
                     </NavLink>
-                    <NavLink to={`/search/${cateArr[4].id}`}>
+                    <NavLink to={`/search/${cateArr[4]?.id}`}>
                         <div className='category-container'>
                             <p className='emoji-icon'>🍰</p>
                             <p className='category-name'>{cateArr[4].category_name}</p>
                         </div>
                     </NavLink>
-                    <NavLink to={`/search/${cateArr[5].id}`}>
+                    <NavLink to={`/search/${cateArr[5]?.id}`}>
                         <div className='category-container'>
                             <p className='emoji-icon'>🍣</p>
                             <p className='category-name'>{cateArr[5].category_name}</p>
                         </div>
                     </NavLink>
-                    <NavLink to={`/search/${cateArr[6].id}`}>
+                    <NavLink to={`/search/${cateArr[6]?.id}`}>
                         <div className='category-container'>
                             <p className='emoji-icon'>🍝</p>
                             <p className='category-name'>{cateArr[6].category_name}</p>
                         </div>
                     </NavLink>
-                    <NavLink to={`/search/${cateArr[7].id}`}>
+                    <NavLink to={`/search/${cateArr[7]?.id}`}>
                         <div className='category-container'>
                             <p className='emoji-icon'>🍜</p>
                             <p className='category-name'>{cateArr[7].category_name}</p>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Wrapper } from '@googlemaps/react-wrapper';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
@@ -27,10 +27,13 @@ import SplashPage from './components/SplashPage';
 import { loadReviews } from './store/review';
 import Footer from './components/Footer/Footer';
 import CategoryPage from './components/category/CategoryPage';
+import FilteredBiz from './components/filteredBiz/FilteredBiz';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+
+  const businesses = useSelector(state => state?.businesses)
 
   useEffect(() => {
     (async() => {
@@ -94,6 +97,9 @@ function App() {
         </ProtectedRoute>
         <Route path='/search/:categoryId'>
           <CategoryPage />
+        </Route>
+        <Route path='/search/:searchterm'>
+          <FilteredBiz />
         </Route>
       </Switch>
       <Footer />

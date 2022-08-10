@@ -2,7 +2,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import CreateBusinessForm from '../businesses/CreateBusinessForm'
 import SearchBar from '../SearchBar';
@@ -10,6 +10,7 @@ import logo from './logo.png';
 import './navbar.css';
 
 const NavBar = () => {
+  const history = useHistory();
   const user = useSelector(state => state?.session?.user);
 
   const [showMenu, setShowMenu] = useState(false);
@@ -50,6 +51,11 @@ const NavBar = () => {
     return () => document.removeEventListener('click', closeMenu);
   }, [showMenu])
 
+  // const submitSearch = () => {
+  //   history.push(`/search/${searchTerm}`)
+  // }
+
+
   return (
     <nav>
       <div className='logo-div'>
@@ -57,13 +63,13 @@ const NavBar = () => {
             <img src={logo} width='95px' height='40px' />
           </NavLink>
       </div>
-      <div className='search-bar-container'>
+      <div>
         <SearchBar />
-        <div>
-          <button type='submit' className='search-submit-btn'>
+        {/* <div>
+          <button type='submit' className='search-submit-btn' onClick={submitSearch}>
             <i className="fa-solid fa-magnifying-glass fa-2x"></i>
           </button>
-        </div>
+        </div> */}
       </div>
       <ul>
         {sessionLinks}
