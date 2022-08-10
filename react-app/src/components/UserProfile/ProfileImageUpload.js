@@ -32,10 +32,9 @@ const ProfileImage = () => {
         if (addedProfilePic) {
             reset();
             setHasSubmitted(false);
-            // setImageLoading(false);
+            setImageLoading(false);
             hideForm();
         }
-
     }
 
     const updateImage = (e) => {

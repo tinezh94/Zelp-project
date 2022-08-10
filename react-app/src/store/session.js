@@ -14,7 +14,7 @@ const removeUser = () => ({
 
 const addPic = (user) => ({
   type: ADD_PIC,
-  user
+  payload: user
 })
 
 const initialState = { user: null };
@@ -125,10 +125,11 @@ export default function reducer(state = initialState, action) {
     case REMOVE_USER:
       return { user: null }
     case ADD_PIC:
-      let newState = { ...state }
-      newState[action.user.id] = action.user
-      console.log('reducer',newState)
-      return newState
+      return { ...state, user: action.payload}
+      // let newState = { ...state }
+      // newState[action.user.id] = action.user
+      // console.log('reducer',newState)
+      // return newState
     default:
       return state;
   }
