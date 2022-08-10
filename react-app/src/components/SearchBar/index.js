@@ -32,6 +32,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 
     const submitSearch = () => {
         history.push(`/search/${searchTerm}`)
+        setSearchTerm('');
       }
 
     return (
@@ -60,7 +61,7 @@ import { NavLink, useHistory } from 'react-router-dom';
                                 return biz;
                             }
                         }).map((biz, idx) => (
-                            <div key={idx}>
+                            <div key={idx} onClick={() => setSearchTerm('')}>
                                 {/* <p>{biz.name}</p> */}
                                 <NavLink to={`/businesses/${biz.id}`} className='filtered-search-results'>{biz.name}</NavLink>
                             </div>
@@ -72,7 +73,7 @@ import { NavLink, useHistory } from 'react-router-dom';
                                 return category;
                             }
                         }).map((category, idx) => (
-                            <div key={idx}>
+                            <div key={idx} onClick={() => setSearchTerm('')}>
                                 <NavLink to={`/search/${category.id}`} className='filtered-search-results'>{category.category_name}</NavLink>
                             </div>
                         ))}

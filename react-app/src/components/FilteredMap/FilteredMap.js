@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { loadKey } from '../../store/map';
 
-const MultiMapView = ({ filteredBiz, apiKey, businessesArr }) => {
+const MultiMapView = ({ filteredBiz, filteredCateBiz, apiKey, businessesArr }) => {
     const dispatch = useDispatch();
 
     const [ isLoaded, setIsLoad ] = useState(false);
@@ -17,6 +17,10 @@ const MultiMapView = ({ filteredBiz, apiKey, businessesArr }) => {
     let coordinates = [];
 
     filteredBiz?.forEach(biz => {
+        coordinates.push({lat: biz.latitude, lng: biz.longitude})
+    });
+
+    filteredCateBiz?.forEach(biz => {
         coordinates.push({lat: biz.latitude, lng: biz.longitude})
     });
 

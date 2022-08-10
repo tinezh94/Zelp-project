@@ -95,11 +95,8 @@ function App() {
         <ProtectedRoute path='/users/:userId/businesses' exact={true}>
           <UserBiz />
         </ProtectedRoute>
-        <Route path='/search/:categoryId'>
+        <Route path='/search/:searchTerm' exact={true}>
           <CategoryPage />
-        </Route>
-        <Route path='/search/:searchterm'>
-          <FilteredBiz />
         </Route>
       </Switch>
       <Footer />
