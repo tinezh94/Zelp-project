@@ -7,10 +7,10 @@ import businessesReducer, { loadBusinesses } from '../../store/business';
 import { loadImages } from '../../store/image';
 import { loadReviews } from '../../store/review';
 
-const BusinessesPage = () => {
+const BusinessesPage = ({ businesses }) => {
     const dispatch = useDispatch();
 
-    const businesses = useSelector(state => state?.businesses);
+    // const businesses = useSelector(state => state?.businesses);
     // console.log('businesses', businesses)
     const businessesArr = businesses ? Object.values(businesses) : null;
     // console.log('businesspage', businessesArr)
@@ -27,7 +27,7 @@ const BusinessesPage = () => {
 
     const reviews = useSelector(state => state?.reviews);
     const reviewsArr = reviews ? Object.values(reviews) : null;
-    console.log('reviews', reviewsArr)
+    // console.log('reviews', reviewsArr)
 
 
     useEffect(() => {

@@ -9,13 +9,13 @@ import './categorypage.css';
 import { loadImages } from '../../store/image';
 import MultiMapContainer from '../FilteredMap';
 
-const CategoryPage = () => {
+const CategoryPage = ({ businesses }) => {
     const dispatch = useDispatch();
     const { searchTerm } = useParams();
     console.log(searchTerm)
     const term = searchTerm.split(' ')[0];
 
-    const businesses = useSelector(state => state?.businesses);
+    // const businesses = useSelector(state => state?.businesses);
     const businessesArr = businesses ? Object.values(businesses) : null;
     const images = useSelector(state => state?.images)
     const imagesArr = images? Object.values(images) : null;

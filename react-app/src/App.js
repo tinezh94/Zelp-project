@@ -15,19 +15,18 @@ import EditBusinessForm from './components/businesses/EditBusinessForm';
 import BusinessPage from './components/businesses/BusinessPage';
 import CreateReviewForm from './components/reviews/CreateReviewForm';
 import EditReviewForm from './components/reviews/EditReviewForm';
-import MapContainer from './components/MapContainer';
+// import MapContainer from './components/MapContainer';
 import { loadKey } from './store/map';
 import BizUploadImage from './components/businesses/BizUploadImage';
 import UserProfilePage from './components/UserProfile/UserProfilePage';
 import UserBiz from './components/businesses/userBiz';
 import { loadBusinesses } from './store/business';
 import { loadCategories } from './store/category';
-import SearchBar from './components/SearchBar';
-import SplashPage from './components/SplashPage';
-import { loadReviews } from './store/review';
+// import SearchBar from './components/SearchBar';
+// import SplashPage from './components/SplashPage';
+// import { loadReviews } from './store/review';
 import Footer from './components/Footer/Footer';
 import CategoryPage from './components/category/CategoryPage';
-import FilteredBiz from './components/filteredBiz/FilteredBiz';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -86,7 +85,7 @@ function App() {
           <UserProfilePage />
         </ProtectedRoute>
         <Route path='/' exact={true} >
-          <BusinessesPage />
+          <BusinessesPage businesses={businesses} />
           {/* <SplashPage /> */}
         </Route>
         <ProtectedRoute path='/biz/:businessId/images-upload' exact={true}>
@@ -96,7 +95,7 @@ function App() {
           <UserBiz />
         </ProtectedRoute>
         <Route path='/search/:searchTerm' exact={true}>
-          <CategoryPage />
+          <CategoryPage businesses={businesses} />
         </Route>
       </Switch>
       <Footer />
