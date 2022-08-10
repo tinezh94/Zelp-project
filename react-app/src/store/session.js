@@ -126,10 +126,6 @@ export default function reducer(state = initialState, action) {
       return { user: null }
     case ADD_PIC:
       return { ...state, user: action.payload}
-      // let newState = { ...state }
-      // newState[action.user.id] = action.user
-      // console.log('reducer',newState)
-      // return newState
     default:
       return state;
   }
