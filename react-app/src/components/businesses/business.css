@@ -100,6 +100,7 @@
     top: 29.5rem;
     left: 12.5rem;
     color: white;
+    text-transform: uppercase;
 }
 
 .biz-page-bottom-container {
@@ -242,6 +243,10 @@ table {
     text-align: left;
 }
 
+.biz-opt-hrs-td {
+    text-transform: uppercase;
+}
+
 .description-div {
     border-bottom: 1px solid #ebebeb;
     padding-bottom: 32px;
@@ -361,7 +366,7 @@ button.biz-review-delete-btn {
 .biz-info-div {
     border: 1px solid #ebebeb;
     width: 365px;
-    height: 150px;
+    max-height: 150px;
     margin: 0;
     margin-top: 10rem;
     display: flex;
@@ -781,6 +786,12 @@ select.create-biz-select {
     line-height: 24px;
 }
 
+.uploadpg-view-add-div {
+    display: flex;
+    flex-direction: row;
+    width: 700px;
+}
+
 .choose-file-btn#choose-file-btn {
     padding-left: 24px;
     padding-bottom: 30px;
@@ -955,4 +966,64 @@ select.create-biz-select {
 .bizphotos-add-btn:hover {
     cursor: pointer;
     background-color: #fd2e2e;
+}
+
+.uploadpg-imgs-div {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+}
+.upload-pg-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 4px;
+}
+
+.uploadpg-img-delete-div {
+    position: relative;
+}
+
+.uploadpg-delete-pic-btn {
+    border: none;
+    background-color: transparent;
+    color: #333;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: none;
+    cursor: pointer;
+}
+
+/* Errors */
+.biz-img-upload-errors-div {
+    position: absolute;
+    top: 2.5rem;
+    font-weight: 450;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+    color: #666;
+    left: 0rem
+}
+
+.create-biz-errors-div {
+    position: absolute;
+    top: 8rem;
+    font-weight: 400;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+    color: #666;
+    left: 0rem;
+    width: 350px;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.upload-pg-errors-div {
+    position: absolute;
+    top: 20.2rem;
+    font-weight: 400;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+    color: #666;
+    left: 27.5rem;
+    width: 350px;
+    font-size: 12px;
+    line-height: 20px;
 }

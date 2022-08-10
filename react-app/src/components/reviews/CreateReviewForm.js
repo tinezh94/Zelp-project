@@ -105,13 +105,15 @@ const CreateReviewForm = () => {
         <div className='write-review-content-container'>
             <h1 className='write-review-biz-name'>{currBiz?.name}</h1>
             <form onSubmit={onSubmit} className='write-review-form'>
-                {hasSubmitted && validationErrors.length > 0 && (
-                    <ul>
-                        {validationErrors.map(error => (
-                            <li key={error}>{error}</li>
-                        ))}
-                    </ul>
-                )}
+                <div className='create-review-errors-div'>
+                    {hasSubmitted && validationErrors.length > 0 && (
+                        <ul>
+                            {validationErrors.map(error => (
+                                <li key={error}>{error}</li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
                 {/* <label>Rating</label>
                 <input 
                     type='text'
@@ -157,8 +159,8 @@ const CreateReviewForm = () => {
                     onChange={e => setContent(e.target.value)}
                 >
                 </textarea>
-                <h3 className='write-review-h3'>Attach Photos</h3>
-                <UploadImageModal />
+                {/* <h3 className='write-review-h3'>Attach Photos</h3> */}
+                {/* <UploadImageModal /> */}
                 <div className='post-review-btn-div'>
                     <button className='post-review-btn' type='submit'>Post Review</button>
                 </div>

@@ -103,3 +103,13 @@ a.subheading-signup:hover {
 .login-illustration {
     margin-top: 4rem;
 }
+
+/* Errors */
+
+.login-form-errors-div {
+    position: absolute;
+    top: 10rem;
+    font-weight: 450;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+    color: #666;
+}

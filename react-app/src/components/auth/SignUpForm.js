@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink, Redirect, useHistory } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import './signup.css';
 
 const SignUpForm = () => {
-  const [errors, setErrors] = useState([]);
+  const [validationErrors, setValidationErrors] = useState([]);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -13,6 +14,19 @@ const SignUpForm = () => {
   const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+  const history = useHistory();
+  const [users, setUsers] = useState([]);
+
+
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch('/api/users/');
+      const responseData = await response.json();
+      setUsers(responseData.users);
+    }
+    fetchData();
+  }, []);
 
   const dateTime = new Date();
     const isoTime = dateTime.toISOString();
@@ -22,32 +36,50 @@ const SignUpForm = () => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
+    setHasSubmitted(true)
     
-    const payload = {
-      first_name: firstName,
-      last_name: lastName,
-      email: email,
-      password: password,
-      created_at: combined
+    if (!validationErrors.length) {
+      const payload = {
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        password: password,
+        created_at: combined
+      }
+      await dispatch(signUp(payload));
+      setHasSubmitted(false);
+      history.push('/');
     }
 
-    if (password === repeatPassword) {
-      setErrors([]);
-      return dispatch(signUp(payload))
-        .catch(async (res) => {
-          const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
-        });
-      // if (data) {
-      //   setErrors(data)
-      // }
-    }
-    return setErrors(['Repeat password field must be the same as the Password field.']);
+
+    // if (password === repeatPassword) {
+    //   return dispatch(signUp(payload))
+    // }
+    //     .catch(async (res) => {
+    //       const data = await res.json();
+    //       if (data && data.errors) setErrors(data.errors);
+    //     });
+    //   // if (data) {
+    //   //   setErrors(data)
+    //   // }
+    // }
+    // return setErrors(['Repeat password field must be the same as the Password field.']);
   };
 
-  // const updateUsername = (e) => {
-  //   setUsername(e.target.value);
-  // };
+  useEffect(() => {
+    const errors = [];
+
+    if (!firstName) errors.push('First name cannot be empty.')
+    if (!lastName) errors.push('Last name cannot be empty.')
+    if (!email) errors.push('Email cannot be empty.')
+    if (users.map(user => user.email).includes(email)) errors.push('Email address is alredy registered with another account.')
+    if (!(email.includes('@'))) errors.push('Please enter a valid email address.')
+    if (!password) errors.push('Password field cannot be empty.')
+    if (password.length < 6) errors.push('Password must be at least 6 characters long.')
+    if (password !== repeatPassword) errors.push('Confirm password must match Password.')
+
+    setValidationErrors(errors);
+  }, [firstName, lastName, password, repeatPassword, email])
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
@@ -69,8 +101,8 @@ const SignUpForm = () => {
     <div className='signup-container'>
       <div className='signup-form-text-container'>
         <form onSubmit={onSignUp} className='signup-form'>
-          <div>
-            {errors.map((error, ind) => (
+          <div className='signup-form-errors-div'>
+            {hasSubmitted && validationErrors.length > 0 && validationErrors.map((error, ind) => (
               <div key={ind}>{error}</div>
             ))}
           </div>

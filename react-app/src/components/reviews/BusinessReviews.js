@@ -13,18 +13,18 @@ const BusinessReviews = () => {
     // const user = useSelector(state => state?.session?.user);
     const businesses = useSelector(state => state?.businesses);
     const sessionUser = useSelector(state => state.session.user);
-    console.log('user', sessionUser.id)
+    // console.log('user', sessionUser.id)
     const reviews = useSelector(state => state?.reviews)
-    console.log('reviews', reviews)
+    // console.log('reviews', reviews)
 
     const bizReviews = Object.values(reviews)?.filter(review => {
         return review.business_id === Number(businessId)
     });
 
-    console.log('bizreviews', bizReviews)
+    // console.log('bizreviews', bizReviews)
     
     const [users, setUsers] = useState([]);
-    console.log('users', users)
+    // console.log('users', users)
 
     const [showMenu, setShowMenu] = useState(false);
 
@@ -76,15 +76,19 @@ const BusinessReviews = () => {
                                         <p className='review-name'>{user.first_name} {user.last_name[0].toUpperCase()}</p>
                                     </div>
                                     <div>
-                                        {(sessionUser.id === review.user_id) && (
+                                        {sessionUser && (
                                             <div>
-                                                <button className='review-dot-btn' onClick={() => openMenu()}>
-                                                    <i className="fa-solid fa-ellipsis"></i>
-                                                </button>
-                                                {showMenu && (
-                                                    <div className='review-edit-delete'>
-                                                        <NavLink  className='dropdown-links' to={`/editareview/biz/${businessId}`}>Edit Review</NavLink>
-                                                        <button className='biz-review-delete-btn' type='button' onClick={() => onDelete(review.id)}>Remove Review</button>
+                                                {(sessionUser.id === review.user_id) && (
+                                                    <div>
+                                                        <button className='review-dot-btn' onClick={() => openMenu()}>
+                                                            <i className="fa-solid fa-ellipsis"></i>
+                                                        </button>
+                                                        {showMenu && (
+                                                            <div className='review-edit-delete'>
+                                                                <NavLink  className='dropdown-links' to={`/editareview/biz/${businessId}`}>Edit Review</NavLink>
+                                                                <button className='biz-review-delete-btn' type='button' onClick={() => onDelete(review.id)}>Remove Review</button>
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 )}
                                             </div>

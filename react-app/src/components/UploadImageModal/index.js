@@ -20,20 +20,17 @@ function UploadImageModal() {
 
     const user = useSelector(state => state?.session?.user);
 
-    const imageTypes = '/\.(jpg|jpeg|png|gif)$/';
-    const MaxFileSize = 1024 * 1024;
+    const fileExtensions = '([a-zA-Z0-9\s_\\.\-:])+(.png|.jpg|.gif|.jpeg|.pdf)$'
 
     useEffect(() => {
         const errors = [];
-        // if (!image?.name.includes(imageTypes)) errors.push('Please select a valid image');
+        if (!image?.name.match(fileExtensions)) errors.push('Please select a valid image type');
         if (image?.size > 1e6) errors.push('Please upload an image smaller than 1MB');
         setValidationErrors(errors);
     }, [image?.name, image?.size]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // aws uploads can be a bit slow—displaying
-        // some sort of loading message is a good idea
         setImageLoading(true);
         setHasSubmitted(true);
         
@@ -49,7 +46,9 @@ function UploadImageModal() {
                 reset();
                 setHasSubmitted(false);
                 setImageLoading(false);
+                setValidationErrors([]);
                 hideForm();
+                history.push(`/biz/${businessId}/images-upload`)
             }
         }
 
@@ -80,13 +79,15 @@ function UploadImageModal() {
                 <Modal onClose={() => setShowModal(false)}>
                         <div className='add-photos-modal'>
                             <form onSubmit={handleSubmit}>
-                                {hasSubmitted && validationErrors.length > 0 && (
-                                    <ul>
-                                        {validationErrors.map(error => (
-                                            <li key={error}>{error}</li>
-                                        ))}
-                                    </ul>
-                                )}
+                                <div className='biz-img-upload-errors-div'>
+                                    {hasSubmitted && validationErrors.length > 0 && (
+                                        <ul>
+                                            {validationErrors.map(error => (
+                                                <li key={error}>{error}</li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </div>
                                 <div className='attach-photos-container'>
                                     <img className='drop-photos' src='https://s3-media0.fl.yelpcdn.com/assets/public/photo_review_325x200_v2.yji-4a099f5381e9ea0301bb.svg' alt='add-photos' />
                                     <h2 className='select-your-photos'>Select your photos here</h2>

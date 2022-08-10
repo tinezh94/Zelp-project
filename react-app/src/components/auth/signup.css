@@ -106,3 +106,13 @@ input.signup-form-input#signup-name {
     display: flex;
     flex-direction: column;
 }
+
+/* Errors */
+.signup-form-errors-div {
+    position: absolute;
+    top: 10rem;
+    left: 2rem;
+    font-weight: 450;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+    color: #666;
+}

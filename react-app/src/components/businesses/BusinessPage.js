@@ -17,7 +17,7 @@ const BusinessPage = () => {
 
     const businesses = useSelector(state => state?.businesses);
     const reviews = useSelector(state => state?.reviews);
-    const user = useSelector(state => state.session.user);
+    const user = useSelector(state => state?.session?.user);
     // const images = useSelector(state => state?.images);
     const businessesArr = businesses ? Object.values(businesses) : null;
     // console.log('***', businessesArr)
@@ -31,7 +31,7 @@ const BusinessPage = () => {
 
     const reviewsArr = reviews ? Object.values(reviews) : null;
     
-    const review = reviewsArr.filter(review => (review.business_id == businessId && review.user_id === user.id)).length > 0;
+    const review = reviewsArr?.filter(review => (review.business_id == businessId && review.user_id === user?.id)).length > 0;
     
     // console.log('businesspage',reviews)
     
@@ -140,40 +140,41 @@ const BusinessPage = () => {
                                             <table>
                                                 <tr className='biz-opt-hrs'>
                                                     <th>Mon</th>
-                                                    <td>{business.business_hours}</td>
+                                                    <td className='biz-opt-hrs-td'>{business.business_hours}</td>
                                                 </tr>
                                                 <tr className='biz-opt-hrs'>
                                                     <th>Tue</th>
-                                                    <td>{business.business_hours}</td>
+                                                    <td className='biz-opt-hrs-td'>{business.business_hours}</td>
                                                 </tr>
                                                 <tr className='biz-opt-hrs'>
                                                     <th>Wed</th>
-                                                    <td>{business.business_hours}</td>
+                                                    <td className='biz-opt-hrs-td'>{business.business_hours}</td>
                                                 </tr>
                                                 <tr className='biz-opt-hrs'>
                                                     <th>Thu</th>
-                                                    <td>{business.business_hours}</td>
+                                                    <td className='biz-opt-hrs-td'>{business.business_hours}</td>
                                                 </tr>
                                                 <tr className='biz-opt-hrs'>
                                                     <th>Fri</th>
-                                                    <td>{business.business_hours}</td>
+                                                    <td className='biz-opt-hrs-td'>{business.business_hours}</td>
                                                 </tr>
                                                 <tr className='biz-opt-hrs'>
                                                     <th>Sat</th>
-                                                    <td>{business.business_hours}</td>
+                                                    <td className='biz-opt-hrs-td'>{business.business_hours}</td>
                                                 </tr>
                                                 <tr className='biz-opt-hrs'>
                                                     <th>Sun</th>
-                                                    <td>{business.business_hours}</td>
+                                                    <td className='biz-opt-hrs-td'>{business.business_hours}</td>
                                                 </tr>
                                             </table>
-                                            <div className='biz-pg-edit-biz'>
-                                                <i className="fa-solid fa-pencil"></i>
-                                                <NavLink  className='edit-biz' to={`/businesses/${business.id}/edit`}>
-                                                    <p>Edit Business Info</p>
-                                                </NavLink>
-                                            </div>
-                                            {/* <EditBusinessForm /> */}
+                                            {business.owner_id === user?.id && (
+                                                <div className='biz-pg-edit-biz'>
+                                                    <i className="fa-solid fa-pencil"></i>
+                                                    <NavLink  className='edit-biz' to={`/businesses/${business.id}/edit`}>
+                                                        <p>Edit Business Info</p>
+                                                    </NavLink>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
@@ -189,10 +190,12 @@ const BusinessPage = () => {
                                 <BusinessReviews /> 
                             </div>
                             <div className='biz-info-div'>
+                                {business.website && (
                                 <div className='info-container'>
                                     <a className='biz-website' href={business.website} target='_blank'>{business.website}</a>
                                     <i className="fa-solid fa-location-arrow fa-lg"></i>
                                 </div>
+                                )}
                                 <div className='info-container'>
                                     <p className='biz-phone'>{business.phone_number}</p>
                                     <i className="fa-solid fa-phone-volume fa-lg"></i>

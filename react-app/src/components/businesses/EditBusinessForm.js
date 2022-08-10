@@ -100,6 +100,7 @@ const EditBusinessForm = () => {
         else if ((morning === 'pm' || morning === 'PM') && (afternoon === 'am' || afternoon === 'AM')) {
             console.log('inside if statement', openingHour > closingHour)
             if (openingHour > closingHour && closingHour <= '5') return true;
+            if (openingHour < closingHour) return true;
         }
         else if ((morning === 'pm' || morning === 'PM') && (afternoon === 'pm' || afternoon === 'PM')) {
             if (openingHour > closingHour && closingHour >= '10') return true;
@@ -122,14 +123,14 @@ const EditBusinessForm = () => {
         if (!address) errors.push('Business address cannot be empty');
         if (!editDescription) errors.push('Please tell us what your business does')
         if (editDescription.length < 50) errors.push('Please describe your business with more details');
-        if (editDescription.length > 2000) errors.push('Please shorten your description');
+        if (editDescription.length > 1000) errors.push('Please shorten your description');
         if (!editCategory) errors.push('Please choose a category')
         if (!editBusinessHours) errors.push('Please tell us your operating hours')
         if (!editBusinessHours.match(operatingHours)) errors.push('Please have your business hours in valid format: ie. 10:00 AM - 11:00 PM');
         if (!validateOperation()) errors.push('Please enter valid operating hours');
         // if (!(businessHours.match(operatingHours))) errors.push ('Pleast enter your operating hours in such format: 10:00 AM - 10:00 PM');
         if (!editPriceRange) errors.push('Please choose a price range for your business')
-        if (!(editPhone.match(phoneNumber))) errors.push('Please enter a valid phone number')
+        if (!(editPhone.match(phoneNumber))) errors.push('Please enter a valid phone number, i.g 012-333-4567')
         setValidationErrors(errors);
     }, [editName, editDescription, editCategory, editBusinessHours, editPriceRange, editPhone, address])
 
@@ -192,13 +193,17 @@ const EditBusinessForm = () => {
     return (
         <>
             <form onSubmit={onSubmit} className='create-biz-form'>
-            {hasSubmitted && validationErrors.length > 0 && (
-                        <ul>
-                            {validationErrors.map(error => (
-                                <li key={error}>{error}</li>
-                            ))}
-                        </ul>
-                    )}
+                <div className='create-biz-errors-div'>
+                    <div className='create-biz-errors-div'>
+                        {hasSubmitted && validationErrors.length > 0 && (
+                            <ul>
+                                {validationErrors.map(error => (
+                                    <li key={error}>{error}</li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+                </div>
                 <div className='create-biz-single-sec'> 
                     <h2 className='create-biz-h2'>{business?.name}</h2>
                     <h5 className='create-biz-h2-sub'>Fields with * are required!</h5>

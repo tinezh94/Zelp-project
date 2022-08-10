@@ -52,8 +52,8 @@ const CreateBusinessForm = () => {
     }, [dispatch]);
 
     let placeId = autoValue ? autoValue.value.place_id : null;
-    console.log('placeId', placeId)
-    console.log('apiKey', apiKey)
+    // console.log('placeId', placeId)
+    // console.log('apiKey', apiKey)
     // geocodeByPlaceId(placeId)
     //     .then(results => {
     //         setAddress(results[0].formatted_address);
@@ -111,6 +111,7 @@ const CreateBusinessForm = () => {
         else if ((morning === 'pm' || morning === 'PM') && (afternoon === 'am' || afternoon === 'AM')) {
             console.log('inside if statement', openingHour > closingHour)
             if (openingHour > closingHour && closingHour <= '5') return true;
+            if (openingHour < closingHour) return true;
         }
         else if ((morning === 'pm' || morning === 'PM') && (afternoon === 'pm' || afternoon === 'PM')) {
             if (openingHour > closingHour && closingHour >= '10') return true;
@@ -127,14 +128,14 @@ const CreateBusinessForm = () => {
         if (!address) errors.push('Business address cannot be empty');
         if (!description) errors.push('Please tell us what your business does')
         if (description.length < 50) errors.push('Please describe your business with more details');
-        if (description.length > 2000) errors.push('Please shorten your description');
-        if (!category) errors.push('Please choose a category')
+        if (description.length > 1000) errors.push('Please shorten your description');
+        if (category === 'Please choose a category') errors.push('Please choose a category')
         if (!businessHours) errors.push('Please tell us your operating hours')
         if (!businessHours.match(operatingHours)) errors.push('Please have your business hours in valid format: ie. 10:00 AM - 11:00 PM');
         if (!validateOperation()) errors.push('Please enter valid operating hours');
         // if (!(businessHours.match(operatingHours))) errors.push ('Pleast enter your operating hours in such format: 10:00 AM - 10:00 PM');
         if (!priceRange) errors.push('Please choose a price range for your business')
-        if (!(phone.match(phoneNumber))) errors.push('Please enter a valid phone number')
+        if (!(phone.match(phoneNumber))) errors.push('Please enter a valid phone number, i.g 012-333-4567')
         setValidationErrors(errors);
     }, [name, description, category, businessHours, priceRange, phone, address])
 
@@ -190,13 +191,15 @@ const CreateBusinessForm = () => {
     return (
         <>  
             <form onSubmit={onSubmit} className='create-biz-form'>
-                {hasSubmitted && validationErrors.length > 0 && (
-                        <ul>
-                            {validationErrors.map(error => (
-                                <li key={error}>{error}</li>
-                            ))}
-                        </ul>
-                    )}
+                <div className='create-biz-errors-div'>
+                    {hasSubmitted && validationErrors.length > 0 && (
+                            <ul>
+                                {validationErrors.map(error => (
+                                    <li key={error}>{error}</li>
+                                ))}
+                            </ul>
+                        )}
+                </div>
                 <div className='create-biz-single-sec'>
                     <h2 className='create-biz-h2'>Add your listing to Zelp!</h2>
                     <h5 className='create-biz-h2-sub'>Fields with * are required!</h5>

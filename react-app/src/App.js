@@ -64,12 +64,12 @@ function App() {
         <Route path='/signup' exact={true}>
           <SignUpForm />
         </Route>
-        <ProtectedRoute path='/users' exact={true} >
+        {/* <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
-        </ProtectedRoute>
-        <ProtectedRoute path='/businesses' exact={true}>
+        </ProtectedRoute> */}
+        <Route path='/businesses' exact={true}>
           <CreateBusinessForm />
-        </ProtectedRoute>
+        </Route>
         <Route path='/businesses/:businessId' exact={true}>
           <BusinessPage />
         </Route>
