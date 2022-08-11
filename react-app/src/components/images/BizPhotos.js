@@ -6,8 +6,8 @@ import { loadReviews } from "../../store/review";
 import { FaStar } from 'react-icons/fa';
 
 const BizPhotos = ({ businesses }) => {
-    const { businessId } = useParams();
     const dispatch = useDispatch();
+    const { businessId } = useParams();
     const images = useSelector(state => state?.images);
     const reviews = useSelector(state => state?.reviews);
     const bizImagesArr = images ? Object.values(images) : null;
@@ -16,13 +16,14 @@ const BizPhotos = ({ businesses }) => {
     });
 
     business = business[0];
-
+    // console.log('business', business)
+    // console.log('reviews', reviews)
     const bizImages = bizImagesArr?.filter(image => {
         return image.business_id === Number(businessId);
     })
 
     const bizReviews = Object.values(reviews)?.filter(review => {
-        return review.business_id = Number(businessId)
+        return review.business_id === Number(businessId)
     });
 
     const bizPhoto = (id) => {
@@ -36,8 +37,8 @@ const BizPhotos = ({ businesses }) => {
 
     useEffect(() => {
         dispatch(loadImages());
-        dispatch(loadReviews())
-    }, [dispatch])
+        dispatch(loadReviews());
+    }, [dispatch, business])
 
 
     return (
