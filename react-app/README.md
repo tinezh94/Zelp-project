@@ -1,7 +1,16 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Zelp
 
-Your React App will live here.  While is development, run this application from this location using `npm start`.
+Live Link: [Zelp](https://zelp-project.herokuapp.com/)
 
-No environment variables are needed to run this application in development, but be sure to set the REACT_APP_BASE_URL environment variable in your dockerfile!
+Zelp is a pixel-perfect clone of the well-known crowd-sourced reviews publishing App Yelp. The users of Zelp are capable of performing create, read, edit, and delete activities for businesses and reviews. Users are also able to upload and delete images for businesses. 
 
-This app will be automatically built when you push to your main branch on Github. 
+## Technologies Used
+  * Python
+  * SQLAlchemy 
+  * Flask
+  * Postgres
+  * React
+  * JavaScript
+  * AWS
+  * Google Maps API
+  
