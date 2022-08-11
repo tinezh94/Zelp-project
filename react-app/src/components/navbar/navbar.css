@@ -115,7 +115,8 @@ li {
     transition: background-color 0.5s ease-in;
 }
 
-a.navbar-businesses {
+a.navbar-businesses,
+a.navbar-businesses-link {
     font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
     font-size: 16px;
     color: #2d2e2f;
@@ -126,7 +127,8 @@ a.navbar-businesses {
     text-decoration: none;
 }
 
-a.navbar-businesses:hover {
+a.navbar-businesses:hover,
+a.navbar-businesses-link:hover {
     text-decoration: underline;
 }
 

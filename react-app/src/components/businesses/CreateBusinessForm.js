@@ -114,7 +114,8 @@ const CreateBusinessForm = () => {
             if (openingHour < closingHour) return true;
         }
         else if ((morning === 'pm' || morning === 'PM') && (afternoon === 'pm' || afternoon === 'PM')) {
-            if (openingHour > closingHour && closingHour >= '10') return true;
+            if (openingHour < '12' && openingHour > closingHour && closingHour >= '10') return true;
+            if (openingHour == '12' && openingHour > closingHour) return true;
         }
         return false;
     }

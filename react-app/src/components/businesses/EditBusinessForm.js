@@ -7,6 +7,7 @@ import { geocodeByPlaceId, geocodeByAddress, getLatLng } from 'react-google-plac
 
 import { deleteBusiness, editBusiness, loadBusinesses } from '../../store/business';
 import { loadCategories } from '../../store/category';
+import DeleteBizModal from './DeleteBusinessModal';
 
 const EditBusinessForm = () => {
     const dispatch = useDispatch();
@@ -103,7 +104,8 @@ const EditBusinessForm = () => {
             if (openingHour < closingHour) return true;
         }
         else if ((morning === 'pm' || morning === 'PM') && (afternoon === 'pm' || afternoon === 'PM')) {
-            if (openingHour > closingHour && closingHour >= '10') return true;
+            if (openingHour < '12' && openingHour > closingHour && closingHour >= '10') return true;
+            if (openingHour == '12' && openingHour > closingHour) return true;
         }
         return false;
     }
@@ -122,8 +124,8 @@ const EditBusinessForm = () => {
         // if (businessesArr?.map(business => business.name).includes(editName)) errors.push('Business name must be unique');
         if (!address) errors.push('Business address cannot be empty');
         if (!editDescription) errors.push('Please tell us what your business does')
-        if (editDescription.length < 50) errors.push('Please describe your business with more details');
-        if (editDescription.length > 1000) errors.push('Please shorten your description');
+        if (editDescription?.length < 50) errors.push('Please describe your business with more details');
+        if (editDescription?.length > 1000) errors.push('Please shorten your description');
         if (!editCategory) errors.push('Please choose a category')
         if (!editBusinessHours) errors.push('Please tell us your operating hours')
         if (!editBusinessHours.match(operatingHours)) errors.push('Please have your business hours in valid format: ie. 10:00 AM - 11:00 PM');
@@ -333,7 +335,7 @@ const EditBusinessForm = () => {
                 </div>
                 <div className='edit-biz-btns-div'>
                     <button className='edit-biz-submit-btn' type='submit'>Edit Business</button>
-                    <button className='edit-biz-delete-btn' type='button' onClick={() => onDelete(business.id)}>Delete Business</button>
+                    <DeleteBizModal business={business} />
                 </div>
             </form>
         </>
