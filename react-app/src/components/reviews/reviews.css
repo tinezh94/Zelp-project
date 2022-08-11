@@ -132,6 +132,11 @@ textarea {
     box-sizing: border-box;
 }
 
+.post-review-btn:hover {
+    background-color: #fd2e2e;
+    transition: background-color 0.5s ease-in;
+}
+
 .post-review-btn-div {
     margin-top: 30px;
 }

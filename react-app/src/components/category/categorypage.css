@@ -69,6 +69,9 @@
     padding-bottom: 12px;
 }
 
+.cate-pg-biz-name:hover {
+    text-decoration: underline;
+}
 .cate-pg-biz-cate {
     font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
     font-size: 12px;

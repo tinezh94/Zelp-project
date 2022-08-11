@@ -115,14 +115,19 @@ li {
     transition: background-color 0.5s ease-in;
 }
 
-.navbar-businesses-link {
-    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+a.navbar-businesses {
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
     font-size: 16px;
     color: #2d2e2f;
     text-align: left;
     line-height: 20px;
     font-weight: 600;
     margin-right: 20px;
+    text-decoration: none;
+}
+
+a.navbar-businesses:hover {
+    text-decoration: underline;
 }
 
 .search-results-container {

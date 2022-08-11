@@ -101,6 +101,10 @@
     margin-top: 7px;
 }
 
+.add-profile-pic-p:hover {
+    text-decoration: underline;
+}
+
 .profile-pg-bottom-container {
     display: flex;
     flex-direction: row;
