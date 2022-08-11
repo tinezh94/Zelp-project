@@ -166,7 +166,7 @@ const EditBusinessForm = () => {
             if (editedBusiness) {
                 reset();
                 setHasSubmitted(false);
-                history.push('/');
+                history.push(`/businesses/${business.id}`);
             }
         }
     };
