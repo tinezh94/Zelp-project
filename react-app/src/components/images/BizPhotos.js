@@ -38,7 +38,7 @@ const BizPhotos = ({ businesses }) => {
     useEffect(() => {
         dispatch(loadImages());
         dispatch(loadReviews());
-    }, [dispatch, business])
+    }, [dispatch])
 
 
     return (
