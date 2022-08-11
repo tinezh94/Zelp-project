@@ -26,7 +26,7 @@ Zelp is a pixel-perfect clone of the well-known crowd-sourced reviews publishing
 
 ### Homepage
 
-https://user-images.githubusercontent.com/99835281/184212202-1b4ef5c2-2a40-4c21-be9f-b4ff89fe26d3.mov
+
 
 ### Log In
 
@@ -36,28 +36,34 @@ https://user-images.githubusercontent.com/99835281/184212202-1b4ef5c2-2a40-4c21-
 
 <img width="1478" alt="Screen Shot 2022-08-11 at 2 14 56 PM" src="https://user-images.githubusercontent.com/99835281/184210286-100ed025-3100-4393-afac-06a2226c20a2.png">
 
+### Homepage
+
+![Screen_Recording_2022-08-11_at_2_58_37_PM_AdobeExpress](https://user-images.githubusercontent.com/99835281/184218456-a8a0c191-49db-4366-9c49-6db380cd4f90.gif)
+
 
 ### Business Page
 
-https://user-images.githubusercontent.com/99835281/184212708-c0ef662f-ebde-4fe8-bbd5-b0b2a8c10f76.mov
+![Screen_Recording_2022-08-11_at_3_00_44_PM_AdobeExpress](https://user-images.githubusercontent.com/99835281/184218847-e09a5cf0-fe75-4f3a-8e74-76a30c611b0f.gif)
+
 
 ### Create Business
 
-https://user-images.githubusercontent.com/99835281/184212968-c8018d83-9587-4fd4-984e-e08a58ef2eca.mov
-
+![Screen_Recording_2022-08-11_at_3_02_11_PM_AdobeExpress](https://user-images.githubusercontent.com/99835281/184219093-a842e23e-476b-49e6-87d4-efda08570ca2.gif)
 
 ### Write Reviews
 
-https://user-images.githubusercontent.com/99835281/184213063-f275581f-2cfa-4072-a4bf-05e6bbfaf00c.mov
+![Screen_Recording_2022-08-11_at_3_03_28_PM_AdobeExpress](https://user-images.githubusercontent.com/99835281/184219408-a2b22d65-23d3-455d-820f-833d0d138c02.gif)
 
 
 ### Upload Image
 
-<img width="1483" alt="Screen Shot 2022-08-11 at 2 30 25 PM" src="https://user-images.githubusercontent.com/99835281/184213248-55d024b2-ac32-4b68-96c0-c4ecd0a6d143.png">
+![Screen_Recording_2022-08-11_at_3_06_28_PM_AdobeExpress](https://user-images.githubusercontent.com/99835281/184219887-7d6389c3-c12c-40b0-baa2-b0b954fff2f9.gif)
+
 
 ### Profile Page
 
-https://user-images.githubusercontent.com/99835281/184213317-55d85d65-5147-44a7-8f31-27ecff90879c.mov
+![Screen_Recording_2022-08-11_at_3_07_34_PM_AdobeExpress](https://user-images.githubusercontent.com/99835281/184220022-12b7070a-e130-40fe-a681-a0c1d5816ad4.gif)
+
 
 ## Future To Do List
 
