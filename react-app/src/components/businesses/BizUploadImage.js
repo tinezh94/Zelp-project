@@ -19,7 +19,11 @@ const BizUploadImage = () => {
         return (image.business_id === Number(businessId) && image.user_id === user.id);
     });
 
-    console.log('biz', bizImages)
+    const bizTotalImages = Object.values(images)?.filter(image => {
+        return (image.business_id === Number(businessId));
+    })
+
+    console.log('biz', bizTotalImages)
 
 
     useEffect(() => {
@@ -28,7 +32,7 @@ const BizUploadImage = () => {
 
     useEffect(() => {
         const errors = [];
-        if (bizImages.length < 5) errors.push('Business owner must upload at least 5 photos.');
+        if (bizTotalImages.length < 5) errors.push('Business owner must upload at least 5 photos.');
         setValidationErrors(errors);
     }, [dispatch, bizImages?.length])
 

@@ -1041,3 +1041,88 @@ select.create-biz-select {
     font-size: 12px;
     line-height: 20px;
 }
+
+.remove-biz-modal {
+    height: 300px;
+    width: auto;
+    box-shadow: none;
+}
+
+.remove-biz-h2 {
+    color: #d32323;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 21px;
+    line-height: 28px;
+    text-align: left;
+    font-weight: 900;
+    /* padding-left: 24px; */
+    padding-top: 20px;
+    padding-bottom: 18px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.remove-biz-h3 {
+    margin-left: 20px;
+    margin-right: 20px;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: left;
+    font-weight: 600;
+    padding-top: 20px;
+    color: #333;
+}
+
+.reomove-biz-h4{
+    margin-left: 20px;
+    margin-right: 20px;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: left;
+    font-weight: 500;
+    padding-top: 20px;
+    color: #333;
+}
+
+.remove-biz-btns-div {
+    display: flex;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 6rem;
+}
+
+.remove-biz-confirm-btn {
+    background-color: #d32323;
+    border: 1px solid #d32323;
+    color: white;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+    padding: 6px 8px;
+    line-height: 1.2em;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.6s;
+    margin-right: 10px;
+}
+
+.remove-biz-confirm-btn:hover {
+    background-color: #e44040;
+}
+
+.remove-biz-cancel-btn {
+    border: none;
+    background-color: transparent;
+    color:#0073bb;
+    font-size: 12px;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-weight: 500;
+}
+
+.remove-biz-cancel-btn:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}

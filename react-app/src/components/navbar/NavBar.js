@@ -20,7 +20,7 @@ const NavBar = () => {
     sessionLinks = (
       <div className='session-actions-div'>
         <li>
-          <NavLink to='/' style={{textDecoration: 'none'}} className='navbar-businesses-link'>Businesses</NavLink>
+          <NavLink to='/' className='navbar-businesses-link'>Businesses</NavLink>
         </li>
         <li>
           <NavLink to='/login' exact={true} activeClassName='active'>
