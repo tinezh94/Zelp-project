@@ -148,7 +148,8 @@
 }
 
 .biz-write-review:hover {
-    background-color: #de4040;
+    background-color: #fd2e2e;
+    transition: background-color 0.5s ease-in;
 }
 
 .fa-solid.fa-star {
@@ -363,6 +364,11 @@ button.biz-review-delete-btn {
     padding-top: 8px;
 }
 
+.biz-review-delete-btn:hover {
+    background-color: #c8c9ca;
+    border-radius: 3px;
+}
+
 .biz-info-div {
     border: 1px solid #ebebeb;
     width: 365px;
@@ -385,6 +391,10 @@ a.biz-website {
     border-bottom: 1px solid #ebebeb;
     width: 365px;
     padding-bottom: 32px;
+}
+
+.biz-website:hover {
+    text-decoration: underline;
 }
 
 .biz-phone {
@@ -417,6 +427,10 @@ a.edit-biz {
     text-decoration: none;
     padding-left: 8px;
     padding-top: 12px;
+}
+
+.edit-biz:hover {
+    text-decoration: underline;
 }
 
 .fa-solid.fa-pencil {

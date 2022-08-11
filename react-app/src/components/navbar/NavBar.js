@@ -71,7 +71,7 @@ const NavBar = () => {
         {user && (
           <div className='profile-div'>
             <li>
-              <NavLink to='/' style={{textDecoration: 'none'}} className='navbar-businesses'>Businesses</NavLink>
+              <NavLink to='/' className='navbar-businesses'>Businesses</NavLink>
             </li>
             <li>
                 <img className='user-profile-pic'  src={user.profile_pic} style={{width: 40, height: 40}} onClick={() => openMenu()} />
