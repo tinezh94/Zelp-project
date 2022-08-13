@@ -47,7 +47,7 @@ function UploadImageModal() {
                 setImageLoading(false);
                 setValidationErrors([]);
                 hideForm();
-                history.push(`/biz/${businessId}/images-upload`)
+                history.push(`/biz_user_photos/${businessId}/upload`)
             }
         }
     }

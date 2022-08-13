@@ -153,7 +153,7 @@ const CreateBusinessForm = () => {
             if (createdBusiness) {
                 reset();
                 setHasSubmitted(false);
-                history.push(`/biz/${createdBusiness.id}/images-upload`);
+                history.push(`/biz_user_photos/${createdBusiness.id}/upload`);
             };
         }
     };
