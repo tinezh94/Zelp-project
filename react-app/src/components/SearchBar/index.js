@@ -38,7 +38,7 @@ import { NavLink, useHistory } from 'react-router-dom';
     return (
         <>
             <div>
-                <div className='search-bar-container'>
+                <div className='search-bar-container' id='search-bar-div'>
                     <input 
                         className='search-bar-input'
                         placeholder='Search here...'

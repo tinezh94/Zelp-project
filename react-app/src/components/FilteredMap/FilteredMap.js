@@ -24,6 +24,8 @@ const MultiMapView = ({ filteredBiz, filteredCateBiz, apiKey, businessesArr }) =
         coordinates.push({lat: biz.latitude, lng: biz.longitude})
     });
 
+    console.log('coordinates', coordinates)
+
     
     // let center = [];
     let allCoordinates = [];
@@ -51,7 +53,9 @@ const MultiMapView = ({ filteredBiz, filteredCateBiz, apiKey, businessesArr }) =
             lat: latAvrg,
             lng: lgnAvrg
         }
-    } else {
+    } 
+    
+    if (filteredBiz.length > 0 ){
         center = {
             lat: coordinates[0]?.lat,
             lng: coordinates[0]?.lng
@@ -76,7 +80,7 @@ const MultiMapView = ({ filteredBiz, filteredCateBiz, apiKey, businessesArr }) =
                         mapContainerStyle={{width: '100%', height: '100vh'}}
                         apiKey={apiKey}
                         onLoad={onLoad}
-                        zoom={14}
+                        zoom={11}
                         center={center}
                     >
                         {coordinates.map(set => (

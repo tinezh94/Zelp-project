@@ -56,57 +56,58 @@ function App() {
   return (
     <BrowserRouter>
     <Wrapper libraries={'places'}>
-      {/* <NavBar /> */}
+      <NavBar />
       <Switch>
         <Route path='/login' exact={true}>
-          <NavBar />
+          {/* <NavBar /> */}
           <LoginForm />
         </Route>
         <Route path='/signup' exact={true}>
-          <NavBar />
+          {/* <NavBar /> */}
           <SignUpForm />
         </Route>
         <Route path='/businesses/new' exact={true}>
-          <NavBar />
+          {/* <NavBar /> */}
           <CreateBusinessForm />
         </Route>
         <Route path='/businesses/:businessId' exact={true}>
-          <NavBar />
+          {/* <NavBar /> */}
           <BusinessPage />
         </Route>
         <ProtectedRoute path='/businesses/:businessId/edit' exact={true}>
-          <NavBar />
+          {/* <NavBar /> */}
           <EditBusinessForm />
         </ProtectedRoute>
         <ProtectedRoute path='/writeareview/biz/:businessId' exact={true}>
-          <NavBar />
+          {/* <NavBar /> */}
           <CreateReviewForm />
         </ProtectedRoute>
         <ProtectedRoute path='/editareview/biz/:businessId' exact={true}>
-          <NavBar />
+          {/* <NavBar /> */}
           <EditReviewForm />
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
-          <NavBar />
+          {/* <NavBar /> */}
           <UserProfilePage />
         </ProtectedRoute>
         <Route path='/' exact={true} >
+          {/* <NavBar /> */}
           <BusinessesPage businesses={businesses} />
         </Route>
         <ProtectedRoute path='/biz_user_photos/:businessId/upload' exact={true}>
-          <NavBar />
+          {/* <NavBar /> */}
           <BizUploadImage />
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId/businesses' exact={true}>
-          <NavBar />
+          {/* <NavBar /> */}
           <UserBiz />
         </ProtectedRoute>
         <Route path='/search/:searchTerm' exact={true}>
-          <NavBar />
+          {/* <NavBar /> */}
           <CategoryPage businesses={businesses} />
         </Route>
         <Route path='/biz_photos/:businessId' exact={true}>
-          <NavBar />
+          {/* <NavBar /> */}
           <BizPhotos businesses={businesses} />
         </Route>
         <Route>
