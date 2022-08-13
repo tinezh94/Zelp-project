@@ -4,6 +4,7 @@ import { NavLink, useHistory, useParams } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
 
 import { loadReviews, deleteReview } from '../../store/review';
+import DeleteReviewModal from './DeleteReviewModal';
 
 const BusinessReviews = () => {
     const dispatch = useDispatch();
@@ -28,20 +29,20 @@ const BusinessReviews = () => {
 
     const [showMenu, setShowMenu] = useState(false);
 
-    const openMenu = () => {
-        if (showMenu) return;
-        setShowMenu(true)
-      }
+    // const openMenu = () => {
+    //     if (showMenu) return;
+    //     setShowMenu(true)
+    //   }
     
-      useEffect(() => {
-        if (!showMenu) return;
-        const closeMenu = () => {
-            setShowMenu(false);
-        };
+    //   useEffect(() => {
+    //     if (!showMenu) return;
+    //     const closeMenu = () => {
+    //         setShowMenu(false);
+    //     };
     
-        document.addEventListener('click', closeMenu);
-        return () => document.removeEventListener('click', closeMenu);
-      }, [showMenu])
+    //     document.addEventListener('click', closeMenu);
+    //     return () => document.removeEventListener('click', closeMenu);
+    //   }, [showMenu])
 
     const stars = Array(5).fill(0);
 
@@ -80,13 +81,14 @@ const BusinessReviews = () => {
                                             <div>
                                                 {(sessionUser.id === review.user_id) && (
                                                     <div>
-                                                        <button className='review-dot-btn' onClick={() => openMenu()}>
+                                                        <button className='review-dot-btn' onClick={() => setShowMenu(!showMenu)}>
                                                             <i className="fa-solid fa-ellipsis"></i>
                                                         </button>
                                                         {showMenu && (
                                                             <div className='review-edit-delete'>
                                                                 <NavLink  className='dropdown-links' to={`/editareview/biz/${businessId}`}>Edit Review</NavLink>
-                                                                <button className='biz-review-delete-btn' type='button' onClick={() => onDelete(review.id)}>Remove Review</button>
+                                                                <DeleteReviewModal review={review} businessId={businessId} showMenu={showMenu} setShowMenu={setShowMenu} />
+                                                                {/* <button className='biz-review-delete-btn' type='button' onClick={() => onDelete(review.id)}>Remove Review</button> */}
                                                             </div>
                                                         )}
                                                     </div>

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Modal } from '../../context/Modal';
 import { NavLink, useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import UploadPicture from '../images/UploadImage';
 import { createImage } from "../../store/image";
 
 function UploadImageModal() {
