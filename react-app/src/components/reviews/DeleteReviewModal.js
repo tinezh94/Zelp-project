@@ -53,29 +53,41 @@ const DeleteReviewModal = ({ review, businessId, showMenu, setShowMenu }) => {
                                 <div className="remove-review-input-div">
                                     <input 
                                         type="radio"
-                                        value='reason'
+                                        name='reason'
+                                        value={reason}
                                         onChange={(e) => setReason(e.target.value)}
                                         // checked={'reason'}
                                     />
-                                    <label>I was threatened with legal action or sued.</label>
+                                    <label htmlFor="reason" className="remove-review-label">I was threatened with legal action or sued.</label>
                                 </div>
                                 <div className="remove-review-input-div">
                                     <input 
                                         type="radio"
-                                        value='reason'
+                                        name='reason'
+                                        value={reason}
                                         onChange={(e) => setReason(e.target.value)}
                                         // checked={'reason'}
                                     />
-                                    <label>I was offered a refund or other compensation to remove this review.</label>
+                                    <label htmlFor="reason" className="remove-review-label">I was offered a refund or other compensation to remove this review.</label>
                                 </div>
                                 <div className="remove-review-input-div">
                                     <input 
                                         type="radio"
-                                        value='reason'
+                                        name='reason'
+                                        value={reason}
                                         onChange={(e) => setReason(e.target.value)}
                                         // checked={'reason'}
                                     />
-                                    <label>I changed my opinion of this business after a new interaction.</label>
+                                    <label htmlFor="reason" className="remove-review-label">I changed my opinion of this business after a new interaction.</label>
+                                </div>
+                                <div className="remove-review-input-div">
+                                    <input 
+                                        type="radio"
+                                        name="reason"
+                                        value={reason}
+                                        onChange={(e) => setReason(e.target.value)}
+                                    />
+                                    <label htmlFor="reason" className="remove-review-label">Other</label>
                                 </div>
                             </form>
                             <div className="remove-reviews-btns-div">

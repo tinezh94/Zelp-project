@@ -308,7 +308,7 @@ input::file-selector-button:hover {
 .remove-review-modal {
     position: absolute;
     width: 550px;
-    height:300px;
+    height:360px;
     background-color: white;
     z-index: 99999;
     top: -10rem;
@@ -352,9 +352,9 @@ input::file-selector-button:hover {
     display: flex;
     margin-left: 20px;
     margin-right: 20px;
-    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
     font-size: 14px;
-    line-height: 18px;
+    line-height: 20px;
     text-align: left;
     font-weight: 400;
     padding-top: 20px;
@@ -400,14 +400,9 @@ input::file-selector-button:hover {
     cursor: pointer;
 }
 
-
-/* #modal {
-    position: absolute;
-    z-index: 920383;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-} */
+.remove-review-label {
+    padding-left: 10px;
+}
 
 
 /* Errors */
