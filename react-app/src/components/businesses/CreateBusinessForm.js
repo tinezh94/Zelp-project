@@ -43,27 +43,12 @@ const CreateBusinessForm = () => {
     const [ hasSubmitted, setHasSubmitted ] = useState(false);
     const [ validationErrors, setValidationErrors ] = useState([]);
     
-    // useEffect(() => {
-    //     const errors = [];
-    // })
 
     useEffect(() => {
         dispatch(loadCategories());
     }, [dispatch]);
 
     let placeId = autoValue ? autoValue.value.place_id : null;
-    // console.log('placeId', placeId)
-    // console.log('apiKey', apiKey)
-    // geocodeByPlaceId(placeId)
-    //     .then(results => {
-    //         setAddress(results[0].formatted_address);
-    //         setStreetAddress(address.split(',')[0]);
-    //         setCity(address.split(',')[1]);
-    //         setState(address.split(',').split(' ')[0]);
-    //         setZipcode(address.split(',').split(' ')[1]);
-
-    //     })
-    //     .catch(error => console.error(error));
 
     if (placeId) {
         geocodeByPlaceId(placeId)
@@ -243,30 +228,34 @@ const CreateBusinessForm = () => {
                         }
                     </div>
                 </div>
-                {/* <label>Address*</label>
+                <label className='create-biz-label'>Address*</label>
                 <input
+                    className='create-biz-input'
                     type='text'
                     value={streetAddress}
                     onChange={e => setStreetAddress(e.target.value)} 
                 />
-                <label>City*</label>
+                <label className='create-biz-label'>City*</label>
                 <input
+                    className='create-biz-input'
                     type='text'
                     value={city}
                     onChange={e => setCity(e.target.value)} 
                 />
-                <label>State*</label>
+                <label className='create-biz-label'>State*</label>
                 <input
+                    className='create-biz-input'
                     type='text'
                     value={state}
                     onChange={e => setState(e.target.value)}
                 />
-                <label>Zip Code*</label>
+                <label className='create-biz-label'>Zip Code*</label>
                 <input 
+                    className='create-biz-input'
                     type='text'
                     value={zipcode}
                     onChange={e => setZipcode(e.target.value)}
-                /> */}
+                />
                 <div className='create-biz-single-sec'>
                     <label className='create-biz-label'>Description*</label>
                     <textarea

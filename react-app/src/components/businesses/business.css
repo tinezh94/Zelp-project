@@ -255,6 +255,7 @@ table {
 }
 
 .biz-description {
+    width: 680px;
     color: rgba(45,46,47,1);
     text-align: left;
     font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -263,7 +264,14 @@ table {
     line-height: 24px;
     letter-spacing: 0.5;
     height: 65px;
+    /* overflow-x: auto; */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical; 
+    word-break: break-word;
     overflow: auto;
+    /* overflow-y: auto; */
+    /* float: left; */
 }
 
 .reviews-container {
