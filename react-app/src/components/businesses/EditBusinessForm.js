@@ -50,7 +50,7 @@ const EditBusinessForm = () => {
     const [ editLatitude, setEditLatitude ] = useState(business?.latitude);
     const [ ediLongitude, setEditLongitude ] = useState(business?.longitude);
     const [ autoValue, setAutoValue ] = useState(null);
-    const [ address, setAddress ] = useState('');
+    const [ address, setAddress ] = useState(business?.address);
     const [ hasSubmitted, setHasSubmitted ] = useState(false);
     const [ validationErrors, setValidationErrors ] = useState([]);
 
@@ -220,7 +220,7 @@ const EditBusinessForm = () => {
                     />
                 </div>
                 <div className='create-biz-single-sec'>
-                    <label className='create-biz-label'>Address*</label>
+                    <label className='create-biz-label'>Address</label>
                     <div>
                         {apiKey && 
                         <GooglePlacesAutocomplete
@@ -247,30 +247,34 @@ const EditBusinessForm = () => {
                         }
                     </div>
                 </div>
-                {/* <label>Address*</label>
+                <label className='create-biz-label'>Address*</label>
                 <input
+                    className='create-biz-input'
                     type='text'
                     value={editStreetAddress}
                     onChange={e => setEditStreetAddress(e.target.value)} 
                 />
-                <label>City*</label>
+                <label className='create-biz-label'>City*</label>
                 <input
+                    className='create-biz-input'
                     type='text'
                     value={editCity}
                     onChange={e => setEditCity(e.target.value)} 
                 />
-                <label>State*</label>
+                <label className='create-biz-label'>State*</label>
                 <input
+                    className='create-biz-input'
                     type='text'
                     value={editState}
                     onChange={e => setEditState(e.target.value)}
                 />
-                <label>Zip Code*</label>
+                <label className='create-biz-label'>Zip Code*</label>
                 <input 
+                    className='create-biz-input'
                     type='text'
                     value={editZipcode}
                     onChange={e => setEditZipcode(e.target.value)}
-                /> */}
+                />
                 <div className='create-biz-single-sec'>
                     <label className='create-biz-label'>Description*</label>
                     <textarea

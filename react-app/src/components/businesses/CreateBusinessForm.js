@@ -201,7 +201,7 @@ const CreateBusinessForm = () => {
                     />
                 </div>
                 <div className='create-biz-single-sec'>
-                    <label className='create-biz-label'>Address*</label>
+                    <label className='create-biz-label'>Address</label>
                     <div>
                         {apiKey && 
                         <GooglePlacesAutocomplete

@@ -50,8 +50,6 @@ function UploadImageModal() {
                 history.push(`/biz/${businessId}/images-upload`)
             }
         }
-
-
     }
     const updateImage = (e) => {
         const file = e.target.files[0];

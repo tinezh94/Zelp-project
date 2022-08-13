@@ -73,7 +73,7 @@ const SignUpForm = () => {
     if (!lastName) errors.push('Last name cannot be empty.')
     if (!email) errors.push('Email cannot be empty.')
     if (users.map(user => user.email).includes(email)) errors.push('Email address is alredy registered with another account.')
-    if (!(email.includes('@'))) errors.push('Please enter a valid email address.')
+    if (!(email.includes('@')) || !(email.includes('.')) || (email.indexOf('.') < email.indexOf('@'))) errors.push('Please enter a valid email address.')
     if (!password) errors.push('Password field cannot be empty.')
     if (password.length < 6) errors.push('Password must be at least 6 characters long.')
     if (password !== repeatPassword) errors.push('Confirm password must match Password.')

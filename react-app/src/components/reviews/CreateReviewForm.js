@@ -5,9 +5,10 @@ import { loadOneBusiness } from '../../store/business';
 import { FaStar } from 'react-icons/fa';
 
 import { createReview } from '../../store/review';
-import RateStar from '../Rate';
+import { loadImages, deleteImage } from '../../store/image';
 import UploadImageModal from '../UploadImageModal';
 import './reviews.css'
+import ReviewPhotosModal from './ReviewPhotosModal';
 
 const CreateReviewForm = () => {
     const dispatch = useDispatch();
@@ -16,6 +17,21 @@ const CreateReviewForm = () => {
 
     const user = useSelector(state => state?.session?.user);
     const business = useSelector(state => state?.businesses);
+    const images = useSelector(state => state?.images);
+
+    const bizImages = Object.values(images)?.filter(image => {
+        return (image.business_id === Number(businessId) && image.user_id === user.id);
+    });
+
+    useEffect(() => {
+        dispatch(loadImages());
+    },[dispatch, businessId]);
+
+    console.log('bizImages', bizImages)
+
+    const onDeletePic = async (id) => {
+        await dispatch(deleteImage(id));
+    }
     
     let currBiz = business ? Object.values(business) : null;
 
@@ -159,8 +175,18 @@ const CreateReviewForm = () => {
                     onChange={e => setContent(e.target.value)}
                 >
                 </textarea>
-                {/* <h3 className='write-review-h3'>Attach Photos</h3> */}
-                {/* <UploadImageModal /> */}
+                <h3 className='write-review-h3'>Attach Photos</h3>
+                <ReviewPhotosModal />
+                <div className='create-review-imgs-div'>
+                    {bizImages && bizImages.map(image => (
+                        <div className='create-review-imgs-container'>
+                            <img className='upload-pg-img' src={image.image_url} />
+                            <button className='create-review-delete-pic-btn' type='button' onClick={() => onDeletePic(image.id)}>
+                                <i className="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                    ))}
+                </div>
                 <div className='post-review-btn-div'>
                     <button className='post-review-btn' type='submit'>Post Review</button>
                 </div>

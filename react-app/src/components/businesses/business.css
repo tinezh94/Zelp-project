@@ -823,7 +823,7 @@ select.create-biz-select {
     width: 200px;
     height: 200px;
     border-radius: 4px;
-    margin-left: 15rem;
+    /* margin-left: 15rem; */
 }
 
 .upload-image-save-btn {
