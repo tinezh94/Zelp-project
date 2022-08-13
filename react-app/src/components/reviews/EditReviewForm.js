@@ -8,6 +8,7 @@ import { deleteImage, loadImages } from '../../store/image';
 import { deleteReview, editReview } from '../../store/review';
 // import EditImage from '../images/EditImage';
 import UploadImageModal from '../UploadImageModal';
+import ReviewPhotosModal from './ReviewPhotosModal';
 import './reviews.css'
 
 const EditReviewForm = () => {
@@ -175,16 +176,16 @@ const EditReviewForm = () => {
                     onChange={e => setEditContent(e.target.value)}
                 >
                 </textarea>
-                {/* <h3 className='write-review-h3'>Attach Photos</h3>
-                <UploadImageModal /> */}
+                <h3 className='write-review-h3'>Attach Photos</h3>
+                <ReviewPhotosModal />
                 <div className='review-images-div'>
                     {bizImages && bizImages.map (image => (
-                            <div className='review-img'>
-                                <img src={image['image_url']} alt='biz review photos' style={{width: 142.5, height: 120 }} className='edit-review' />
-                                <button className='delete-pic-btn' type='button' onClick={() => onDeletePic(image.id)}>
-                                    <i className="fa-solid fa-xmark"></i>
-                                </button>
-                            </div>
+                        <div className='review-img'>
+                            <img src={image['image_url']} alt='biz review photos' style={{width: 142.5, height: 120 }} className='edit-review' />
+                            <button className='delete-pic-btn' type='button' onClick={() => onDeletePic(image.id)}>
+                                <i className="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
                     ))}
                 </div>
                 <div className='post-review-btn-div'>

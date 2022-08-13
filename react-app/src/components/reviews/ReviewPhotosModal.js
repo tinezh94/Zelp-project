@@ -3,6 +3,7 @@ import { Modal } from '../../context/Modal';
 import { NavLink, useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { loadImages, createImage, deleteImage } from "../../store/image";
+import UploadReviewPhotos from './UploadReviewPhotos';
 
 const ReviewPhotosModal = () => {
     const history = useHistory();
@@ -26,47 +27,47 @@ const ReviewPhotosModal = () => {
         dispatch(loadImages());
     },[dispatch, businessId]);
 
-    const fileExtensions = '([a-zA-Z0-9\s_\\.\-:])+(.png|.jpg|.gif|.jpeg|.pdf)$'
+    // const fileExtensions = '([a-zA-Z0-9\s_\\.\-:])+(.png|.jpg|.gif|.jpeg|.pdf)$'
 
-    useEffect(() => {
-        const errors = [];
-        if (!image?.name.match(fileExtensions)) errors.push('Please select a valid image type');
-        if (image?.size > 1e6) errors.push('Please upload an image smaller than 1MB');
-        setValidationErrors(errors);
-    }, [image?.name, image?.size]);
+    // useEffect(() => {
+    //     const errors = [];
+    //     if (!image?.name.match(fileExtensions)) errors.push('Please select a valid image type');
+    //     if (image?.size > 1e6) errors.push('Please upload an image smaller than 1MB');
+    //     setValidationErrors(errors);
+    // }, [image?.name, image?.size]);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setImageLoading(true);
-        setHasSubmitted(true);
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     setImageLoading(true);
+    //     setHasSubmitted(true);
         
-        if (!validationErrors.length) {
-            const payload = {
-                user_id: user.id,
-                business_id: Number(businessId),
-                image_url: image
-            }
-            const uploadedImage = await dispatch(createImage(payload));
-            console.log('uploadedimage', uploadedImage)
-            if (uploadedImage) {
-                reset();
-                setHasSubmitted(false);
-                setImageLoading(false);
-                setValidationErrors([]);
-                hideForm();
-            }
-        }
-    }
+    //     if (!validationErrors.length) {
+    //         const payload = {
+    //             user_id: user.id,
+    //             business_id: Number(businessId),
+    //             image_url: image
+    //         }
+    //         const uploadedImage = await dispatch(createImage(payload));
+    //         console.log('uploadedimage', uploadedImage)
+    //         if (uploadedImage) {
+    //             reset();
+    //             setHasSubmitted(false);
+    //             setImageLoading(false);
+    //             setValidationErrors([]);
+    //             hideForm();
+    //         }
+    //     }
+    // }
 
-    const updateImage = (e) => {
-        const file = e.target.files[0];
-        setImage(file);
-    }
+    // const updateImage = (e) => {
+    //     const file = e.target.files[0];
+    //     setImage(file);
+    // }
 
-    console.log('image', image, image?.name, image?.size)
-    const reset = () => {
-        setImage(null);
-    }
+    // // console.log('image', image, image?.name, image?.size)
+    // const reset = () => {
+    //     setImage(null);
+    // }
 
     const hideForm = () => {
         setShowModal(false);
@@ -74,69 +75,40 @@ const ReviewPhotosModal = () => {
 
     const displayComp = () => {
         const container = document.getElementById('review-add-photos-containers');
-        if (bizImages.length > 0) container.style.width = '100px';
+        console.log('container', container)
+        if (bizImages.length > 0 && container) container.style.width = '100px';
     }
 
-    const changeContent = () => {
-        const selectPhotos = document.getElementById('select-photos');
-        const photoIllustration = document.getElementById('drop-photos')
+    // const changeContent = () => {
+    //     const selectPhotos = document.getElementById('select-photos');
+    //     const photoIllustration = document.getElementById('drop-photos')
 
-        if (image) {
-            selectPhotos.style.display = 'none';
-            photoIllustration.style.display = 'none';
-            return (
-                <div>
-                    <img 
-                        className='image-preview'
-                        src={URL.createObjectURL(image)}
-                        alt='image-preview'
-                    />
-                </div>
-            )
-        }
-    }
+    //     if (image && selectPhotos && photoIllustration) {
+    //         selectPhotos.style.display = 'none';
+    //         photoIllustration.style.display = 'none';
+    //         return (
+    //             <div>
+    //                 <img 
+    //                     className='image-preview'
+    //                     src={URL.createObjectURL(image)}
+    //                     alt='image-preview'
+    //                 />
+    //             </div>
+    //         )
+    //     }
+    // }
 
     return (
         <div>
             <div className='add-photos-icon-container' id='review-add-photos-containers'>
-                <button className='add-photo-btn' onClick={() => setShowModal(true)}>
+                {bizImages && displayComp()}
+                <button className='add-photo-btn'  type='button' onClick={() => setShowModal(true)}>
                     <i className="fa-solid fa-plus"></i>
                 </button>
             </div>
-            {bizImages && displayComp()}
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <div className='add-photos-modal'>
-                        <form onSubmit={handleSubmit}>
-                            <div className='biz-img-upload-errors-div'>
-                                {hasSubmitted && validationErrors.length > 0 && (
-                                    <ul>
-                                        {validationErrors.map(error => (
-                                            <li key={error}>{error}</li>
-                                        ))}
-                                    </ul>
-                                )}
-                            </div>
-                            <div className='attach-photos-container'>
-                                <img className='drop-photos' id='drop-photos' src='https://s3-media0.fl.yelpcdn.com/assets/public/photo_review_325x200_v2.yji-4a099f5381e9ea0301bb.svg' alt='add-photos' />
-                                <h2 className='select-your-photos' id='select-photos'>Select your photos here</h2>
-                                <div className='drop-photos-modal-preview-div'>
-                                    {changeContent()}
-                                    <input
-                                        className='choose-file-btn'
-                                        type="file"
-                                        accept="image/*"
-                                        onChange={updateImage}
-                                    />
-                                </div>
-                            </div>
-                            <div className='cancel-submit-pic-div'>
-                                <button className='cancel-upload-image-btn' type='button' onClick={() => setShowModal(false)}>Cancel</button>
-                                <button className='upload-image-btn' type='submit'>Attach</button>
-                            </div>
-                            {!validationErrors.length && imageLoading && <p className='loading-pic'>Loading ...</p>}
-                        </form>
-                    </div>
+                    <UploadReviewPhotos hideForm={hideForm} showModal={showModal} setShowModal={setShowModal} />
                 </Modal>
             )}
         </div>
