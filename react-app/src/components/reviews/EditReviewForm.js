@@ -7,7 +7,6 @@ import { deleteImage, loadImages } from '../../store/image';
 
 import { deleteReview, editReview } from '../../store/review';
 // import EditImage from '../images/EditImage';
-// import UploadPicture from '../images/UploadImage';
 import UploadImageModal from '../UploadImageModal';
 import './reviews.css'
 
@@ -144,6 +143,7 @@ const EditReviewForm = () => {
                             return (
                                 <label>
                                     <input 
+                                        className='star-radio-type'
                                         type='radio' 
                                         display='none'
                                         name='rating' 

@@ -5,7 +5,6 @@ import { loadOneBusiness } from '../../store/business';
 import { FaStar } from 'react-icons/fa';
 
 import { createReview } from '../../store/review';
-import UploadPicture from '../images/UploadImage';
 import RateStar from '../Rate';
 import UploadImageModal from '../UploadImageModal';
 import './reviews.css'
@@ -126,7 +125,8 @@ const CreateReviewForm = () => {
                             const ratingValue = index + 1;
                             return (
                                 <label>
-                                    <input 
+                                    <input
+                                        className='star-radio-type'
                                         type='radio' 
                                         display='none'
                                         name='rating' 
