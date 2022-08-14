@@ -25,8 +25,14 @@ const CategoryPage = ({ businesses }) => {
         return category.id === Number(searchTerm)
     });
 
+    const categoryName = Object.values(categories)?.filter(category => {
+        return category.category_name === searchTerm
+    })
+
+    console.log('category name', categoryName)
+
     const filteredCateBiz = businessesArr.filter(biz => {
-        return biz.category === category[0]?.category_name
+        return biz.category === category[0]?.category_name || biz.category === categoryName[0]?.category_name
     });
 
     const filteredBiz = businessesArr?.filter(biz => {
@@ -40,6 +46,10 @@ const CategoryPage = ({ businesses }) => {
         return imagesArr?.filter(image => image.business_id === id)[3];
     }
 
+    const allBizReviews = (businessId) => {
+        const bizReviews = reviewsArr.filter(review => review.business_id === businessId);
+        return bizReviews.length;
+    }
     // console.log('biz', filteredBiz)
     useEffect(() => {
         dispatch(loadBusinesses());
@@ -50,13 +60,13 @@ const CategoryPage = ({ businesses }) => {
 
     const getAvrg = (businessId) => {
         const reviewsList = reviewsArr.filter(review => review.business_id === businessId)
-        console.log(reviews)
+        // console.log(reviews)
         const bizRatings = reviewsList.map(review => review.rating)
-        console.log('bizratings', bizRatings)
+        // console.log('bizratings', bizRatings)
         const avrgRating = (bizRatings.reduce((a, b) => a + b, 0) / bizRatings.length)
-        console.log('avrgrating', avrgRating)
+        // console.log('avrgrating', avrgRating)
         const totalFilled = Math.floor(Number(avrgRating))
-        console.log('total',totalFilled )
+        // console.log('total',totalFilled )
         return totalFilled;
     }
 
@@ -79,15 +89,18 @@ const CategoryPage = ({ businesses }) => {
                                     <div className='cate-pg-biz-info'>
                                         <h4 className='cate-pg-biz-name'>{biz.name}</h4>
                                         <p className='cate-pg-biz-cate'>{biz.category}</p>
-                                        <div className='cate-pg-biz-rating'>
-                                            {stars.map((_, index) => (                                
-                                                <FaStar
-                                                    key={index}
-                                                    isFilled={index + 1 < getAvrg(biz.id)}
-                                                    color={index < getAvrg(biz.id) ? "#f15c00" :  "#a9a9a9"}
-                                                    size={22}
-                                                ></FaStar>
-                                            ))}
+                                        <div className='bizreviews-ct-div'>
+                                            <div className='cate-pg-biz-rating'>
+                                                {stars.map((_, index) => (                                
+                                                    <FaStar
+                                                        key={index}
+                                                        isFilled={index + 1 < getAvrg(biz.id)}
+                                                        color={index < getAvrg(biz.id) ? "#f15c00" :  "#a9a9a9"}
+                                                        size={22}
+                                                    ></FaStar>
+                                                ))}
+                                            </div>
+                                            <div className='bizreviews-ct'>{allBizReviews(biz?.id)}</div>
                                         </div>
                                         <p className='cate-pg-biz-hrs'>{biz.business_hours}</p>
                                         <p className='cate-pg-biz-descrip'>{biz.description}</p>
