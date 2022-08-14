@@ -179,7 +179,9 @@ const EditReviewForm = () => {
                 <h3 className='write-review-h3'>Attach Photos</h3>
                 <ReviewPhotosModal />
                 <div className='review-images-div'>
-                    {bizImages && bizImages.map (image => (
+                    {bizImages && bizImages.filter(image => (
+                        image.user_id === user.id
+                    )).map (image => (
                         <div className='review-img'>
                             <img src={image['image_url']} alt='biz review photos' style={{width: 142.5, height: 120 }} className='edit-review' />
                             <button className='delete-pic-btn' type='button' onClick={() => onDeletePic(image.id)}>
