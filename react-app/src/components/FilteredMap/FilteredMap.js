@@ -62,6 +62,11 @@ const MultiMapView = ({ filteredBiz, filteredCateBiz, apiKey, businessesArr }) =
         }
     }
 
+    let defaultCenter = {
+        lat: 40.7624368,
+        lng: -73.8311779
+    }
+
     useEffect(() => {
         if (apiKey) {
             setIsLoad(true);
@@ -81,7 +86,7 @@ const MultiMapView = ({ filteredBiz, filteredCateBiz, apiKey, businessesArr }) =
                         apiKey={apiKey}
                         onLoad={onLoad}
                         zoom={12}
-                        center={center}
+                        center={defaultCenter}
                     >
                         {coordinates.map(set => (
                             <Marker position={{lat: set.lat, lng: set.lng}}></Marker>
