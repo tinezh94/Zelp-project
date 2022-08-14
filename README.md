@@ -1,4 +1,37 @@
-# Flask React Project
+# Zelp
+
+Live Link: [Zelp](https://zelp-project.herokuapp.com/)
+
+Zelp is a pixel-perfect clone of the well-known crowd-sourced reviews publishing App Yelp. The users of Zelp are capable of performing create, read, edit, and delete activities for businesses and reviews. Users are also able to upload and delete images for businesses. 
+
+## Technologies Used
+  * Python
+  * SQLAlchemy 
+  * Flask
+  * Postgres
+  * React
+  * JavaScript
+  * AWS
+  * CSS
+  * HTML
+
+## Project Planning
+
+  * [Database Schema](https://github.com/tinezh94/Zelp-project/wiki/Database-Schema)
+  * [MVP Feature List](https://github.com/tinezh94/Zelp-project/wiki/MVP-Feature-List)
+  * [User Stories](https://github.com/tinezh94/Zelp-project/wiki/User-Stories)
+  * [Wireframes](https://github.com/tinezh94/Zelp-project/wiki/Wireframes)
+
+## Functionalities
+
+### Homepage
+
+
+
+### Log In
+
+<img width="1495" alt="Screen Shot 2022-08-11 at 2 14 35 PM" src="https://user-images.githubusercontent.com/99835281/184210233-d67f57ec-929c-4ecb-902b-ac05e0ffb887.png">
+
 
 2. Install dependencies
 
