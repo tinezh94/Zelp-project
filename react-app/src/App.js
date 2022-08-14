@@ -29,6 +29,7 @@ import CategoryPage from './components/category/CategoryPage';
 // import AllImages from './components/images/AllImages';
 import BizPhotos from './components/images/BizPhotos';
 import PageNotFound from './components/PageNotFound';
+import AllBusinesses from './components/FilteredBiz/AllBusinesses';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -63,52 +64,43 @@ function App() {
           <LoginForm />
         </Route>
         <Route path='/signup' exact={true}>
-          {/* <NavBar /> */}
           <SignUpForm />
         </Route>
         <Route path='/businesses/new' exact={true}>
-          {/* <NavBar /> */}
           <CreateBusinessForm />
         </Route>
         <Route path='/businesses/:businessId' exact={true}>
-          {/* <NavBar /> */}
           <BusinessPage />
         </Route>
         <ProtectedRoute path='/businesses/:businessId/edit' exact={true}>
-          {/* <NavBar /> */}
           <EditBusinessForm />
         </ProtectedRoute>
         <ProtectedRoute path='/writeareview/biz/:businessId' exact={true}>
-          {/* <NavBar /> */}
           <CreateReviewForm />
         </ProtectedRoute>
         <ProtectedRoute path='/editareview/biz/:businessId' exact={true}>
-          {/* <NavBar /> */}
           <EditReviewForm />
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
-          {/* <NavBar /> */}
           <UserProfilePage />
         </ProtectedRoute>
         <Route path='/' exact={true} >
-          {/* <NavBar /> */}
           <BusinessesPage businesses={businesses} />
         </Route>
         <ProtectedRoute path='/biz_user_photos/:businessId/upload' exact={true}>
-          {/* <NavBar /> */}
           <BizUploadImage />
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId/businesses' exact={true}>
-          {/* <NavBar /> */}
           <UserBiz />
         </ProtectedRoute>
         <Route path='/search/:searchTerm' exact={true}>
-          {/* <NavBar /> */}
           <CategoryPage businesses={businesses} />
         </Route>
         <Route path='/biz_photos/:businessId' exact={true}>
-          {/* <NavBar /> */}
           <BizPhotos businesses={businesses} />
+        </Route>
+        <Route path='/businesses' exact={true}>
+          <AllBusinesses businesses={businesses} />
         </Route>
         <Route>
           <PageNotFound />

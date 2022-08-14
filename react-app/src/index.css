@@ -53,3 +53,55 @@ body {
     cursor: pointer;
     text-decoration: underline;
 }
+
+.cate-pg-biz-review-div {
+    display: flex;
+    flex-direction: row;
+    display: -webkit-box;
+    -webkit-line-clamp: 2.5;
+    -webkit-box-orient: vertical; 
+    /* word-break: break-word; */
+    text-align: left;
+    font-size: 14px;
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    line-height: 21px;
+    height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: rgba(110,112,114,1);
+}
+
+.cate-pg-biz-review {
+    padding-left: 5px;
+}
+
+.fa-solid.fa-x {
+    color: rgb(179, 3, 3);
+    font-size: smaller;
+}
+
+.restaurants-btn {
+    border: none;
+    background-color: #e00707;
+    width: 200px;
+    /* height: 40px; */
+    font-size: 17px;
+    font-family: Poppins, 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    color: white;
+    border-radius: 4px;
+    text-align: center;
+    padding-left: 0px;
+    padding-right: 10px;
+    font-weight: 500;
+    position: absolute;
+    top: 23rem;
+    left: 16rem;
+    padding-top: 3px;
+    padding-bottom: -2px;
+}
+
+.restaurants-btn:hover {
+    background-color: #fd2e2e;
+    transition: background-color 0.5s ease-in;
+    cursor: pointer;
+}
