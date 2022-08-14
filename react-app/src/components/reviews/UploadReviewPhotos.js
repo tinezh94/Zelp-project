@@ -4,9 +4,10 @@ import { NavLink, useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { loadImages, createImage, deleteImage } from "../../store/image";
 
-const UploadReviewPhotos = ({ hideForm, setShowModal, showModal }) => {
+const UploadReviewPhotos = ({ setShowModal, showModal }) => {
     const { businessId } = useParams();
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const [image, setImage] = useState(null);
     const [imageLoading, setImageLoading] = useState(false);
@@ -66,15 +67,9 @@ const UploadReviewPhotos = ({ hideForm, setShowModal, showModal }) => {
         setImage(null);
     }
 
-    // const hideForm = () => {
-    //     setShowModal(false);
-    // }
-
-    // const displayComp = () => {
-    //     const container = document.getElementById('review-add-photos-containers');
-    //     console.log('container', container)
-    //     if (bizImages.length > 0 && container) container.style.width = '100px';
-    // }
+    const hideForm = () => {
+        setShowModal(false);
+    }
 
     const changeContent = () => {
         const selectPhotos = document.getElementById('select-photos');
@@ -93,6 +88,11 @@ const UploadReviewPhotos = ({ hideForm, setShowModal, showModal }) => {
                 </div>
             )
         }
+    }
+
+    const submit = (e) => {
+        const btn = document.getElementById('upload-img-btn');
+        btn.addEventListener('click', handleSubmit(e));
     }
 
     return (
@@ -122,7 +122,7 @@ const UploadReviewPhotos = ({ hideForm, setShowModal, showModal }) => {
                 </div>
                 <div className='cancel-submit-pic-div'>
                     <button className='cancel-upload-image-btn' type='button' onClick={() => setShowModal(false)}>Cancel</button>
-                    <button className='upload-image-btn' type='submit'>Attach</button>
+                    <button className='upload-image-btn' type='button' id='upload-img-btn' onClick={submit}>Attach</button>
                 </div>
                 {!validationErrors.length && imageLoading && <p className='loading-pic'>Loading ...</p>}
             </form>
