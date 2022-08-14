@@ -4,6 +4,8 @@ import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { loadKey } from '../../store/map';
 
+const libraries = ['places'];
+
 const AllBizMapView = ({ businessesArr }) => {
     const [ isLoaded, setIsLoad ] = useState(false);
 
