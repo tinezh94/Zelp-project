@@ -12,11 +12,11 @@ const Footer = () => {
                 <div>
                     <div>
                         <i className="fa-brands fa-github"></i>
-                        <a className="author-links" href="https://github.com/tinezh94">GitHub</a>
+                        <a className="author-links" href="https://github.com/tinezh94" target="_blank">GitHub</a>
                     </div>
                     <div>
                         <i className="fa-brands fa-linkedin-in"></i>
-                        <a className="author-links" href="https://www.linkedin.com/in/christine-zhang-4b263080/">LinkedIn</a>
+                        <a className="author-links" href="https://www.linkedin.com/in/christine-zhang-4b263080/" target="_blank">LinkedIn</a>
                     </div>
                 </div>
             </div>
