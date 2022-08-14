@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from "react";
 import { useHistory, useParams, NavLink } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { loadImages } from "../../store/image";
 import { loadReviews } from "../../store/review";
 import { FaStar } from 'react-icons/fa';
+import { Modal } from "../../context/Modal";
 
 const BizPhotos = ({ businesses }) => {
     const dispatch = useDispatch();
@@ -40,6 +41,18 @@ const BizPhotos = ({ businesses }) => {
         dispatch(loadReviews());
     }, [dispatch])
 
+    const [ showModal, setShowModal ] = useState(false);
+    const [selected, setSelected ] = useState('');
+
+    // console.log('modal', showModal)
+
+    const handleClick = (e, idx) => {
+        e.preventDefault();
+        setShowModal(true)
+        // console.log('modal', showModal)
+        setSelected(idx)
+        // console.log('selected', selected)
+    }
 
     return (
         <>
@@ -78,9 +91,20 @@ const BizPhotos = ({ businesses }) => {
                     </div>
                 </div>
                 <div className="bizphotos-images-container">
-                    {bizImages && bizImages.map(image => (
+                    {bizImages && bizImages.map((image,idx) => (
                         <div>
-                            <img className="bizphotos-images-img" src={image.image_url} />
+                            <div>
+                                <img className="bizphotos-images-img" src={image.image_url} onClick={(e) => handleClick(e, idx)} />
+                            </div>
+                            <div id='enlarged-photo-div'>
+                                {showModal && (
+                                    <Modal onClose={() => setShowModal(false)}>
+                                        <div id="enlarged-photo-modal">
+                                            <img className="enlarged-img" src={bizImages[selected].image_url} style={{width: '475px', height: '425px'}} />
+                                        </div>
+                                    </Modal>
+                                )}
+                            </div>
                         </div>
                     ))}
                 </div>

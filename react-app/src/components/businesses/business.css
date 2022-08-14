@@ -1041,6 +1041,7 @@ select.create-biz-select {
     border-radius: 4px;
     margin-top: 10px;
     box-sizing: border-box;
+    cursor: pointer;
 }
 
 .bizphotos-add-btn {
@@ -1216,4 +1217,12 @@ select.create-biz-select {
 .remove-biz-cancel-btn:hover {
     text-decoration: underline;
     cursor: pointer;
+}
+
+.enlarged-img {
+    border-radius: 5px;
+}
+
+#modal-content > #enlarged-photo-modal {
+    background-color: transparent;
 }
