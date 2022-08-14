@@ -60,7 +60,7 @@ const AllBizMapView = ({ businessesArr }) => {
                         mapContainerStyle={{width: '100%', height: '100vh'}}
                         apiKey={key}
                         onLoad={onLoad}
-                        zoom={11}
+                        zoom={12}
                         center={center}
                     >
                         {allCoordinates.map(set => (
