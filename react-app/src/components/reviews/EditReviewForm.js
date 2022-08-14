@@ -71,9 +71,6 @@ const EditReviewForm = () => {
         setValidationErrors(errors);
     }, [editRating, editContent]);
 
-    const handleClick = value => {
-        setEditRating(value)
-    };
 
     const handleMouseOver = value => {
         setHoverValue(value)
@@ -118,6 +115,26 @@ const EditReviewForm = () => {
         setEditContent('')
     }
 
+    const handleClick = (ratingValue) => {
+        const ele = document.getElementById('write-review-rate-label');
+        // console.log(ele.innerText)
+        if (ratingValue === 1) {
+            ele.innerText = 'Not good'
+        }
+        if (ratingValue === 2) {
+            ele.innerText = 'Could\'ve been better'
+        }
+        if (ratingValue === 3) {
+            ele.innerText = 'OK'
+        }
+        if (ratingValue === 4) {
+            ele.innerText = 'Good'
+        }
+        if (ratingValue === 5) {
+            ele.innerText = 'Great'
+        }
+    }
+
     return (
         <div className='write-review-content-container'>
             <h1 className='write-review-biz-name'>{business?.name}</h1>
@@ -158,14 +175,14 @@ const EditReviewForm = () => {
                                             cursor: 'pointer'
                                         }}
                                         color={ratingValue <= (editRating || hoverValue) ? colors.orange : colors.grey}
-                                        // onClick={() => handleClick(index + 1)}
+                                        onClick={() => handleClick(ratingValue)}
                                         onMouseEnter={() => handleMouseOver(ratingValue)}
                                         onMouseLeave={handleMouseLeave}
                                         ></FaStar>
                                 </label>
                             )
                         })}
-                        <p className='write-review-rate-label'>Select your rating</p>
+                        <p className='write-review-rate-label' id='write-review-rate-label'>Select your rating</p>
                     </div>
                 </div>
                 <textarea
