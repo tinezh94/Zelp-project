@@ -75,22 +75,23 @@ const BusinessesPage = ({ businesses }) => {
                                     <img className='biz-card-photo' src={bizPhoto(business?.id)?.image_url} />
                                 </NavLink>
                             </div>
-                            <div>
+                            <div className='biz-card-right-div'>
                                 <NavLink className='biz-card-link' to={`/businesses/${business.id}`}>
                                     <h3 className='biz-card-name'>{business?.name}</h3>
                                 </NavLink>
+                                <h4 className='do-you-recommend'>Do you recommend this business?</h4>
                                 <div className='biz-card-rating'>
                                     {stars.map((_, index) => (                                
                                         <FaStar
                                             key={index}
                                             isFilled={index + 1 < getAvrg(business.id)}
                                             color={index < getAvrg(business.id) ? "#f15c00" :  "#a9a9a9"}
-                                            size={24}
+                                            size={32}
                                         ></FaStar>
                                     ))}
                                 </div>
-                                <p className='biz-card-category'>{business.category}</p>
-                                <p className='biz-card-description'>{business.description}</p>
+                                {/* <p className='biz-card-category'>{business.category}</p>
+                                <p className='biz-card-description'>{business.description}</p> */}
                             </div>
                         </div>
                 ))}
