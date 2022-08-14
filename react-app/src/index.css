@@ -73,6 +73,8 @@ body {
 
 .cate-pg-biz-review {
     padding-left: 5px;
+    margin-top: 0;
+    padding-right: 20px;
 }
 
 .fa-solid.fa-x {
@@ -104,4 +106,32 @@ body {
     background-color: #fd2e2e;
     transition: background-color 0.5s ease-in;
     cursor: pointer;
+}
+
+.bizreviews-ct-div {
+    display: flex;
+    flex-direction: row;
+}
+
+.bizreviews-ct {
+    padding-left: 5px;
+    margin-top: 3px;
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: #6E7072;
+}
+
+.cate-pg-cate-price-div {
+    display: flex;
+    flex-direction: row;
+}
+
+.cate-pg-biz-price {
+    color: #6e7072;
+    margin-top: 2px;
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    padding-left: 8px;
 }

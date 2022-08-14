@@ -93,6 +93,10 @@ const CategoryPage = ({ businesses }) => {
                                         <p className='cate-pg-biz-descrip'>{biz.description}</p>
                                         <div className='biz-dining-options-div'>
                                             <div className='biz-dining-options'>
+                                                <i className="fa-solid fa-x"></i>
+                                                <p className='biz-dining-p'>Outdoor Dining</p>
+                                            </div>
+                                            <div className='biz-dining-options'>
                                                 <i className="fa-solid fa-check"></i>
                                                 <p className='biz-dining-p'>Dine In</p>
                                             </div>
@@ -103,10 +107,6 @@ const CategoryPage = ({ businesses }) => {
                                             <div className='biz-dining-options'>
                                                 <i className="fa-solid fa-check"></i>
                                                 <p className='biz-dining-p'>Take Out</p>
-                                            </div>
-                                            <div className='biz-dining-options'>
-                                                <i className="fa-solid fa-xmark"></i>
-                                                <p className='biz-dining-p'>Outdoor Dining</p>
                                             </div>
                                         </div>
                                     </div>
@@ -135,6 +135,10 @@ const CategoryPage = ({ businesses }) => {
                                     <p className='cate-pg-biz-hrs'>{biz.business_hours}</p>
                                     <p className='cate-pg-biz-descrip'>{biz.description}</p>
                                     <div className='biz-dining-options-div'>
+                                        <div className='biz-dining-options'>
+                                            <i className="fa-solid fa-x"></i>
+                                            <p className='biz-dining-p'>Outdoor Dining</p>
+                                        </div>
                                         <div className='biz-dining-options'>
                                             <i className="fa-solid fa-check"></i>
                                             <p className='biz-dining-p'>Dine In</p>

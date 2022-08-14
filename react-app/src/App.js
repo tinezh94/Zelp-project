@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Wrapper } from '@googlemaps/react-wrapper';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/navbar/NavBar';
@@ -56,7 +55,6 @@ function App() {
 
   return (
     <BrowserRouter>
-    <Wrapper libraries={'places'}>
       <NavBar />
       <Switch>
         <Route path='/login' exact={true}>
@@ -107,7 +105,6 @@ function App() {
         </Route>
       </Switch>
       <Footer />
-    </Wrapper>
     </BrowserRouter>
   );
 }

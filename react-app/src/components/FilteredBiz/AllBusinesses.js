@@ -36,6 +36,11 @@ const AllBusinesses = ({ businesses }) => {
         return review;
     }
 
+    const allBizReviews = (businessId) => {
+        const bizReviews = reviewsArr.filter(review => review.business_id === businessId);
+        return bizReviews.length;
+    }
+
     const getAvrg = (businessId) => {
         const reviewsList = reviewsArr.filter(review => review.business_id === businessId)
         const bizRatings = reviewsList.map(review => review.rating)
@@ -53,24 +58,30 @@ const AllBusinesses = ({ businesses }) => {
                     <h1 className='cate-page-h1'>The Best 10 Restaurants in the Area</h1>
                     <h4 className='cate-page-sub'>All Results</h4>
                     <div>
-                        {businessesArr && businessesArr.slice(0, 9).map(biz => (
+                        {businessesArr && businessesArr.slice(0, 10).map((biz, idx) => (
                             <NavLink to={`/businesses/${biz.id}`}>
                                 <div key={biz} className='cate-pg-biz-card'>
                                     <div className='cate-pg-biz-pic-div'>
                                         <img className='biz-card-photo' id='cate-pg-biz-pic' src={bizPhoto(biz?.id)?.image_url} />
                                     </div>
                                     <div className='cate-pg-biz-info'>
-                                        <h4 className='cate-pg-biz-name'>{biz.name}</h4>
-                                        <p className='cate-pg-biz-cate'>{biz.category}</p>
-                                        <div className='cate-pg-biz-rating'>
-                                            {stars.map((_, index) => (                                
-                                                <FaStar
+                                        <h4 className='cate-pg-biz-name'>{idx + 1}. {biz.name}</h4>
+                                        <div className='bizreviews-ct-div'>
+                                            <div className='cate-pg-biz-rating'>
+                                                {stars.map((_, index) => (                                
+                                                    <FaStar
                                                     key={index}
                                                     isFilled={index + 1 < getAvrg(biz.id)}
                                                     color={index < getAvrg(biz.id) ? "#f15c00" :  "#a9a9a9"}
                                                     size={22}
-                                                ></FaStar>
-                                            ))}
+                                                    ></FaStar>
+                                                    ))}
+                                            </div>
+                                            <div className='bizreviews-ct'>{allBizReviews(biz?.id)}</div>
+                                        </div>
+                                        <div className='cate-pg-cate-price-div'>
+                                            <p className='cate-pg-biz-cate'>{biz.category}</p>
+                                            <p className='cate-pg-biz-price'>{biz.price_range}</p>
                                         </div>
                                         <p className='cate-pg-biz-hrs'>{biz.business_hours}</p>
                                         <div className='cate-pg-biz-review-div'>
