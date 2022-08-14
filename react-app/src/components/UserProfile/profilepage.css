@@ -461,6 +461,13 @@
     background-color: rgb(235, 235, 235, 0.6);
 }
 
+.fa-solid.fa-utensils,
+.fa-solid.fa-image,
+.fa-solid.fa-star-half-stroke,
+.fa-solid.fa-user {
+    color: #333;
+}
+
 /* Errors */
 .profile-pg-img-errors-div {
     position: absolute;

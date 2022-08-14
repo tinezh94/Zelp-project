@@ -9,19 +9,18 @@ import { FaStar } from 'react-icons/fa';
 
 import './profilepage.css';
 import { loadBusinesses } from '../../store/business';
-import { AddProfilePic } from '../../store/session';
 
-const UserProfilePage = () => {
+const UserBizPhotos = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
     const user = useSelector(state => state?.session.user);
     const reviews = useSelector(state => state?.reviews);
     const images = useSelector(state => state?.images);
-    const businesses = useSelector(state => state?.businesses);
-    const businessesArr = businesses ? Object.values(businesses) : null;
+    // const businesses = useSelector(state => state?.businesses);
+    // const businessesArr = businesses ? Object.values(businesses) : null;
 
-    // console.log('biz', businessesArr)
+
     const userReviews = Object.values(reviews)?.filter(review => {
         return review.user_id === user.id
     });
@@ -30,15 +29,21 @@ const UserProfilePage = () => {
         return image.user_id === user.id
     });
 
-    useEffect(() => {
-        dispatch(loadReviews());
-        dispatch(loadImages());
-        dispatch(loadBusinesses());
-    }, [dispatch, user?.profile_pic]);
+    const stars = Array(5).fill(0);
 
-    const month = user.created_at.split(' ')[2]
-    const year = user.created_at.split(' ')[3]
-    
+    useEffect(() => {
+        dispatch(loadImages());
+    }, [dispatch])
+
+    const onDeletePic = async (id) => {
+        await dispatch(deleteImage(id));
+        // history.push(`/businesses/${businessId}`);
+    }
+
+    const bizPhoto = (id) => {
+        return Object.values(images)?.filter(image => image.business_id === id)[1];
+    }
+
     return (
         <>
             <div className='profile-info-container'>
@@ -91,16 +96,23 @@ const UserProfilePage = () => {
                     </div>
                 </div>
                 <div className='profile-pg-bottom-right'>
+                    <div>
+                        <h2 className='profile-pg-h2-3'>Photos</h2>
+                        <div className='profile-pg-imgs-div'>
+                            {userImages && userImages.map(image => (
+                                <div className='profile-pg-imgs-div'>
+                                    <img  className='profile-pg-img' src={image.image_url} />
+                                    <button className='delete-pic-btn' type='button' onClick={() => onDeletePic(image.id)}>
+                                        <i className="fa-solid fa-xmark"></i>
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
-                    <div className='user-about-div'>
-                        <h4 className='about-user'>About {user.first_name} {user.last_name[0].toUpperCase()}</h4>
-                        <h4 className='zelp-since'>Zelping since </h4>
-                        <p className='month-yr'>{month} {year}</p>
-                    </div> 
             </div>
         </>
     )
-};
+}
 
-export default UserProfilePage;
-
+export default UserBizPhotos;

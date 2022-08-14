@@ -29,6 +29,9 @@ import CategoryPage from './components/category/CategoryPage';
 import BizPhotos from './components/images/BizPhotos';
 import PageNotFound from './components/PageNotFound';
 import AllBusinesses from './components/FilteredBiz/AllBusinesses';
+import UserBizPhotos from './components/UserProfile/UserBizPhotos';
+import UserReviews from './components/UserProfile/UserReviews';
+import UserBusinesses from './components/UserProfile/UserBusinesses';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -97,6 +100,15 @@ function App() {
         <Route path='/biz_photos/:businessId' exact={true}>
           <BizPhotos businesses={businesses} />
         </Route>
+        <ProtectedRoute path='/user_local_photos/:userId' exact={true}>
+          <UserBizPhotos />
+        </ProtectedRoute>
+        <ProtectedRoute path='/user_details_reviews/:userId' exact={true}>
+          <UserReviews businesses={businesses} />
+        </ProtectedRoute>
+        <ProtectedRoute path='/user_biz/:userId' exact={true}>
+          <UserBusinesses />
+        </ProtectedRoute>
         <Route path='/businesses' exact={true}>
           <AllBusinesses businesses={businesses} />
         </Route>
