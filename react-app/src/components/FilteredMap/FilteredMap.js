@@ -34,33 +34,33 @@ const MultiMapView = ({ filteredBiz, filteredCateBiz, apiKey, businessesArr }) =
     });
     
     // console.log('coordinates', allCoordinates)
-    let latSum = 0;
-    let lgnSum = 0;
-    for (let i = 0; i < allCoordinates.length; i++) {
-            let set = allCoordinates[i];
-            latSum += set.lat
-            lgnSum += set.lng
+    // let latSum = 0;
+    // let lgnSum = 0;
+    // for (let i = 0; i < allCoordinates.length; i++) {
+    //         let set = allCoordinates[i];
+    //         latSum += set.lat
+    //         lgnSum += set.lng
 
-    }
+    // }
 
-    const latAvrg = latSum / allCoordinates.length;
-    const lgnAvrg = lgnSum / allCoordinates.length;
-        // console.log('sums',  latAvrg, lgnAvrg)
+    // const latAvrg = latSum / allCoordinates.length;
+    // const lgnAvrg = lgnSum / allCoordinates.length;
+    //     // console.log('sums',  latAvrg, lgnAvrg)
 
-    let center;
-    if (filteredBiz.length === 0) {
-        center = {
-            lat: latAvrg,
-            lng: lgnAvrg
-        }
-    } 
+    // let center;
+    // if (filteredBiz.length === 0) {
+    //     center = {
+    //         lat: latAvrg,
+    //         lng: lgnAvrg
+    //     }
+    // } 
     
-    if (filteredBiz.length > 0 ){
-        center = {
-            lat: coordinates[0]?.lat,
-            lng: coordinates[0]?.lng
-        }
-    }
+    // if (filteredBiz.length > 0 ){
+    //     center = {
+    //         lat: coordinates[0]?.lat,
+    //         lng: coordinates[0]?.lng
+    //     }
+    // }
 
     let defaultCenter = {
         lat: 40.7624368,

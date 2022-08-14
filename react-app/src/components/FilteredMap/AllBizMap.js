@@ -25,22 +25,22 @@ const AllBizMapView = ({ businessesArr }) => {
     });
     
     // console.log('coordinates', allCoordinates)
-    let latSum = 0;
-    let lgnSum = 0;
-    for (let i = 0; i < allCoordinates.length; i++) {
-            let set = allCoordinates[i];
-            latSum += set.lat
-            lgnSum += set.lng
+    // let latSum = 0;
+    // let lgnSum = 0;
+    // for (let i = 0; i < allCoordinates.length; i++) {
+    //         let set = allCoordinates[i];
+    //         latSum += set.lat
+    //         lgnSum += set.lng
 
-    }
+    // }
 
-    const latAvrg = latSum / allCoordinates.length;
-    const lgnAvrg = lgnSum / allCoordinates.length;
+    // const latAvrg = latSum / allCoordinates.length;
+    // const lgnAvrg = lgnSum / allCoordinates.length;
 
-    let center = {
-        lat: latAvrg,
-        lng: lgnAvrg
-    }
+    // let center = {
+    //     lat: latAvrg,
+    //     lng: lgnAvrg
+    // }
 
     let defaultCenter = {
         lat: 40.7624368,
