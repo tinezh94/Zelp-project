@@ -42,6 +42,11 @@ const AllBizMapView = ({ businessesArr }) => {
         lng: lgnAvrg
     }
 
+    let defaultCenter = {
+        lat: 40.7624368,
+        lng: -73.8311779
+    }
+
     useEffect(() => {
         if (key) {
             setIsLoad(true);
@@ -61,7 +66,7 @@ const AllBizMapView = ({ businessesArr }) => {
                         apiKey={key}
                         onLoad={onLoad}
                         zoom={12}
-                        center={center}
+                        center={defaultCenter}
                     >
                         {allCoordinates.map(set => (
                             <Marker position={{lat: set.lat, lng: set.lng}}></Marker>
