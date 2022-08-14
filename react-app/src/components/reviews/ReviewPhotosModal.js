@@ -6,7 +6,6 @@ import { loadImages, createImage, deleteImage } from "../../store/image";
 import UploadReviewPhotos from './UploadReviewPhotos';
 
 const ReviewPhotosModal = () => {
-    const history = useHistory();
     const { businessId } = useParams();
     const dispatch = useDispatch();
 
@@ -27,48 +26,6 @@ const ReviewPhotosModal = () => {
         dispatch(loadImages());
     },[dispatch, businessId]);
 
-    // const fileExtensions = '([a-zA-Z0-9\s_\\.\-:])+(.png|.jpg|.gif|.jpeg|.pdf)$'
-
-    // useEffect(() => {
-    //     const errors = [];
-    //     if (!image?.name.match(fileExtensions)) errors.push('Please select a valid image type');
-    //     if (image?.size > 1e6) errors.push('Please upload an image smaller than 1MB');
-    //     setValidationErrors(errors);
-    // }, [image?.name, image?.size]);
-
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     setImageLoading(true);
-    //     setHasSubmitted(true);
-        
-    //     if (!validationErrors.length) {
-    //         const payload = {
-    //             user_id: user.id,
-    //             business_id: Number(businessId),
-    //             image_url: image
-    //         }
-    //         const uploadedImage = await dispatch(createImage(payload));
-    //         console.log('uploadedimage', uploadedImage)
-    //         if (uploadedImage) {
-    //             reset();
-    //             setHasSubmitted(false);
-    //             setImageLoading(false);
-    //             setValidationErrors([]);
-    //             hideForm();
-    //         }
-    //     }
-    // }
-
-    // const updateImage = (e) => {
-    //     const file = e.target.files[0];
-    //     setImage(file);
-    // }
-
-    // // console.log('image', image, image?.name, image?.size)
-    // const reset = () => {
-    //     setImage(null);
-    // }
-
     const hideForm = () => {
         setShowModal(false);
     }
@@ -78,25 +35,6 @@ const ReviewPhotosModal = () => {
         console.log('container', container)
         if (bizImages.length > 0 && container) container.style.width = '100px';
     }
-
-    // const changeContent = () => {
-    //     const selectPhotos = document.getElementById('select-photos');
-    //     const photoIllustration = document.getElementById('drop-photos')
-
-    //     if (image && selectPhotos && photoIllustration) {
-    //         selectPhotos.style.display = 'none';
-    //         photoIllustration.style.display = 'none';
-    //         return (
-    //             <div>
-    //                 <img 
-    //                     className='image-preview'
-    //                     src={URL.createObjectURL(image)}
-    //                     alt='image-preview'
-    //                 />
-    //             </div>
-    //         )
-    //     }
-    // }
 
     return (
         <div>
