@@ -109,9 +109,10 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     height: 60px;
-    overflow: hidden;
+    overflow: auto;
     text-overflow: ellipsis;
     color: #6e7072;
+    word-break: break-word;
     /* padding-right: 24px; */
 }
 
