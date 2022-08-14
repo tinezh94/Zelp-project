@@ -143,7 +143,11 @@ textarea {
 
 .add-photos-modal {
     width: 900px;
-    height: 450px;
+    height: 480px;
+    background-color: white;
+    border-radius: 15px;
+    box-sizing: border-box;
+    padding: 10px;
 }
 
 #modal-content.add-photos-modal {
