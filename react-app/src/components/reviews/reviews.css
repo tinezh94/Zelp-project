@@ -450,3 +450,16 @@ input::file-selector-button:hover {
     flex-direction: row;
     justify-content: space-around;
 }
+
+/* Errors */
+.remove-review-error-msg {
+    padding-top: 4px;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+    color: #666;
+    width: 500px;
+    font-size: 14px;
+}
+
+.remove-review-errors-ul {
+    padding-left: 8px;
+}
