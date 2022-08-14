@@ -11,10 +11,28 @@ const DeleteReviewModal = ({ review, businessId, showMenu, setShowMenu }) => {
     const [ showModal, setShowModal ] = useState(false);
 
     const [ reason, setReason ] = useState('');
+    const [ validationErrors, setValidationErrors ] = useState([]);
+    const [ hasSubmitted, setHasSubmitted ] = useState(false);
 
     const onDelete = async (id) => {
-        await dispatch(deleteReview(id));
+        setHasSubmitted(true);
+        console.log('errors', validationErrors)
+        if (validationErrors.length === 0) {
+            await dispatch(deleteReview(id));
+        }
+        if (validationErrors.length > 0) {
+            return (
+                <div className='remove-review-errors'>
+                    <ul>
+                        {validationErrors.map(error => (
+                            <li key={error}>{error}</li>
+                        ))}
+                    </ul>
+                </div>
+            )
+        }
         hideForm();
+        setHasSubmitted(false);
         setShowMenu(false);
         history.push(`/businesses/${businessId}`);
     }
@@ -29,14 +47,13 @@ const DeleteReviewModal = ({ review, businessId, showMenu, setShowMenu }) => {
         setShowModal(false);
     }
 
-    // const handleChange = (e) => {
-    //     e.preventDefault();
-    //     setReason(e.target.value);
-    // }
-
-
-    console.log('menu',showMenu)
-    console.log('modal', showModal)
+    console.log('reason~~~', reason)
+    useEffect(() => {
+        const errors = [];
+        console.log('reason', reason)
+        if (reason.length === 0) errors.push('Please select one of the following reasons.');
+        setValidationErrors(errors);
+    }, [reason])
 
     return (
         <div>
@@ -47,6 +64,15 @@ const DeleteReviewModal = ({ review, businessId, showMenu, setShowMenu }) => {
                 <Modal onClose={() => setShowModal(false)} className='remove-review-container'>
                     <div className="remove-review-modal">
                         <h2 className="remove-review-h2">Remove Review</h2>
+                        <div className='remove-review-errors'>
+                            {hasSubmitted && validationErrors.length > 0 && (
+                                <ul className='remove-review-errors-ul'>
+                                    {validationErrors.map(error => (
+                                        <li className='remove-review-error-msg' key={error}>{error}</li>
+                                    ))}
+                                </ul>
+                            )}
+                        </div>
                         <h4 className="remove-review-h4">Why do you want to remove this review?</h4>
                         <div className="remove-review-form">
                             <form className="remove-review-form">
@@ -54,9 +80,9 @@ const DeleteReviewModal = ({ review, businessId, showMenu, setShowMenu }) => {
                                     <input 
                                         type="radio"
                                         name='reason'
-                                        value={reason}
+                                        value='legal action'
                                         onChange={(e) => setReason(e.target.value)}
-                                        // checked={'reason'}
+                                        checked={reason === 'legal action'}
                                     />
                                     <label htmlFor="reason" className="remove-review-label">I was threatened with legal action or sued.</label>
                                 </div>
@@ -64,9 +90,9 @@ const DeleteReviewModal = ({ review, businessId, showMenu, setShowMenu }) => {
                                     <input 
                                         type="radio"
                                         name='reason'
-                                        value={reason}
+                                        value='refund'
                                         onChange={(e) => setReason(e.target.value)}
-                                        // checked={'reason'}
+                                        checked={reason === 'refund'}
                                     />
                                     <label htmlFor="reason" className="remove-review-label">I was offered a refund or other compensation to remove this review.</label>
                                 </div>
@@ -74,9 +100,9 @@ const DeleteReviewModal = ({ review, businessId, showMenu, setShowMenu }) => {
                                     <input 
                                         type="radio"
                                         name='reason'
-                                        value={reason}
+                                        value='changed opinion'
                                         onChange={(e) => setReason(e.target.value)}
-                                        // checked={'reason'}
+                                        checked={reason === 'changed opinion'}
                                     />
                                     <label htmlFor="reason" className="remove-review-label">I changed my opinion of this business after a new interaction.</label>
                                 </div>
@@ -84,16 +110,17 @@ const DeleteReviewModal = ({ review, businessId, showMenu, setShowMenu }) => {
                                     <input 
                                         type="radio"
                                         name="reason"
-                                        value={reason}
+                                        value='other'
+                                        checked={reason === 'other'}
                                         onChange={(e) => setReason(e.target.value)}
                                     />
                                     <label htmlFor="reason" className="remove-review-label">Other</label>
                                 </div>
-                            </form>
                             <div className="remove-reviews-btns-div">
                                 <button className="remove-review-confirm-btn" type="button" onClick={() => onDelete(review.id)}>Remove Review</button>
                                 <button className="remove-review-cancel-btn" type="button" onClick={onCancel}>Keep Review</button>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </Modal>
