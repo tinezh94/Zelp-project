@@ -9,9 +9,8 @@ import { FaStar } from 'react-icons/fa';
 
 import './profilepage.css';
 import { loadBusinesses } from '../../store/business';
-import { AddProfilePic } from '../../store/session';
 
-const UserProfilePage = () => {
+const UserBusinesses = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -21,7 +20,7 @@ const UserProfilePage = () => {
     const businesses = useSelector(state => state?.businesses);
     const businessesArr = businesses ? Object.values(businesses) : null;
 
-    // console.log('biz', businessesArr)
+
     const userReviews = Object.values(reviews)?.filter(review => {
         return review.user_id === user.id
     });
@@ -30,15 +29,17 @@ const UserProfilePage = () => {
         return image.user_id === user.id
     });
 
+    const stars = Array(5).fill(0);
+
     useEffect(() => {
-        dispatch(loadReviews());
         dispatch(loadImages());
         dispatch(loadBusinesses());
-    }, [dispatch, user?.profile_pic]);
+    }, [dispatch])
 
-    const month = user.created_at.split(' ')[2]
-    const year = user.created_at.split(' ')[3]
-    
+    const bizPhoto = (id) => {
+        return Object.values(images)?.filter(image => image.business_id === id)[1];
+    }
+
     return (
         <>
             <div className='profile-info-container'>
@@ -66,13 +67,11 @@ const UserProfilePage = () => {
                 <div className='profile-pg-bottom-left'>
                     <h3 className='user-profile-h3'>{user.first_name}'s Profile</h3>
                     <div className='user-profile-left-links'>
-                        <NavLink to={`/users/${user.id}`}>
-                            <i className="fa-solid fa-user"></i>
-                            <button className='user-profile-left-btns'>Profile Overview</button>
-                        </NavLink>
+                        <i className="fa-solid fa-user"></i>
+                        <button className='user-profile-left-btns'>Profile Overview</button>
                     </div>
                     <div className='user-profile-left-links'>
-                        <NavLink to={`/user_details_reviews/${user.id}`}>
+                        <NavLink to={`/user_details_reviews/${user.id}`}> 
                             <i className="fa-solid fa-star-half-stroke"></i>
                             <button className='user-profile-left-btns' id='profile-pic-review-btn'>Reviews</button>
                         </NavLink>
@@ -91,16 +90,32 @@ const UserProfilePage = () => {
                     </div>
                 </div>
                 <div className='profile-pg-bottom-right'>
+                    <div>
+                        <h2 className='profile-pg-h2-2'>Businesses</h2>
+                        <div className='profile-pg-bizes-container'>
+                            {businessesArr && businessesArr.filter(biz => (
+                                biz.owner_id === user.id
+                                )).map(biz => (
+                                    <div className='profile-pg-biz-info'>
+                                    <div>
+                                        <img className='profile-pg-biz-img' src={bizPhoto(biz?.id)?.image_url}/>
+                                    </div>
+                                    <div className='profile-pg-owner-biz-info'>
+                                        <NavLink to={`/businesses/${biz.id}`}>
+                                            <h3 className='profile-pg-owner-biz-name'>{biz.name}</h3>
+                                        </NavLink>
+                                        <p className='profile-pg-owner-biz-add'>{biz.address}</p>
+                                        <p className='profile-pg-owner-biz-city'>{biz.city} {biz.state} {biz.zipcode}</p>
+                                        <p className='profile-pg-owner-biz-des'>{biz.description}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
-                    <div className='user-about-div'>
-                        <h4 className='about-user'>About {user.first_name} {user.last_name[0].toUpperCase()}</h4>
-                        <h4 className='zelp-since'>Zelping since </h4>
-                        <p className='month-yr'>{month} {year}</p>
-                    </div> 
             </div>
         </>
     )
-};
+}
 
-export default UserProfilePage;
-
+export default UserBusinesses;
