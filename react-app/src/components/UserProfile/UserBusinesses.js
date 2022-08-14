@@ -67,8 +67,10 @@ const UserBusinesses = () => {
                 <div className='profile-pg-bottom-left'>
                     <h3 className='user-profile-h3'>{user.first_name}'s Profile</h3>
                     <div className='user-profile-left-links'>
-                        <i className="fa-solid fa-user"></i>
-                        <button className='user-profile-left-btns'>Profile Overview</button>
+                        <NavLink to={`/users/${user.id}`}>
+                            <i className="fa-solid fa-user"></i>
+                            <button className='user-profile-left-btns'>Profile Overview</button>
+                        </NavLink>
                     </div>
                     <div className='user-profile-left-links'>
                         <NavLink to={`/user_details_reviews/${user.id}`}> 

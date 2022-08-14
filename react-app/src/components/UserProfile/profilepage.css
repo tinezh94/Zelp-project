@@ -397,6 +397,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     color: #6e7072;
+    word-break: break-word;
 }
 
 .profile-pg-h2-3 {
