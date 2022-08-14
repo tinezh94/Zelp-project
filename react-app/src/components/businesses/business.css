@@ -90,6 +90,10 @@
     font-size: 18px;
 }
 
+#biz-category:hover {
+    text-decoration: underline;
+}
+
 .biz-hour {
     font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
     font-size: 16px;

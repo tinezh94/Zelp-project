@@ -91,7 +91,9 @@ const BusinessPage = () => {
                             <p className='bullet-pt'>•</p>
                             <p id='biz-price'>{business.price_range}</p>
                             <p className='bullet-pt'>•</p>
-                            <p id='biz-category'>{business.category}</p>
+                            <NavLink to={`/search/${business.category}`}>
+                                <p id='biz-category'>{business.category}</p>
+                            </NavLink>
                         </div>
                         <div>
                             <p className='biz-hour'>{business.business_hours}</p>
