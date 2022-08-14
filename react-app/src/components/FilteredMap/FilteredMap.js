@@ -80,7 +80,7 @@ const MultiMapView = ({ filteredBiz, filteredCateBiz, apiKey, businessesArr }) =
                         mapContainerStyle={{width: '100%', height: '100vh'}}
                         apiKey={apiKey}
                         onLoad={onLoad}
-                        zoom={11}
+                        zoom={12}
                         center={center}
                     >
                         {coordinates.map(set => (
