@@ -415,3 +415,38 @@ input::file-selector-button:hover {
     color: #666;
     width: 500px;
 }
+
+#review-add-photos-containers {
+    width: 630px;
+    margin: 0;
+    border: 1px solid #ebebeb;
+}
+
+.create-review-imgs-div {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    justify-content: center;
+    gap: 20px;
+    /* position: absolute; */
+    /* top: 48rem; */
+    margin-top: 20px;
+}
+
+.create-review-imgs-container {
+    position: relative;
+}
+
+.create-review-delete-pic-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.drop-photos-modal-preview-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

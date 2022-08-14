@@ -13,7 +13,6 @@ const CategoryPage = ({ businesses }) => {
     const dispatch = useDispatch();
     const { searchTerm } = useParams();
     console.log(searchTerm)
-    const term = searchTerm.split(' ')[0];
 
     // const businesses = useSelector(state => state?.businesses);
     const businessesArr = businesses ? Object.values(businesses) : null;
@@ -31,7 +30,7 @@ const CategoryPage = ({ businesses }) => {
     });
 
     const filteredBiz = businessesArr?.filter(biz => {
-        return biz.name.toLowerCase().includes(term.toLowerCase());
+        return biz.name.toLowerCase().includes(searchTerm.toLowerCase());
     });
 
     console.log('filteredbiz', filteredBiz)
@@ -94,6 +93,10 @@ const CategoryPage = ({ businesses }) => {
                                         <p className='cate-pg-biz-descrip'>{biz.description}</p>
                                         <div className='biz-dining-options-div'>
                                             <div className='biz-dining-options'>
+                                                <i className="fa-solid fa-x"></i>
+                                                <p className='biz-dining-p'>Outdoor Dining</p>
+                                            </div>
+                                            <div className='biz-dining-options'>
                                                 <i className="fa-solid fa-check"></i>
                                                 <p className='biz-dining-p'>Dine In</p>
                                             </div>
@@ -132,6 +135,10 @@ const CategoryPage = ({ businesses }) => {
                                     <p className='cate-pg-biz-hrs'>{biz.business_hours}</p>
                                     <p className='cate-pg-biz-descrip'>{biz.description}</p>
                                     <div className='biz-dining-options-div'>
+                                        <div className='biz-dining-options'>
+                                            <i className="fa-solid fa-x"></i>
+                                            <p className='biz-dining-p'>Outdoor Dining</p>
+                                        </div>
                                         <div className='biz-dining-options'>
                                             <i className="fa-solid fa-check"></i>
                                             <p className='biz-dining-p'>Dine In</p>

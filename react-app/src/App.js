@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Wrapper } from '@googlemaps/react-wrapper';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/navbar/NavBar';
@@ -29,6 +28,7 @@ import CategoryPage from './components/category/CategoryPage';
 // import AllImages from './components/images/AllImages';
 import BizPhotos from './components/images/BizPhotos';
 import PageNotFound from './components/PageNotFound';
+import AllBusinesses from './components/FilteredBiz/AllBusinesses';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -55,10 +55,10 @@ function App() {
 
   return (
     <BrowserRouter>
-    <Wrapper libraries={'places'}>
       <NavBar />
       <Switch>
         <Route path='/login' exact={true}>
+          {/* <NavBar /> */}
           <LoginForm />
         </Route>
         <Route path='/signup' exact={true}>
@@ -85,7 +85,7 @@ function App() {
         <Route path='/' exact={true} >
           <BusinessesPage businesses={businesses} />
         </Route>
-        <ProtectedRoute path='/biz/:businessId/images-upload' exact={true}>
+        <ProtectedRoute path='/biz_user_photos/:businessId/upload' exact={true}>
           <BizUploadImage />
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId/businesses' exact={true}>
@@ -94,15 +94,17 @@ function App() {
         <Route path='/search/:searchTerm' exact={true}>
           <CategoryPage businesses={businesses} />
         </Route>
-        <Route path='/biz-photos/:businessId' exact={true}>
+        <Route path='/biz_photos/:businessId' exact={true}>
           <BizPhotos businesses={businesses} />
+        </Route>
+        <Route path='/businesses' exact={true}>
+          <AllBusinesses businesses={businesses} />
         </Route>
         <Route>
           <PageNotFound />
         </Route>
       </Switch>
       <Footer />
-    </Wrapper>
     </BrowserRouter>
   );
 }

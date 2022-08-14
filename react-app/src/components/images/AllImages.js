@@ -34,7 +34,7 @@ const AllImages = () => {
                 ))}
             </div>
             <div className="see-all-photos-div">
-                <NavLink to={`/biz-photos/${businessId}`}>
+                <NavLink to={`/biz_photos/${businessId}`}>
                     <button className="see-all-photos-btn">See {bizImages.length} Photos</button>
                 </NavLink>
             </div>

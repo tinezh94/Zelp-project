@@ -43,27 +43,12 @@ const CreateBusinessForm = () => {
     const [ hasSubmitted, setHasSubmitted ] = useState(false);
     const [ validationErrors, setValidationErrors ] = useState([]);
     
-    // useEffect(() => {
-    //     const errors = [];
-    // })
 
     useEffect(() => {
         dispatch(loadCategories());
     }, [dispatch]);
 
     let placeId = autoValue ? autoValue.value.place_id : null;
-    // console.log('placeId', placeId)
-    // console.log('apiKey', apiKey)
-    // geocodeByPlaceId(placeId)
-    //     .then(results => {
-    //         setAddress(results[0].formatted_address);
-    //         setStreetAddress(address.split(',')[0]);
-    //         setCity(address.split(',')[1]);
-    //         setState(address.split(',').split(' ')[0]);
-    //         setZipcode(address.split(',').split(' ')[1]);
-
-    //     })
-    //     .catch(error => console.error(error));
 
     if (placeId) {
         geocodeByPlaceId(placeId)
@@ -168,7 +153,7 @@ const CreateBusinessForm = () => {
             if (createdBusiness) {
                 reset();
                 setHasSubmitted(false);
-                history.push(`/biz/${createdBusiness.id}/images-upload`);
+                history.push(`/biz_user_photos/${createdBusiness.id}/upload`);
             };
         }
     };
@@ -194,7 +179,7 @@ const CreateBusinessForm = () => {
             <form onSubmit={onSubmit} className='create-biz-form'>
                 <div className='create-biz-errors-div'>
                     {hasSubmitted && validationErrors.length > 0 && (
-                            <ul>
+                            <ul className='create-biz-error'>
                                 {validationErrors.map(error => (
                                     <li key={error}>{error}</li>
                                 ))}
@@ -216,7 +201,7 @@ const CreateBusinessForm = () => {
                     />
                 </div>
                 <div className='create-biz-single-sec'>
-                    <label className='create-biz-label'>Address*</label>
+                    <label className='create-biz-label'>Address</label>
                     <div>
                         {apiKey && 
                         <GooglePlacesAutocomplete
@@ -243,30 +228,44 @@ const CreateBusinessForm = () => {
                         }
                     </div>
                 </div>
-                {/* <label>Address*</label>
-                <input
-                    type='text'
-                    value={streetAddress}
-                    onChange={e => setStreetAddress(e.target.value)} 
-                />
-                <label>City*</label>
-                <input
-                    type='text'
-                    value={city}
-                    onChange={e => setCity(e.target.value)} 
-                />
-                <label>State*</label>
-                <input
-                    type='text'
-                    value={state}
-                    onChange={e => setState(e.target.value)}
-                />
-                <label>Zip Code*</label>
-                <input 
-                    type='text'
-                    value={zipcode}
-                    onChange={e => setZipcode(e.target.value)}
-                /> */}
+                <div className='create-biz-address-div'>
+                    <label className='create-biz-label'>Address*</label>
+                    <input
+                        className='create-biz-address-input'
+                        type='text'
+                        value={streetAddress}
+                        onChange={e => setStreetAddress(e.target.value)} 
+                    />
+                </div>
+                <div className='create-biz-city-state-div'>
+                    <div className='create-biz-city-div'>
+                        <label className='create-biz-label'>City*</label>
+                        <input
+                            className='create-biz-input'
+                            type='text'
+                            value={city}
+                            onChange={e => setCity(e.target.value)} 
+                        />
+                    </div>
+                    <div className='create-biz-state-div'>
+                        <label className='create-biz-label'>State*</label>
+                        <input
+                            className='create-biz-input'
+                            type='text'
+                            value={state}
+                            onChange={e => setState(e.target.value)}
+                        />
+                    </div>
+                </div>
+                <div className='create-biz-zipcode-div'>
+                    <label className='create-biz-label'>Zip Code*</label>
+                    <input 
+                        className='create-biz-zipcode-input'
+                        type='text'
+                        value={zipcode}
+                        onChange={e => setZipcode(e.target.value)}
+                    />
+                </div>
                 <div className='create-biz-single-sec'>
                     <label className='create-biz-label'>Description*</label>
                     <textarea

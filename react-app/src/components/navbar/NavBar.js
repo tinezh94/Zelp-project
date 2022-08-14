@@ -3,6 +3,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import CreateBusinessForm from '../businesses/CreateBusinessForm'
 import SearchBar from '../SearchBar';
@@ -20,7 +21,7 @@ const NavBar = () => {
     sessionLinks = (
       <div className='session-actions-div'>
         <li>
-          <NavLink to='/' className='navbar-businesses-link'>Businesses</NavLink>
+          <NavLink to='/' className='navbar-businesses-link' onClick={() => {window.location.href='/'}}>Businesses</NavLink>
         </li>
         <li>
           <NavLink to='/login' exact={true} activeClassName='active'>
@@ -71,7 +72,7 @@ const NavBar = () => {
         {user && (
           <div className='profile-div'>
             <li>
-              <NavLink to='/' className='navbar-businesses'>Businesses</NavLink>
+              <NavLink to='/' className='navbar-businesses' onClick={() => {window.location.href='/'}}>Businesses</NavLink>
             </li>
             <li>
                 <img className='user-profile-pic'  src={user.profile_pic} style={{width: 40, height: 40}} onClick={() => openMenu()} />

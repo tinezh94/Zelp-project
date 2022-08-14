@@ -4,30 +4,19 @@ import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { loadKey } from '../../store/map';
 
-const MultiMapView = ({ filteredBiz, filteredCateBiz, apiKey, businessesArr }) => {
-    const dispatch = useDispatch();
-
+const AllBizMapView = ({ businessesArr }) => {
     const [ isLoaded, setIsLoad ] = useState(false);
+
+    const dispatch = useDispatch();
+    const key = useSelector(state => state?.key);
+
+    useEffect(() => {
+        dispatch(loadKey());
+    }, [dispatch])
 
     const mapRef = useRef();
     const onLoad = useCallback(map => (mapRef.current = map), [])
 
-    // console.log('filtered', filteredBiz)
-
-    let coordinates = [];
-
-    filteredBiz?.forEach(biz => {
-        coordinates.push({lat: biz.latitude, lng: biz.longitude})
-    });
-
-    filteredCateBiz?.forEach(biz => {
-        coordinates.push({lat: biz.latitude, lng: biz.longitude})
-    });
-
-    console.log('coordinates', coordinates)
-
-    
-    // let center = [];
     let allCoordinates = [];
     businessesArr?.forEach(biz => {
         allCoordinates.push({lat: biz.latitude, lng: biz.longitude})
@@ -45,28 +34,17 @@ const MultiMapView = ({ filteredBiz, filteredCateBiz, apiKey, businessesArr }) =
 
     const latAvrg = latSum / allCoordinates.length;
     const lgnAvrg = lgnSum / allCoordinates.length;
-        // console.log('sums',  latAvrg, lgnAvrg)
 
-    let center;
-    if (filteredBiz.length === 0) {
-        center = {
-            lat: latAvrg,
-            lng: lgnAvrg
-        }
-    } 
-    
-    if (filteredBiz.length > 0 ){
-        center = {
-            lat: coordinates[0]?.lat,
-            lng: coordinates[0]?.lng
-        }
+    let center = {
+        lat: latAvrg,
+        lng: lgnAvrg
     }
 
     useEffect(() => {
-        if (apiKey) {
+        if (key) {
             setIsLoad(true);
         }    
-    }, [apiKey])
+    }, [key])
 
     if (!isLoaded) {
         return <h1>Loading...</h1>
@@ -78,12 +56,12 @@ const MultiMapView = ({ filteredBiz, filteredCateBiz, apiKey, businessesArr }) =
                 <div className='multi-mark-map-container'>
                     <GoogleMap
                         mapContainerStyle={{width: '100%', height: '100vh'}}
-                        apiKey={apiKey}
+                        apiKey={key}
                         onLoad={onLoad}
                         zoom={11}
                         center={center}
                     >
-                        {coordinates.map(set => (
+                        {allCoordinates.map(set => (
                             <Marker position={{lat: set.lat, lng: set.lng}}></Marker>
                         ))}
                     </GoogleMap>
@@ -91,6 +69,6 @@ const MultiMapView = ({ filteredBiz, filteredCateBiz, apiKey, businessesArr }) =
             )}
         </div>
     )
-};
+}
 
-export default MultiMapView;
+export default AllBizMapView;

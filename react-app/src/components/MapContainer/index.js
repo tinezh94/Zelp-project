@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadKey } from '../../store/map';
 import Maps from './Map';
 
+const libraries = ['places'];
 const MapContainer = ({ latitude, longitude}) => {
     const dispatch = useDispatch();
     // const [ key, setKey ] = useState(null);

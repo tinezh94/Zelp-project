@@ -72,7 +72,7 @@ const BizPhotos = ({ businesses }) => {
                         </div>
                     </div>
                     <div>
-                        <NavLink to={`/biz/${businessId}/images-upload`}>
+                        <NavLink to={`/biz_user_photos/${businessId}/upload`}>
                             <button className="bizphotos-add-btn">Add photos</button>
                         </NavLink>
                     </div>

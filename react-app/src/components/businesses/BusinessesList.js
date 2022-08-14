@@ -29,6 +29,7 @@ const BusinessesPage = ({ businesses }) => {
     const reviewsArr = reviews ? Object.values(reviews) : null;
     // console.log('reviews', reviewsArr)
 
+    // const [ searchTerm, setSearchTerm ] = useState('restaurants');
 
     useEffect(() => {
         dispatch(loadBusinesses());
@@ -53,9 +54,17 @@ const BusinessesPage = ({ businesses }) => {
     const stars = Array(5).fill(0);
 
     return (
-        <>
+        <> 
             <div className='main-pg-background-image' style={{ backgroundImage: 'linear-gradient(90deg,#0006,#0000001a 30%), url(https://restaurants.yelp.com/wp-content/uploads/sites/3/2022/05/different-kinds-of-food-on-a-table-1944x1094.jpeg)'}}></div>
             <h1 className='bizes-h1'>Ready to Eat?</h1>
+            <div>
+                <NavLink to='/businesses'>
+                    <button className='restaurants-btn'>
+                        <i className="fa-solid fa-magnifying-glass"></i>
+                        Restaurants
+                    </button>
+                </NavLink>
+            </div>
             <div className='main-page-top-container'>
                 <h2 className='main-pg-h2'>Your Next Visit Awaits</h2>
                 <div className='biz-cards-container'>

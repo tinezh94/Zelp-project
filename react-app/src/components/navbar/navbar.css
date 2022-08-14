@@ -12,6 +12,7 @@ nav {
     display: flex;
     flex-direction: row;
 }
+
 .search-submit-btn {
     background-color: #E00707;
     border-radius: 0 4px 4px 0;
