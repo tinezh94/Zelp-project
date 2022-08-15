@@ -229,7 +229,7 @@ def seed_bizphotos():
     marthas_photo1 = Bizphoto(
         user_id=5,
         business_id=10,
-        image_url=['https://s3-media0.fl.yelpcdn.com/bphoto/DhJUcppGTB2C7bXkUDK1kw/o.jpg','https://s3-media0.fl.yelpcdn.com/bphoto/vHDmseC6tU2DtI95DcRQww/o.jpg','https://s3-media0.fl.yelpcdn.com/bphoto/Yk8VK4BIa80B0vwJf30ZZQ/o.jpg','https://s3-media0.fl.yelpcdn.com/bphoto/vkBB5BUwoQfT9jOWa0UarA/o.jpg','https://s3-media0.fl.yelpcdn.com/bphoto/fKKb2ebVwu2QyV23ApUZLg/o.jpg']
+        image_url='https://s3-media0.fl.yelpcdn.com/bphoto/LnP7lqSZU3yjvoyVhOYhxQ/o.jpg'
     )
     marthas_photo2 = Bizphoto(
         user_id=5,
