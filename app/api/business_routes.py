@@ -17,7 +17,7 @@ def validation_errors_to_error_messages(validation_errors):
 
 @business_routes.route('/google_maps_api')
 def google_map_api():
-    print('backend', os.environ.get('API_KEY'))
+    # print('backend', os.environ.get('API_KEY'))
     return {'api_key': os.environ.get('API_KEY')}
 
 @business_routes.route('/')

@@ -20,6 +20,19 @@ const DeleteReviewModal = ({ review, businessId, showMenu, setShowMenu }) => {
         if (validationErrors.length === 0) {
             await dispatch(deleteReview(id));
         }
+        else {
+            return (
+                <div className='remove-review-errors'>
+                    {/* {hasSubmitted && validationErrors.length > 0 && ( */}
+                        <ul className='remove-review-errors-ul'>
+                            {validationErrors.map(error => (
+                                <li className='remove-review-error-msg' key={error}>{error}</li>
+                            ))}
+                        </ul>
+                    {/* )} */}
+                </div>
+            )
+        }
         hideForm();
         setHasSubmitted(false);
         setShowMenu(false);
