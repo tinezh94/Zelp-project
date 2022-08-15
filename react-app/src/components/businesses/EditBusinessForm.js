@@ -20,7 +20,7 @@ const EditBusinessForm = () => {
     const categories = useSelector(state => state?.categories);
     const businesses = useSelector(state => state?.businesses);
     const apiKey = useSelector(state => state?.key);
-    console.log("edit business")
+    // console.log("edit business")
     const businessesArr = businesses ? Object.values(businesses) : null;
     const categoriesArr = categories ? Object.values(categories) : null;
 
