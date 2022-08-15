@@ -52,8 +52,8 @@ const CreateBusinessForm = () => {
 
     if (placeId) {
         geocodeByPlaceId(placeId)
-        .then(results => {
-            setAddress(results[0].formatted_address);
+        .then(result => {
+            setAddress(result[0].formatted_address);
             setStreetAddress(address.split(',')[0]);
             setCity(address.split(', ')[1]);
             let stateZip = address.split(', ')[2];
@@ -82,6 +82,7 @@ const CreateBusinessForm = () => {
 
     const phoneNumber = /^\(?([0-9]{3})\)?(\-[0-9]{3})(\-[0-9]{4})$/;
     const operatingHours = /^(0?[1-9]|1[0-2]):([0-5]\d)\s((?:A|P)\.?M\.?)\s([\-])\s(0?[1-9]|1[0-2]):([0-5]\d)\s((?:A|P)\.?M\.?)$/i;
+    const validZip = /^\d{5}$/;
     
     // console.log(businessHours?.split('-')[1].split(':')[0])
     const morning = businessHours?.split(' - ')[0]?.split(' ')[1];
@@ -112,18 +113,23 @@ const CreateBusinessForm = () => {
         if (!name) errors.push('Business name cannot be empty')
         if (businessesArr?.map(business => business.name).includes(name)) errors.push('Business name must be unique');
         if (!address) errors.push('Business address cannot be empty');
+        if (!streetAddress) errors.push('Business address cannot be empty');
+        if (!city) errors.push('City field cannot be empty')
+        if (!state) errors.push('State field cannot be empty')
+        if (!zipcode) errors.push('Zipcode field cannot be empty')
+        if (!(zipcode?.match(validZip))) errors.push('Zipcode must be in valid format. ie. 12345')
         if (!description) errors.push('Please tell us what your business does')
         if (description.length < 50) errors.push('Please describe your business with more details');
         if (description.length > 1000) errors.push('Please shorten your description');
         if (category === 'Please choose a category') errors.push('Please choose a category')
         if (!businessHours) errors.push('Please tell us your operating hours')
-        if (!businessHours.match(operatingHours)) errors.push('Please have your business hours in valid format: ie. 10:00 AM - 11:00 PM');
+        if (!businessHours?.match(operatingHours)) errors.push('Please have your business hours in valid format: ie. 10:00 AM - 11:00 PM');
         if (!validateOperation()) errors.push('Please enter valid operating hours');
         // if (!(businessHours.match(operatingHours))) errors.push ('Pleast enter your operating hours in such format: 10:00 AM - 10:00 PM');
         if (!priceRange) errors.push('Please choose a price range for your business')
-        if (!(phone.match(phoneNumber))) errors.push('Please enter a valid phone number, i.g 012-333-4567')
+        if (!(phone?.match(phoneNumber))) errors.push('Please enter a valid phone number, i.g 012-333-4567')
         setValidationErrors(errors);
-    }, [name, description, category, businessHours, priceRange, phone, address])
+    }, [name, description, category, businessHours, priceRange, phone, address, streetAddress, city, state, zipcode])
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -201,7 +207,7 @@ const CreateBusinessForm = () => {
                     />
                 </div>
                 <div className='create-biz-single-sec'>
-                    <label className='create-biz-label'>Address</label>
+                    <label className='create-biz-label'>Address*</label>
                     <div>
                         {apiKey && 
                         <GooglePlacesAutocomplete
