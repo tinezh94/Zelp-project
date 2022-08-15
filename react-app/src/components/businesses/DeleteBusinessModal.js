@@ -24,10 +24,12 @@ const DeleteBizModal = ({ business }) => {
         setShowModal(false);
     }
 
+    console.log('modal', showModal)
+
     return (
         <div>
             <div>
-                <button className='edit-biz-delete-btn' onClick={() => setShowModal(true)}>Delete Business</button>
+                <button className='edit-biz-delete-btn'onClick={() => setShowModal(true)}>Delete Business</button>
             </div>
             <div>
             {showModal && (
@@ -38,7 +40,7 @@ const DeleteBizModal = ({ business }) => {
                         <h4 className="reomove-biz-h4">Removing the business from Zelp will be permanent and cannot be undone.</h4>
                         <div className="remove-biz-btns-div">
                             <button className="remove-biz-confirm-btn" type='button' onClick={() => onDelete(business.id)}>Remove Business</button>
-                            <button className="remove-biz-cancel-btn" type='button' onClick={onCancel}>Keep Business</button>
+                            <button className="remove-biz-cancel-btn" type='button' onClick={(e) => onCancel(e)}>Keep Business</button>
                         </div>
                     </div>
                 </Modal>

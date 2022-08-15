@@ -50,7 +50,7 @@ const EditBusinessForm = () => {
     const [ editLatitude, setEditLatitude ] = useState(business?.latitude);
     const [ ediLongitude, setEditLongitude ] = useState(business?.longitude);
     const [ autoValue, setAutoValue ] = useState(null);
-    const [ address, setAddress ] = useState(business?.address);
+    const [ address, setAddress ] = useState('');
     const [ hasSubmitted, setHasSubmitted ] = useState(false);
     const [ validationErrors, setValidationErrors ] = useState([]);
 
@@ -58,8 +58,8 @@ const EditBusinessForm = () => {
 
     if (placeId) {
         geocodeByPlaceId(placeId)
-        .then(results => {
-            setAddress(results[0].formatted_address);
+        .then(result => {
+            setAddress(result[0].formatted_address);
             setEditStreetAddress(address.split(',')[0]);
             setEditCity(address.split(', ')[1]);
             let stateZip = address.split(', ')[2];
@@ -69,7 +69,7 @@ const EditBusinessForm = () => {
         .catch(error => console.error(error));
     }
 
-    if (address.length > 0) {
+    if (address?.length > 0) {
         geocodeByAddress(address)
             .then(res => getLatLng(res[0]))
             .then(({lat, lng}) => {
@@ -79,6 +79,13 @@ const EditBusinessForm = () => {
             .catch(error => console.error(error));    
     }
 
+    // useEffect(() => {
+    //     setEditStreetAddress(editStreetAddress);
+    //     setEditCity(editCity);
+    //     setEditState(editState);
+    //     setEditZipcode(editZipcode);
+    // }, [editStreetAddress, editCity, editState, editZipcode])
+
     const dateTime = new Date();
     const isoTime = dateTime.toISOString();
     const date = isoTime.slice(0, 10);
@@ -87,6 +94,7 @@ const EditBusinessForm = () => {
 
     const phoneNumber = /^\(?([0-9]{3})\)?(\-[0-9]{3})(\-[0-9]{4})$/;
     const operatingHours = /^(0?[1-9]|1[0-2]):([0-5]\d)\s((?:A|P)\.?M\.?)\s([\-])\s(0?[1-9]|1[0-2]):([0-5]\d)\s((?:A|P)\.?M\.?)$/i;
+    const validZip = /^\d{5}$/;
     
         // console.log(editBusinessHours?.split(' - ')[1].split(' ')[1])
     const morning = editBusinessHours?.split(' - ')[0]?.split(' ')[1];
@@ -111,7 +119,9 @@ const EditBusinessForm = () => {
     }
 
     // console.log(validateOperation())
-
+    console.log('biz add', business?.address)
+    console.log('street add', editStreetAddress)
+    console.log('city', editCity)
 
 
 
@@ -122,26 +132,32 @@ const EditBusinessForm = () => {
 
         if (!editName) errors.push('Business name cannot be empty')
         // if (businessesArr?.map(business => business.name).includes(editName)) errors.push('Business name must be unique');
-        if (!address) errors.push('Business address cannot be empty');
+        // if (!address) errors.push('Business address cannot be empty');
+        if (!editStreetAddress) errors.push('Business address cannot be empty');
+        if (!editCity) errors.push('City field cannot be empty')
+        if (!editState) errors.push('State field cannot be empty')
+        if (!editZipcode) errors.push('Zipcode field cannot be empty')
+        if (!(editZipcode?.match(validZip))) errors.push('Zipcode must be in valid format. ie. 12345')
         if (!editDescription) errors.push('Please tell us what your business does')
         if (editDescription?.length < 50) errors.push('Please describe your business with more details');
         if (editDescription?.length > 1000) errors.push('Please shorten your description');
         if (!editCategory) errors.push('Please choose a category')
         if (!editBusinessHours) errors.push('Please tell us your operating hours')
-        if (!editBusinessHours.match(operatingHours)) errors.push('Please have your business hours in valid format: ie. 10:00 AM - 11:00 PM');
+        if (!editBusinessHours?.match(operatingHours)) errors.push('Please have your business hours in valid format: ie. 10:00 AM - 11:00 PM');
         if (!validateOperation()) errors.push('Please enter valid operating hours');
         // if (!(businessHours.match(operatingHours))) errors.push ('Pleast enter your operating hours in such format: 10:00 AM - 10:00 PM');
         if (!editPriceRange) errors.push('Please choose a price range for your business')
-        if (!(editPhone.match(phoneNumber))) errors.push('Please enter a valid phone number, i.g 012-333-4567')
+        if (!(editPhone?.match(phoneNumber))) errors.push('Please enter a valid phone number, i.g 012-333-4567')
         setValidationErrors(errors);
-    }, [editName, editDescription, editCategory, editBusinessHours, editPriceRange, editPhone, address])
+    }, [editName, editDescription, editCategory, editBusinessHours, editPriceRange, editPhone, editStreetAddress, editCity, editState, editZipcode])
+
+    console.log('errors', validationErrors)
 
     const onSubmit = async (e) => {
         e.preventDefault();
         setHasSubmitted(true);
 
         if (!validationErrors.length) {
-
             const payload = {
                 id: business?.id,
                 owner_id: user.id,
@@ -196,15 +212,15 @@ const EditBusinessForm = () => {
         <>
             <form onSubmit={onSubmit} className='create-biz-form'>
                 <div className='create-biz-errors-div'>
-                    <div className='create-biz-errors-div'>
-                        {hasSubmitted && validationErrors.length > 0 && (
-                            <ul>
-                                {validationErrors.map(error => (
-                                    <li key={error}>{error}</li>
-                                ))}
-                            </ul>
-                        )}
-                    </div>
+                    {/* <div className='create-biz-errors-div'> */}
+                    {hasSubmitted && validationErrors.length > 0 && (
+                        <ul className='create-biz-error'>
+                            {validationErrors.map(error => (
+                                <li key={error}>{error}</li>
+                            ))}
+                        </ul>
+                    )}
+                    {/* </div> */}
                 </div>
                 <div className='create-biz-single-sec'> 
                     <h2 className='create-biz-h2'>{business?.name}</h2>
@@ -220,7 +236,7 @@ const EditBusinessForm = () => {
                     />
                 </div>
                 <div className='create-biz-single-sec'>
-                    <label className='create-biz-label'>Address</label>
+                    <label className='create-biz-label'>Address*</label>
                     <div>
                         {apiKey && 
                         <GooglePlacesAutocomplete
@@ -349,7 +365,8 @@ const EditBusinessForm = () => {
                 </div>
                 <div className='edit-biz-btns-div'>
                     <button className='edit-biz-submit-btn' type='submit'>Edit Business</button>
-                    <DeleteBizModal business={business} />
+                    <button className="edit-biz-delete-btn" type='button' onClick={() => onDelete(business.id)}>Remove Business</button>
+                    {/* <DeleteBizModal business={business} /> */}
                 </div>
             </form>
         </>

@@ -100,7 +100,7 @@ const BizPhotos = ({ businesses }) => {
                                 {showModal && (
                                     <Modal onClose={() => setShowModal(false)}>
                                         <div id="enlarged-photo-modal">
-                                            <img className="enlarged-img" src={bizImages[selected].image_url} style={{width: '475px', height: '425px'}} />
+                                            <img className="enlarged-img" src={bizImages[selected].image_url} style={{width: '575px', height: '500px'}} />
                                         </div>
                                     </Modal>
                                 )}
