@@ -318,6 +318,11 @@ table {
 }
 
 .biz-page-review-content {
+    display: -webkit-box;
+    /* -webkit-line-clamp: 6; */
+    -webkit-box-orient: vertical; 
+    word-break: break-word;
+    overflow: auto;
     font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
     font-size: 15px;
     font-weight: 400;

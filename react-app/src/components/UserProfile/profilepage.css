@@ -310,6 +310,7 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    word-break: break-word;
 }
 .profile-single-review-container {
     height: 225px;
