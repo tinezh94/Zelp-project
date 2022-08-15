@@ -133,7 +133,7 @@ def seed_businesses():
         description='Vastly popular Thai street food is the one thing that one must try when visiting Bangkok. Taking its name, “When in Bangkok” means that we will transport you to experience local Thai cuisine as if you were in Bangkok. The inspiration behind the establishment was nothing more than the intent to bring authentic Thai fare to the street of New York. When in Bangkok is for those who seek a skillful cooking and extraordinary dining experience with a tropical bungalow décor which will provide you a relaxed atmosphere during your visits. With an experienced team from Malii Thai Kitchen and Malii Gramercy in Manhattan, we strive to provide you with an enjoyable dining experience.',
         category='Thai',
         business_hours='11:30 AM - 10:00 PM',
-        website='http://www.meetfresh.us',
+        website='http://www.wib-nyc.com',
         phone_number='929-362-2000',
         price_range='$$',
         created_at='2022-03-23 10:23:48',
