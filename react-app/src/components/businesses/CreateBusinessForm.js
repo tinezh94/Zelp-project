@@ -113,7 +113,7 @@ const CreateBusinessForm = () => {
         if (!name) errors.push('Business name cannot be empty')
         if (businessesArr?.map(business => business.name).includes(name)) errors.push('Business name must be unique');
         if (!address) errors.push('Business address cannot be empty');
-        if (!streetAddress) errors.push('Business address cannot be empty');
+        // if (!streetAddress) errors.push(' cannot be empty');
         if (!city) errors.push('City field cannot be empty')
         if (!state) errors.push('State field cannot be empty')
         if (!zipcode) errors.push('Zipcode field cannot be empty')
