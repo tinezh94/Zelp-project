@@ -68,6 +68,7 @@ const EditReviewForm = () => {
         const errors = [];
         if (!editRating) errors.push('Please leave a rating');
         if (editContent?.length < 30) errors.push('Woah, did you mean to post so soon? We thought your review was just getting started! Please add more details so we can post this review.');
+        if (editContent.length > 3000) errors.push('Please shorten your review content');
         setValidationErrors(errors);
     }, [editRating, editContent]);
 
