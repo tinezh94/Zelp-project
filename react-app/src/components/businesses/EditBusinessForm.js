@@ -131,6 +131,7 @@ const EditBusinessForm = () => {
         const errors = [];
 
         if (!editName) errors.push('Business name cannot be empty')
+        if (editName.length > 100) errors.push('Business name cannot exceed 100 characters');
         // if (businessesArr?.map(business => business.name).includes(editName)) errors.push('Business name must be unique');
         // if (!address) errors.push('Business address cannot be empty');
         if (!editStreetAddress) errors.push('Business address cannot be empty');
@@ -224,7 +225,7 @@ const EditBusinessForm = () => {
                 </div>
                 <div className='create-biz-single-sec'> 
                     <h2 className='create-biz-h2'>{business?.name}</h2>
-                    <h5 className='create-biz-h2-sub'>Fields with * are required!</h5>
+                    <h5 className='create-biz-h2-sub'>Fields with * are required! US Addresses ONLY!</h5>
                 </div>
                 <div className='create-biz-single-sec'>
                     <label className='create-biz-label'>Business Name*</label>

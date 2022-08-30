@@ -111,6 +111,7 @@ const CreateBusinessForm = () => {
         const errors = [];
 
         if (!name) errors.push('Business name cannot be empty')
+        if (name.length > 100) errors.push('Business name cannot exceed 100 characters');
         if (businessesArr?.map(business => business.name).includes(name)) errors.push('Business name must be unique');
         if (!address) errors.push('Business address cannot be empty');
         // if (!streetAddress) errors.push(' cannot be empty');
@@ -194,7 +195,7 @@ const CreateBusinessForm = () => {
                 </div>
                 <div className='create-biz-single-sec'>
                     <h2 className='create-biz-h2'>Add your listing to Zelp!</h2>
-                    <h5 className='create-biz-h2-sub'>Fields with * are required!</h5>
+                    <h5 className='create-biz-h2-sub'>Fields with * are required! US Addresses ONLY!</h5>
                 </div>
                 <div className='create-biz-single-sec'>
                     <label className='create-biz-label'>Business Name*</label>
