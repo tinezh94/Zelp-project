@@ -182,6 +182,11 @@ const CreateBusinessForm = () => {
         setLatitude('');
     };
 
+    const searchOptions = {
+        componentRestrictions: { country: 'us' },
+        types: ['address']
+    }
+
     return (
         <>  
             <form onSubmit={onSubmit} className='create-biz-form'>
@@ -217,6 +222,7 @@ const CreateBusinessForm = () => {
                         {apiKey && 
                         <GooglePlacesAutocomplete
                             apiKey={apiKey}
+                            searchOptions={searchOptions}
                             selectProps={{
                                 styles: {
                                     input: (provided) => ({
