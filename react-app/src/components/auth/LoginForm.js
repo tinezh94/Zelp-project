@@ -1,24 +1,54 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink, Redirect, useHistory } from 'react-router-dom';
 import { login } from '../../store/session';
 import DemoUser from './DemoUser';
 import './login.css';
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+  const history = useHistory();
+  const [users, setUsers] = useState([]);
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const response = await fetch('/api/users/');
+  //     const responseData = await response.json();
+  //     setUsers(responseData.users);
+  //   }
+  //   fetchData();
+  // }, []);
 
   const onLogin = async (e) => {
     e.preventDefault();
+    // setHasSubmitted(true);
+
+    // if (!validationErrors.length) {
+    //   await dispatch(login(email, password));
+    //   setHasSubmitted(false);
+    //   // history.push('/');
+    // }
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
+      console.log('errors', data)
     }
   };
+  // console.log('errors', errors[0])
+
+  // useEffect(() => {
+  //   const errors = [];
+  //   if (!email) errors.push('Email field is required');
+  //   if (!password) errors.push('Password field is required');
+  //   if (!(users.map(user => user.email).includes(email))) errors.push('No such user exists');
+
+  //   setValidationErrors(errors);
+  // }, [email, password]);
 
   const updateEmail = (e) => {
     setEmail(e.target.value);

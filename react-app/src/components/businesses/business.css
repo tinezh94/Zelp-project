@@ -1126,10 +1126,10 @@ select.create-biz-select {
 
 .create-biz-errors-div {
     position: absolute;
-    top: 7rem;
+    top: 9rem;
     font-weight: 400;
     font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
-    left: 49rem;
+    left: 69rem;
     width: 350px;
     font-size: 12px;
     line-height: 20px;
