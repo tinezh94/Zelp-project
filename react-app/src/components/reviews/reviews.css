@@ -413,11 +413,12 @@ input::file-selector-button:hover {
 
 .create-review-errors-div {
     position: absolute;
-    top: 31rem;
+    top: 37rem;
     font-weight: 450;
     font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
     color: #666;
     width: 500px;
+    left: 35rem;
 }
 
 #review-add-photos-containers {

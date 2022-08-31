@@ -225,7 +225,10 @@ const EditBusinessForm = () => {
                 </div>
                 <div className='create-biz-single-sec'> 
                     <h2 className='create-biz-h2'>{business?.name}</h2>
-                    <h5 className='create-biz-h2-sub'>Fields with * are required! US Addresses ONLY!</h5>
+                    <div className='create-biz-h5-div'>
+                        <h5 className='create-biz-h2-sub'>Fields with * are required!</h5>
+                        <h5 className='us-address-only' >US Addresses ONLY!</h5>
+                    </div>
                 </div>
                 <div className='create-biz-single-sec'>
                     <label className='create-biz-label'>Business Name*</label>
