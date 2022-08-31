@@ -642,6 +642,11 @@ a.biz-card-link:hover {
     color:#2d2e2f;
 }
 
+.create-biz-h5-div {
+    display: flex;
+    flex-direction: row;
+}
+
 .create-biz-h2-sub {
     font-family: 'Poppins','Helvetica Neue',Helvetica,Arial,sans-serif;
     font-size: 13px;
@@ -650,6 +655,17 @@ a.biz-card-link:hover {
     padding-bottom: 15px;
     border-bottom: 1px solid #ebebeb;
     margin-bottom: 20px;
+}
+
+.us-address-only {
+    font-family: 'Poppins','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    color:rgb(230, 0, 0);
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ebebeb;
+    margin-bottom: 20px;
+    padding-left: 10px;
 }
 
 .create-biz-form {
@@ -1110,10 +1126,10 @@ select.create-biz-select {
 
 .create-biz-errors-div {
     position: absolute;
-    top: 7rem;
+    top: 9rem;
     font-weight: 400;
     font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
-    left: 49rem;
+    left: 69rem;
     width: 350px;
     font-size: 12px;
     line-height: 20px;
