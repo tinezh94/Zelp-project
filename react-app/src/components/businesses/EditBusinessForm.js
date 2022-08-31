@@ -131,7 +131,7 @@ const EditBusinessForm = () => {
         const errors = [];
 
         if (!editName) errors.push('Business name cannot be empty')
-        if (editName.length > 100) errors.push('Business name cannot exceed 100 characters');
+        if (editName.length > 45) errors.push('Business name is too long');
         // if (businessesArr?.map(business => business.name).includes(editName)) errors.push('Business name must be unique');
         // if (!address) errors.push('Business address cannot be empty');
         if (!editStreetAddress) errors.push('Business address cannot be empty');

@@ -111,7 +111,7 @@ const CreateBusinessForm = () => {
         const errors = [];
 
         if (!name) errors.push('Business name cannot be empty')
-        if (name.length > 100) errors.push('Business name cannot exceed 100 characters');
+        if (name.length > 45) errors.push('Business name is too long');
         if (businessesArr?.map(business => business.name).includes(name)) errors.push('Business name must be unique');
         if (!address) errors.push('Business address cannot be empty');
         if (!(/^\d/.test(address))) errors.push('Business address must start with a number');
