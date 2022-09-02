@@ -13,7 +13,7 @@
 .profile-pic-div {
     position: absolute;
     top: 1.5rem;
-    left: 20rem;
+    left: 20%;
     box-sizing: border-box;
     border: 1px solid #ebebeb;
     border-radius: 4px;
@@ -116,8 +116,9 @@
 .profile-pg-bottom-left {
     display: flex;
     flex-direction: column;
-    margin-left: -40em;
+    /* margin-left: -40em; */
     position: absolute;
+    left: 20%
 }
 
 .user-profile-h3 {
@@ -173,7 +174,7 @@
     /* border-left: 1px solid #ebebeb; */
     width: 300px;
     margin: 0;
-    margin-left: 37rem;
+    /* margin-left: 37rem; */
     margin-top: -2rem;
 }
 .about-user {
@@ -239,6 +240,7 @@
 .profile-pg-bottom-right {
     margin-left: 20rem;
     margin-top: 20px;
+    min-width: 713px;
 }
 
 .review-biz-info-name {
@@ -282,7 +284,7 @@
 }
 .profile-pg-h2 {
     position: absolute;
-    top: 24rem;
+    /* top: 24rem; */
     margin-top: -3rem;
     font-size: 21px;
     line-height: 1.3em;
@@ -403,7 +405,7 @@
 
 .profile-pg-h2-3 {
     position: absolute;
-    top: 24rem;
+    /* top: 24rem; */
     margin-top: -3rem;
     font-size: 21px;
     line-height: 1.3em;

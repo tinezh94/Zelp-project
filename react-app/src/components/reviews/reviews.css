@@ -24,7 +24,7 @@
     padding-bottom: 22px;
     position: absolute;
     top: 10rem;
-    left: 28rem;
+    left: 30%;
 }
 
 .star-radio-type[type='radio'] {
@@ -42,7 +42,7 @@
 .write-review-rating-container {
     position: absolute;
     top: 14.5rem;
-    left: 29rem;
+    left: 30%;
 }
 
 .star-p {
@@ -413,12 +413,12 @@ input::file-selector-button:hover {
 
 .create-review-errors-div {
     position: absolute;
-    top: 37rem;
+    top: 38rem;
     font-weight: 450;
     font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
-    color: #666;
+    color: rgb(219, 2, 2);
     width: 500px;
-    left: 35rem;
+    left: 37%;
 }
 
 #review-add-photos-containers {

@@ -170,7 +170,7 @@ a.filtered-search-results:hover {
 .profile-div {
     display: flex;
     flex-direction: row;
-    margin-left: 33rem;
+    margin-left: 380%;
 }
 .user-profile-pic {
     border-radius: 50%;
@@ -196,7 +196,7 @@ a.filtered-search-results:hover {
     position: absolute;
     width: 258px;
     height: auto;
-    right: 2rem;
+    right: 2%;
     z-index: 1282;
     border: 0;
     box-shadow: 0 0 10px rgba(191, 186, 186, 0.5);
