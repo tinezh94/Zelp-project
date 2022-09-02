@@ -34,7 +34,7 @@
 .biz-name {
     position: absolute;
     top: 20rem;
-    left: 12rem;
+    left: 13%;
     color: white;
     font-family: 'Poppins','Helvetica Neue',Helvetica,Arial,sans-serif;
     font-size: 48px;
@@ -46,7 +46,7 @@
 .biz-rating {
     position: absolute;
     top: 24rem;
-    left: 12rem;
+    left: 13%;
     display: inline-block;
 }
 
@@ -74,7 +74,7 @@
     text-align: left;
     position: absolute;
     top: 27rem;
-    left: 12.5rem;
+    left: 13.5%;
 
 }
 
@@ -102,7 +102,7 @@
     text-align: left;
     position: absolute;
     top: 29.5rem;
-    left: 12.5rem;
+    left: 13.5%;
     color: white;
     text-transform: uppercase;
 }
@@ -349,7 +349,7 @@ table {
 
 .review-edit-delete {
     position: absolute;
-    left: 50em;
+    left: 46%;
     z-index: 0;
     width: 160px;
     display: flex;
@@ -582,6 +582,7 @@ a.biz-card-link:hover {
 .main-page-top-container {
     border-bottom: 1px solid #ebebeb;
     padding-bottom: 50px;
+    min-width: 100vw;
 }
 
 .biz-categories {
@@ -626,6 +627,7 @@ a.biz-card-link:hover {
 
 .main-page-bottom-container {
     padding-bottom: 40px;
+    min-width: 100vw;
 }
 
 
@@ -1129,7 +1131,8 @@ select.create-biz-select {
     top: 9rem;
     font-weight: 400;
     font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
-    left: 69rem;
+    /* left: 69rem; */
+    right: 2%;
     width: 350px;
     font-size: 12px;
     line-height: 20px;

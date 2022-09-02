@@ -3,6 +3,11 @@
     margin: auto 0;
 }
 
+#root {
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
 body {
     display: block;
     position: relative;
