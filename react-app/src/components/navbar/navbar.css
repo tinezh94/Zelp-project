@@ -171,7 +171,7 @@ a.filtered-search-results:hover {
     display: flex;
     flex-direction: row;
     /* margin-left: 380%; */
-    min-width: 680px;
+    /* min-width: 680px; */
     justify-content: flex-end;
     margin-top: 5px;
     /* margin-left: 23rem; */
