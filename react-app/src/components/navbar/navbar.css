@@ -172,7 +172,9 @@ a.filtered-search-results:hover {
     flex-direction: row;
     /* margin-left: 380%; */
     min-width: 680px;
-    justify-content: end;
+    justify-content: flex-end;
+    margin-top: 5px;
+    /* margin-left: 23rem; */
 }
 .user-profile-pic {
     border-radius: 50%;
