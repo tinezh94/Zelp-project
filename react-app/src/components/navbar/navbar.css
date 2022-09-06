@@ -170,7 +170,9 @@ a.filtered-search-results:hover {
 .profile-div {
     display: flex;
     flex-direction: row;
-    margin-left: 380%;
+    /* margin-left: 380%; */
+    min-width: 680px;
+    justify-content: end;
 }
 .user-profile-pic {
     border-radius: 50%;

@@ -338,7 +338,7 @@ const EditBusinessForm = () => {
                     />
                 </div>
                 <div className='create-biz-single-sec'>
-                    <label className='create-biz-label'>Business Hours*</label>
+                    <label className='create-biz-label'>Business Hours (i.e 10:00 AM - 11:00 PM)*</label>
                     <input 
                         className='create-biz-input'
                         type='text'
