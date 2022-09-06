@@ -6,6 +6,7 @@ nav {
     border-bottom: 1px solid #ebebeb;
     /* margin-bottom: 30px; */
     /* position: fixed */
+    justify-content: space-between;
 }
 
 .search-bar-container {
@@ -170,11 +171,11 @@ a.filtered-search-results:hover {
 .profile-div {
     display: flex;
     flex-direction: row;
+    justify-content: flex-end;
     /* margin-left: 380%; */
     /* min-width: 680px; */
-    justify-content: flex-end;
     margin-top: 5px;
-    /* margin-left: 23rem; */
+    /* margin-left: 33rem; */
 }
 .user-profile-pic {
     border-radius: 50%;

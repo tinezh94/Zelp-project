@@ -35,6 +35,30 @@ const NavBar = () => {
         </li>
       </div>
     )
+  } else {
+    sessionLinks = (
+      <div className='profile-div'>
+            <li>
+              <NavLink to='/' className='navbar-businesses' onClick={() => {window.location.href='/'}}>Businesses</NavLink>
+            </li>
+            <li>
+                <img className='user-profile-pic'  src={user.profile_pic} style={{width: 40, height: 40}} onClick={() => openMenu()} />
+              {showMenu && (
+                <div className='profile-dropdown'>
+                  <NavLink className='dropdown-links' to='/businesses/new'>
+                    <i className="fa-solid fa-plus"></i>
+                    <p className='dropdown-p'>Create New Business Listing</p>
+                  </NavLink>
+                  <NavLink className='dropdown-links' to={`/users/${user?.id}`}>
+                      <i className="fa-solid fa-address-card"></i>
+                      <p className='dropdown-p'>About me</p>
+                  </NavLink>
+                  <LogoutButton />
+                </div>
+                  )}
+            </li>
+          </div>
+    )
   }
 
   const openMenu = () => {
@@ -69,7 +93,7 @@ const NavBar = () => {
       </div>
       <ul>
         {sessionLinks}
-        {user && (
+        {/* {user && (
           <div className='profile-div'>
             <li>
               <NavLink to='/' className='navbar-businesses' onClick={() => {window.location.href='/'}}>Businesses</NavLink>
@@ -91,7 +115,7 @@ const NavBar = () => {
                   )}
             </li>
           </div>
-        )}
+        )} */}
       </ul>
     </nav>
   );
