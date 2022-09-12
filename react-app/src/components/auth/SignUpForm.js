@@ -70,12 +70,16 @@ const SignUpForm = () => {
     const errors = [];
 
     if (!firstName) errors.push('First name cannot be empty.')
+    if (firstName.length > 50) errors.push('First name is too long');
     if (!lastName) errors.push('Last name cannot be empty.')
+    if (lastName.length > 50) errors.push('Last name is too long');
     if (!email) errors.push('Email cannot be empty.')
+    if (!email.length > 200) errors.push('Email cannot be longer than 200 characters');
     if (users.map(user => user.email).includes(email)) errors.push('Email address is alredy registered with another account.')
     if (!(email.includes('@')) || !(email.includes('.')) || (email.indexOf('.') < email.indexOf('@'))) errors.push('Please enter a valid email address.')
     if (!password) errors.push('Password field cannot be empty.')
     if (password.length < 6) errors.push('Password must be at least 6 characters long.')
+    if (password.length > 20) errors.push('Password is too long');
     if (password !== repeatPassword) errors.push('Confirm password must match Password.')
 
     setValidationErrors(errors);
