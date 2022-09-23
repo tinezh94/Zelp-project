@@ -55,7 +55,7 @@ const BusinessesPage = ({ businesses }) => {
 
     return (
         <> 
-            <div className='main-pg-background-image' style={{ backgroundImage: 'linear-gradient(90deg,#0006,#0000001a 30%), url(https://blog.yelp.com/wp-content/uploads/2021/09/Photo-of-Amaru-by-Tim-M.-on-Yelp-1.jpeg)'}}></div>
+            <div className='main-pg-background-image' style={{ backgroundImage: 'linear-gradient(90deg,#0006,#0000001a 30%), url(https://img.freepik.com/premium-photo/mothers-day-brunch-background_136595-21049.jpg?w=2000)'}}></div>
             <h1 className='bizes-h1'>Ready to Eat?</h1>
             <div>
                 <NavLink to='/businesses'>
