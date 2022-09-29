@@ -202,6 +202,11 @@ const BusinessPage = () => {
                                     <p className='biz-phone'>{business.phone_number}</p>
                                     <i className="fa-solid fa-phone-volume fa-lg"></i>
                                 </div>
+                                <div>
+                                    <NavLink to={`/map/${business?.id}`}>
+                                        <p>Get Directions</p>
+                                    </NavLink>
+                                </div>
                             </div>
                         </div>
                         
