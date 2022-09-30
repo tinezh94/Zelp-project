@@ -134,9 +134,18 @@ const BusinessPage = () => {
                                     <div className='map-hrs-div'>
                                         <div>
                                             <MapContainer latitude={business?.latitude} longitude={business?.longitude} />
-                                            <p className='biz-street'>{business.address}</p>
-                                            <p className='biz-city-state'>{business.city}, {business.state}</p>
-                                            <p className='biz-zip'>{business.zipcode} US</p>
+                                            <div className='biz-pg-address-directions-div'>
+                                                <div>
+                                                    <p className='biz-street'>{business.address}</p>
+                                                    <p className='biz-city-state'>{business.city}, {business.state}</p>
+                                                    <p className='biz-zip'>{business.zipcode} US</p>
+                                                </div>
+                                                <div>
+                                                    <NavLink to={`/map/${business?.id}`}>
+                                                        <button className='biz-pg-get-directions-btn'>Get directions</button>
+                                                    </NavLink>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div>
                                             <table>
@@ -201,6 +210,15 @@ const BusinessPage = () => {
                                 <div className='info-container'>
                                     <p className='biz-phone'>{business.phone_number}</p>
                                     <i className="fa-solid fa-phone-volume fa-lg"></i>
+                                </div>
+                                <div className='biz-pg-get-directions-div'>
+                                    <NavLink to={`/map/${business?.id}`}>
+                                        <p className='biz-pg-get-directions-p'>Get Directions</p>
+                                    </NavLink>
+                                    <div className='biz-directions-container'>
+                                        <p className='biz-pg-biz-address'>{business.address}, {business.city}, {business.state} {business.zipcode}</p>
+                                        <i className="fa-solid fa-diamond-turn-right fa-lg"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>

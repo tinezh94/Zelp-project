@@ -33,7 +33,7 @@ import { NavLink, useHistory } from 'react-router-dom';
     const submitSearch = () => {
         history.push(`/search/${searchTerm}`)
         setSearchTerm('');
-      }
+    }
 
     return (
         <>

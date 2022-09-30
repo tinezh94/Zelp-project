@@ -32,12 +32,14 @@ import AllBusinesses from './components/FilteredBiz/AllBusinesses';
 import UserBizPhotos from './components/UserProfile/UserBizPhotos';
 import UserReviews from './components/UserProfile/UserReviews';
 import UserBusinesses from './components/UserProfile/UserBusinesses';
+import Directions from './components/Directions/Directions';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
 
   const businesses = useSelector(state => state?.businesses)
+  const apiKey = useSelector(state => state?.key)
 
   useEffect(() => {
     (async() => {
@@ -109,6 +111,9 @@ function App() {
         <ProtectedRoute path='/user_biz/:userId' exact={true}>
           <UserBusinesses />
         </ProtectedRoute>
+        <Route path='/map/:businessId' exact={true}>
+          <Directions businesses={businesses} apiKey={apiKey} />
+        </Route>
         <Route path='/businesses' exact={true}>
           <AllBusinesses businesses={businesses} />
         </Route>

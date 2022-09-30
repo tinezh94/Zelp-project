@@ -83,13 +83,15 @@ const NavBar = () => {
 
   return (
     <nav>
-      <div className='logo-div'>
-          <NavLink to='/'>
-            <img src={logo} width='95px' height='40px' />
-          </NavLink>
-      </div>
-      <div>
-        <SearchBar />
+      <div className='nav-bar-logo-search-div'>
+        <div className='logo-div'>
+            <NavLink to='/'>
+              <img src={logo} width='95px' height='40px' />
+            </NavLink>
+        </div>
+        <div>
+          <SearchBar />
+        </div>
       </div>
       <ul>
         {sessionLinks}
