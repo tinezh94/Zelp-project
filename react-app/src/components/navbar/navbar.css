@@ -9,6 +9,10 @@ nav {
     justify-content: space-between;
 }
 
+.nav-bar-logo-search-div {
+    display: flex;
+}
+
 .search-bar-container {
     display: flex;
     flex-direction: row;

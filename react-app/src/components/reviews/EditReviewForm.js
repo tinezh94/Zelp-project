@@ -140,7 +140,7 @@ const EditReviewForm = () => {
     return (
         <div className='write-review-content-container'>
             <h1 className='write-review-biz-name'>{business?.name}</h1>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} className='write-review-form'>
                 <div className='create-review-errors-div'>
                     {hasSubmitted && validationErrors.length > 0 && (
                             <ul>
