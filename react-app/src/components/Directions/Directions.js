@@ -228,7 +228,8 @@ const Directions = ({ businesses, apiKey }) => {
                                 <div className='direction-destination-div'>
                                     <p>
                                         <i className="fa-solid fa-map-pin"></i>
-                                        {biz.address}, {biz.city}, {biz.state} {biz.zipcode}</p>
+                                        {biz.address}, {biz.city}, {biz.state} {biz.zipcode} USA
+                                    </p>
                                 </div>
                             </div>
                         )}
