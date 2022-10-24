@@ -1,5 +1,6 @@
 .google-map-container {
     position: relative;
+    margin-top: 25px;
 }
 
 .directions-container {

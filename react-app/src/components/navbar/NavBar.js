@@ -38,11 +38,11 @@ const NavBar = () => {
   } else {
     sessionLinks = (
       <div className='profile-div'>
-            <li>
+            {/* <li>
               <NavLink to='/' className='navbar-businesses' onClick={() => {window.location.href='/'}}>Businesses</NavLink>
-            </li>
+            </li> */}
             <li>
-                <img className='user-profile-pic'  src={user.profile_pic} style={{width: 40, height: 40}} onClick={() => openMenu()} />
+                <img className='user-profile-pic'  src={user.profile_pic} style={{width: 50, height: 50}} onClick={() => openMenu()} />
               {showMenu && (
                 <div className='profile-dropdown'>
                   <NavLink className='dropdown-links' to='/businesses/new'>

@@ -45,6 +45,7 @@ const Directions = ({ businesses, apiKey }) => {
         }
     }, [apiKey, biz]);
 
+    // let stepsArray = [];
     // Get directions with any starting point 
     async function getDirections() {
         // console.log('inside function')
@@ -63,13 +64,13 @@ const Directions = ({ businesses, apiKey }) => {
             travelMode: google.maps.TravelMode.DRIVING
         })
         
-        // console.log('res', res)
         setDirectionsRes(res);
         setDistance(res.routes[0].legs[0].distance.text);
         setDuration(res.routes[0].legs[0].duration.text);
         originRef.current.value = '';
     }
     
+    console.log('res', directionsRes)
     // Show direction instructions
     let stepsArray = [];
     const showSteps = () => {
@@ -82,11 +83,17 @@ const Directions = ({ businesses, apiKey }) => {
             let stepMile = [step, mile];
             stepsArray.push(stepMile);
         }
-        console.log(stepsArray);
+        console.log('stepsaRRAY', stepsArray);
         setInstruction(stepsArray)
         return stepsArray;
     }
     // console.log(instruction);
+
+    async function getAndShow() {
+        await getDirections()
+        .then(showSteps())
+        .then(closeMenu())
+    }
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -144,7 +151,7 @@ const Directions = ({ businesses, apiKey }) => {
 
     // document.getElementById('get-directions')?.addEventListener('click', function(e) {
     //     e.preventDefault();
-    //     getDirections();
+    //     // getDirections().showSteps;
     //     showSteps();
     // })
 
@@ -153,7 +160,7 @@ const Directions = ({ businesses, apiKey }) => {
             {isLoaded && (
                 <div className='google-map-container'>
                     <GoogleMap
-                        mapContainerStyle={{width: 960, height: 600, position: 'absolute', top: '2em', left: '17em', border: '1px solid #cccaca', borderRadius: '3px'}}
+                        mapContainerStyle={{width: 1000, height: 625, position: 'absolute', top: '2em', left: '17em', border: '1px solid #cccaca', borderRadius: '3px'}}
                         zoom={12}
                         center={center}
                         apiKey={apiKey}
@@ -207,7 +214,7 @@ const Directions = ({ businesses, apiKey }) => {
                             <p className='directions-biz-address'>{biz?.address}, {biz?.city}, {biz?.state} {biz?.zipcode}</p>
                         </div>
                         <div className='directions-btn-div'>
-                            <button className='directions-btn' id='get-directions' onClick={() => {getDirections(); showSteps(); closeMenu()}}>Get directions</button>
+                            <button className='directions-btn' id='get-directions' onClick={() => {getAndShow()}}>Get directions</button>
                         </div>
                     <div>
                         {instruction.length > 0 && (
