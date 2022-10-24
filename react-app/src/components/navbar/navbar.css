@@ -1,5 +1,5 @@
 nav {
-    padding: 24px 40px 30px 40px;
+    padding: 16px 38px 20px 28px;
     display: flex;
     /* min-width: 100vw; */
     /* justify-content: start; */
@@ -33,7 +33,7 @@ button > i.fa-solid.fa-magnifying-glass {
     font-weight: 600;
     color: white;
     width: 24px;
-    height: 24px;
+    /* height: 24px; */
     vertical-align: center;
     text-align: center;
 }
