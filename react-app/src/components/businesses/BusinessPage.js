@@ -41,11 +41,10 @@ const BusinessPage = () => {
     
     
     const bizRatings = bizReviews.map(review => review.rating)
-    // console.log('bizratings', bizRatings)
+    
     
     const getAvrg = bizRatings.reduce((a, b) => a + b, 0) / bizRatings.length
-    // console.log('getAverg', getAvrg)
-
+  
     const totalFilled = Math.floor(getAvrg);
     // console.log('totalfilled', totalFilled)
     const stars = Array(5).fill(0);
