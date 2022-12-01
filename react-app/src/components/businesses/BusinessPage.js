@@ -39,7 +39,6 @@ const BusinessPage = () => {
         return review.business_id === Number(businessId)
     });
     
-    // console.log('bizreviews', bizReviews)
     
     const bizRatings = bizReviews.map(review => review.rating)
     // console.log('bizratings', bizRatings)
