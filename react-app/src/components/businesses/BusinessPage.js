@@ -33,7 +33,6 @@ const BusinessPage = () => {
     
     const review = reviewsArr?.filter(review => (review.business_id == businessId && review.user_id === user?.id)).length > 0;
     
-    // console.log('businesspage',reviews)
     
     const bizReviews = Object.values(reviews)?.filter(review => {
         return review.business_id === Number(businessId)
